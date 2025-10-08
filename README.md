@@ -42,25 +42,9 @@ yarn
 yarn dev
 ```
 
-Acesse: **http://localhost:5173/**
-
 ---
 
-## 🏗️ Build de produção
-
-```bash
-yarn build
-```
-
-Pré-visualização do build:
-
-```bash
-yarn preview
-```
-
----
-
-## 🧭 Providers e Rotas
+## 🧭 Providers e Rotas (visão geral)
 
 A aplicação usa um **SharedModule** para encapsular providers globais:
 
@@ -70,6 +54,49 @@ A aplicação usa um **SharedModule** para encapsular providers globais:
 - `QueryClientProvider` (React Query)
 
 O **AppModule** renderiza layout (ex.: `AppHeader`) e o **AppRouter**.
+
+---
+
+## 🧩 Módulos & Rotas (arquitetura modular)
+
+Cada **módulo** possui seu **próprio sistema de rotas, hooks, componentes, serviços e estilos**, mantendo o código **isolado e não intrusivo**. O acesso às rotas de cada módulo é feito pelo **sistema global de rotas** (**AppRouter/AppRoutes**).
+
+### Como funciona
+- Em `src/modules/<Modulo>/` cada módulo expõe seu **roteador local** (ex.: `routes.tsx` ou `Module.tsx`) e suas **páginas**.
+- O **roteador global** registra o **prefixo** e faz o **lazy load** do módulo (code-splitting).  
+  Exemplo simplificado:
+  ```tsx
+  // AppRouter.tsx
+  <Route path="/tutorial/*" element={<LazyTutorialModule />} />
+  ```
+  Dentro do **TutorialModule** você controla as rotas internas:
+  ```tsx
+  // modules/Tutorial/routes.tsx
+  <Routes>
+    <Route index element={<TutorialHome />} />
+    <Route path="page" element={<TutorialPage />} />
+  </Routes>
+  ```
+
+### Benefícios
+- **Isolamento:** cada módulo tem seu próprio diretório de `hooks/`, `components/`, `pages/`, `services/`, `styles/`, `types/` etc., evitando colisões e sobreescritas entre módulos.
+- **Escalabilidade:** adicionar um módulo novo não impacta nos existentes; basta registrá-lo no **AppRouter/AppRoutes**.
+- **Performance:** módulos são carregados sob demanda (**React.lazy + Suspense**).
+- **Organização:** cada área de negócio mantém sua estrutura e convenções internas.
+
+### Sugestão de estrutura por módulo
+```
+src/modules/<Modulo>/
+├─ <Modulo>Module.tsx
+├─ routes.tsx
+├─ pages/
+├─ components/
+├─ hooks/
+├─ services/
+├─ styles/
+├─ types/
+└─ index.ts
+```
 
 ---
 
@@ -127,7 +154,12 @@ frontend/
    │  ├─ router/AppRouter.tsx
    │  ├─ styles/
    │  └─ index.tsx (ou main.tsx conforme entry)
-   ├─ modules/           # features
+   ├─ modules/           # features (cada módulo é isolado e tem rotas próprias)
+   │  ├─ Adm/
+   │  ├─ Artifacts/
+   │  ├─ Recommendations/
+   │  ├─ Tutorial/
+   │  └─ Base/ Login/ ...
    ├─ shared/
    │  ├─ i18n/
    │  │  ├─ providers/I18nProvider/
@@ -137,35 +169,8 @@ frontend/
    │  ├─ AntThemeProvider.tsx
    │  ├─ colors.ts
    │  └─ styled.d.ts
-   └─ main.tsx           # entry usado pelo Vite
+   └─ main.tsx
 ```
-
----
-
-## 🐞 Troubleshooting
-
-### 1) Vite procurando `/src/main.tsx`
-**Erro:** `Failed to load url /src/main.tsx`  
-**Solução:** garantir que o `index.html` aponte para o entry correto:
-```html
-<script type="module" src="/src/main.tsx"></script>
-```
-ou ajuste para `index.tsx` se esse for o seu entry real.
-
-### 2) ESLint “extends” no Flat Config
-**Erro:** “A config object is using the extends key…”  
-**Solução:** usar **`eslint.config.js`** no formato **Flat Config** (já incluso no repo).
-
-### 3) `i18next/no-literal-string`
-Use traduções (`translate({ id: 'chave' })`) em JSX.  
-Para exceções pontuais:
-```tsx
-{/* eslint-disable-next-line i18next/no-literal-string */}
-<Titulo>GuideAut</Titulo>
-```
-
-### 4) Hooks `exhaustive-deps`
-Adicione dependências pedidas pelo ESLint ou justifique conscientemente.
 
 ---
 
@@ -185,6 +190,4 @@ Adicione dependências pedidas pelo ESLint ou justifique conscientemente.
 
 ---
 
-## 📜 Licença
-
-Defina a licença do projeto aqui (ex.: MIT).
+#### Desenvolvido pela turma de Engenharia de Software da Universidade do Estado do Amazonas (UEA), no período 2025/2, sob orientação da Professora Áurea Hiléia da Silva Melo.
