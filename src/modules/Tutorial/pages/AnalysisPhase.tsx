@@ -207,7 +207,7 @@ export default function AnalysisPhase() {
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Header + Botão de Fechar*/}
-                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl z-50">
                     <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                       {language === "pt-BR"
                         ? "Sobre o Diagrama"
@@ -222,7 +222,7 @@ export default function AnalysisPhase() {
                   </CardHeader>
                   {/* Texto do pop-up */}
                   <CardContent className="p-6">
-                    <p className="space-y-3 text-lg">
+                    <p className="text-justify space-y-3 text-lg">
                       {language == "pt-BR"
                         ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
                         : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
@@ -335,10 +335,10 @@ export default function AnalysisPhase() {
             </p>
 
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <div className="flex items-start space-x-3">
+              <div className="flex items-start gap-3">
                 <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-blue-yellow font-medium">
+                  <p className="text-justify text-yellow-800 font-medium text-sm leading-relaxed">
                     {language === "pt-BR"
                       ? "INFO: O termo 'Lista Inicial' é usado porque, nesta etapa, você vai definir apenas a identificação e a descrição do requisito. O detalhamento visual ocorrerá na próxima fase."
                       : "INFO: The term 'Initial List' is used because, at this stage, you will define only the identification and description of the requirement. Visual detailing will occur in the next phase."}
@@ -631,7 +631,7 @@ export default function AnalysisPhase() {
               <h4 className="font-semibold text-lg mb-3 flex items-center gap-2 text-slate-800">
                 {language === "pt-BR" ? "Instâncias" : "Instances"}
               </h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-justify text-sm text-muted-foreground leading-relaxed">
                 {language === "pt-BR"
                   ? "As instâncias do EmpathyAut são obtidas diretamente do Formulário de Caracterização do Autista (FCA) e do Canvas do Cliente (CCS)."
                   : "EmpathyAut instances are obtained directly from the Autistic Characterization Form (FCA) and the Client Canvas (CSS)."}
@@ -717,11 +717,10 @@ export default function AnalysisPhase() {
             <div className="flex items-start gap-3">
               <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-yellow-800 font-medium text-sm leading-relaxed">
-                  <span className="font-bold">INFO: </span>
+                <p className="text-justify text-yellow-800 font-medium text-sm leading-relaxed">
                   {language === "pt-BR"
-                    ? "Embora a equipe possa escolher entre o PersonAut e o EmpathyAut, sugere-se o uso de ambos, pois suas informações se referem a diferentes aspectos da pessoa."
-                    : "Although the team can choose between PersonAut and EmpathyAut, it is suggested to use both, as their information refers to different aspects of the person."}
+                    ? "INFO: Embora a equipe possa escolher entre o PersonAut e o EmpathyAut, sugere-se o uso de ambos, pois suas informações se referem a diferentes aspectos da pessoa."
+                    : "INFO: Although the team can choose between PersonAut and EmpathyAut, it is suggested to use both, as their information refers to different aspects of the person."}
                 </p>
               </div>
             </div>
@@ -782,7 +781,7 @@ export default function AnalysisPhase() {
                       setTocOpen(false);
                     }
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-start gap-2 text-white/90${
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white/90${
                     activeSection === item.id
                       ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"

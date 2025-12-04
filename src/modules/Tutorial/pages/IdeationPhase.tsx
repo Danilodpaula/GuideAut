@@ -372,7 +372,7 @@ export default function IdeationPhase() {
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-yellow-800 font-medium">
+                  <p className="text-justify text-yellow-800 font-medium">
                     {language === "pt-BR"
                       ? "INFO: Sessões de brainstorming remotas vs presenciais. Muitas equipes de trabalho atualmente já não estão no mesmo local físico e as sessões de brainstorming remotas já se tornaram comuns. Com seus contras, a interação face a face é perdida, comunicação não verbal e espontaneidade que ocorrem em uma sessão presencial, por isso, se o brainstorming do modelo virtual não gerar resultados, é indicado uma sessão presencial."
                       : "INFO: Remote vs in-person brainstorming sessions. Many work teams are no longer in the same physical location and remote brainstorming sessions have become common. With their drawbacks, face-to-face interaction is lost, non-verbal communication and spontaneity that occur in an in-person session, so if virtual model brainstorming doesn't generate results, an in-person session is recommended."}
@@ -399,7 +399,7 @@ export default function IdeationPhase() {
                   className="rounded-md shadow-sm max-w-full h-auto"
                 />
               </div>
-              <p className="text-sm text-center mt-2">
+              <p className="text-justify text-sm text-center mt-2">
                 {language === "pt-BR"
                   ? "Figura 2: Template de Board no Miro para sessão de brainstorming"
                   : "Figure 2: Miro Board Template for brainstorming session"}
@@ -467,7 +467,7 @@ export default function IdeationPhase() {
                   </table>
                 </div>
 
-                <p className="text-sm text-center mt-2">
+                <p className="text-justify text-sm text-center mt-2">
                   {language === "pt-BR"
                     ? "Parte do TRR que será preenchido nesta fase"
                     : "Part of RCT that will be filled in this phase"}
@@ -497,7 +497,7 @@ export default function IdeationPhase() {
             <div className="flex items-start space-x-3">
               <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-yellow-800 font-medium">
+                <p className="text-justify text-yellow-800 font-medium">
                   {language === "pt-BR"
                     ? "INFO: os clientes/cuidadores/solicitantes não devem interferir nesta atividade."
                     : "INFO: clients/caregivers/requesters should not interfere in this activity."}
@@ -644,7 +644,7 @@ export default function IdeationPhase() {
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-yellow-800 font-medium">
+                  <p className="text-justify text-yellow-800 font-medium">
                     {language === "pt-BR"
                       ? "INFO: Durante a sessão de brainstorming podem surgir novos requisitos não identificados na fase anterior. Caso isso ocorra e o solicitante esteja participando da sessão de brainstorming, ele poderá ser questionado para validar a necessidade do(s) novo(s) requisito(s) identificado(s), caso contrário ele poderá ser questionado em um outro momento previamente agendado."
                       : "INFO: During the brainstorming session, new requirements not identified in the previous phase may arise. If this occurs and the requester is participating in the brainstorming session, they can be questioned to validate the need for the new identified requirement(s), otherwise they can be questioned at another previously scheduled time."}
@@ -675,7 +675,7 @@ export default function IdeationPhase() {
             <div className="flex items-start space-x-3">
               <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-yellow-800 font-medium">
+                <p className="text-justify text-yellow-800 font-medium">
                   {language === "pt-BR"
                     ? "INFO: os clientes/cuidadores/solicitantes são incentivados a colaborar nesta atividade."
                     : "INFO: clients/caregivers/requesters are encouraged to collaborate in this activity."}
@@ -737,7 +737,7 @@ export default function IdeationPhase() {
                 <div className="flex items-start space-x-3">
                   <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="text-yellow-800 font-medium">
+                    <p className="text-justify text-yellow-800 font-medium">
                       {language === "pt-BR"
                         ? "INFO: O brainwriting é um complemento ao brainstorming tradicional e foca na contribuição silenciosa e estruturada, resultando em um banco de ideias mais diversificado e volumoso, que depois pode ser transformado no Cardápio de Ideias para avaliação."
                         : "INFO: Brainwriting is a complement to traditional brainstorming and focuses on silent and structured contribution, resulting in a more diverse and voluminous idea bank, which can later be transformed into the Idea Menu for evaluation."}
@@ -803,7 +803,7 @@ export default function IdeationPhase() {
                     ? "Sugestão de Procedimento para Elementos de Interface:"
                     : "Suggested Procedure for Interface Elements:"}
                 </h4>
-                <p className="text-blue-800 ">
+                <p className="text-justify text-blue-800 ">
                   {language === "pt-BR"
                     ? "Após a análise e seleção feita anteriormente, ocorre a definição dos elementos principais e complementares dos cenários de interação selecionados. Esses elementos correspondem a um detalhamento de como os elementos que compõem o cenário devem ser apresentados na interface a ser elaborada. Ou seja, se a descrição do cenário selecionado cita um objeto, nesta atividade deve-se definir qual o objeto (como principal) e a cor ou formato do objeto (como complementar)."
                     : "After the analysis and selection done previously, the definition of main and complementary elements of the selected interaction scenarios occurs. These elements correspond to a detailing of how the elements that compose the scenario should be presented in the interface to be elaborated. That is, if the description of the selected scenario mentions an object, in this activity one must define which object (as main) and the color or format of the object (as complementary)."}
@@ -959,7 +959,7 @@ export default function IdeationPhase() {
                     </table>
                   </div>
 
-                  <p className="text-sm text-center mt-2">
+                  <p className="text-justify text-sm text-center mt-2">
                     {language === "pt-BR"
                       ? "TRR do app para Ensino de Noções espaciais e lateralidade"
                       : "RCT for Spatial Notions and Laterality Teaching App"}
@@ -1002,7 +1002,7 @@ export default function IdeationPhase() {
                       setTocOpen(false);
                     }
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-start gap-2 text-white/90${
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white/90${
                     activeSection === item.id
                       ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"

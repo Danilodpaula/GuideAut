@@ -180,7 +180,7 @@ export default function ProAutProcess() {
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               Antes de realizar a elicitação dos requisitos, é de extrema
               importância que todos os envolvidos no projeto conheçam o domínio
               do problema a ser resolvido pela aplicação a ser desenvolvida.
@@ -189,7 +189,7 @@ export default function ProAutProcess() {
               que a pessoa autista participe do processo de design da
               tecnologia. É neste aspecto que a imersão trabalha.
             </p>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               A fase de imersão é a fase caracterizada pela aproximação do
               problema. É nesta etapa que a equipe busca conhecer conceitos que
               permeiam o tema da aplicação a ser projetada.
@@ -217,7 +217,7 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               Before performing requirements elicitation, it is extremely
               important that everyone involved in the project knows the domain
               of the problem to be solved by the application to be developed. We
@@ -226,7 +226,7 @@ export default function ProAutProcess() {
               autistic person to participate in the technology design process.
               This is the aspect that immersion works on.
             </p>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               The immersion phase is characterized by approaching the problem.
               It is at this stage that the team seeks to understand concepts
               that permeate the theme of the application to be designed.
@@ -261,13 +261,13 @@ export default function ProAutProcess() {
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               A fase de Análise é o momento de aproximação do problema. Agora
               que a equipe coletou diversos dados na imersão, é preciso
               mergulhar nessas informações e avaliar as implicações do desafio
               sob o ponto de vista de todos os envolvidos (stakeholders).
             </p>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               A fase de Análise tem como objetivo aprofundar as informações
               obtidas na fase de Imersão e iniciar as principais propostas de
               solução.
@@ -294,14 +294,14 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               The Analysis phase is the moment to approach the problem. Now that
               the team has collected various data during immersion, it is
               necessary to dive into this information and evaluate the
               implications of the challenge from the point of view of all
               stakeholders involved.
             </p>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               The Analysis phase aims to delve deeper into the information
               obtained in the Immersion phase and initiate the main proposed
               solutions.
@@ -335,7 +335,7 @@ export default function ProAutProcess() {
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               A fase de ideação tem como objetivo gerar ideias por meio de
               estímulos de criatividade em conjunto com a equipe de
               desenvolvimento e design da aplicação, em conformidade com o
@@ -366,7 +366,7 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               The ideation phase aims to generate ideas through creativity
               stimuli together with the application development and design team,
               in accordance with the software/app user's context and
@@ -405,14 +405,14 @@ export default function ProAutProcess() {
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               A Prototipação é um processo no qual se busca transferir ideias do
               âmbito conceitual para o concreto. Consiste em todo e qualquer
               objeto, seja físico ou virtual, que simula uma interação para
               validar uma ideia, de forma que se produza uma versão inicial da
               interface idealizada.
             </p>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               Com o protótipo em mãos, é possível avaliá-lo junto ao usuário, e
               dependendo do resultado, refiná-lo até transformá-lo em uma
               solução que realmente esteja alinhada às necessidades levantadas
@@ -439,14 +439,14 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               Prototyping is a process in which ideas are transferred from the
               conceptual domain to a tangible form. It consists of creating any
               object, whether physical or virtual, that simulates an interaction
               to validate an idea, resulting in an initial version of the
               idealized interface.
             </p>
-            <p className="mb-4">
+            <p className="text-justify mb-4">
               With the prototype in hand, it is possible to evaluate it with the
               user and, depending on the results, refine it until it becomes a
               solution that is truly aligned with the needs identified during
@@ -522,7 +522,7 @@ export default function ProAutProcess() {
             <div className="flex items-start space-x-3">
               <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-yellow-800 font-medium">
+                <p className="text-justify text-yellow-800 font-medium">
                   {language === "pt-BR"
                     ? "INFO: O ProAut é indicado, principalmente, para construção de protótipos de baixa fidelidade."
                     : "INFO: ProAut is mainly recommended for building low-fidelity prototypes."}
@@ -540,7 +540,7 @@ export default function ProAutProcess() {
             </h2>
 
             <div className="space-y-4">
-              <p className="text-lg">
+              <p className="text-justify text-lg">
                 {language === "pt-BR"
                   ? "O ProAut possui 4 fases: Fase de imersão, Análise, Ideação e Prototipação. Nas quais:"
                   : "ProAut has 4 phases: Immersion phase, Analysis, Ideation and Prototyping. In which:"}
@@ -574,7 +574,6 @@ export default function ProAutProcess() {
                     {language === "pt-BR"
                       ? "Fase de ideação"
                       : "Ideation phase"}
-                    :
                   </strong>{" "}
                   {language === "pt-BR"
                     ? "conheça requisitos, reunindo a equipe de desenvolvimento para uma comunicação aberta acerca de melhorias, adições e remoções de ferramentas pensadas para resolver o problema definido;"
@@ -593,7 +592,7 @@ export default function ProAutProcess() {
                 </li>
               </ul>
 
-              <p className="text-lg pt-2 flex items-center gap-1 flex-wrap">
+              <p className="text-justify text-lg pt-2 flex items-center gap-1 flex-wrap">
                 {language === "pt-BR"
                   ? "Cada fase possui atividades que devem ser realizadas com artefatos disponibilizados na aba"
                   : "Each phase has activities that must be performed with artifacts provided in the"}
@@ -636,7 +635,7 @@ export default function ProAutProcess() {
                   </CardHeader>
                   {/* Texto do pop-up */}
                   <CardContent className="p-6">
-                    <p className="space-y-3 text-lg">
+                    <p className="text-justify space-y-3 text-lg">
                       {language == "pt-BR"
                         ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
                         : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
@@ -681,7 +680,7 @@ export default function ProAutProcess() {
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-center mt-2">
+                <p className="text-justify text-sm text-center mt-2">
                   {language === "pt-BR"
                     ? "Figura 1: Diagrama ilustrativo do processo ProAut"
                     : "Figure 1: Illustrative diagram of the ProAut process"}
@@ -766,7 +765,7 @@ export default function ProAutProcess() {
                       setTocOpen(false);
                     }
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-start gap-2 text-white/90${
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white/90${
                     activeSection === item.id
                       ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"

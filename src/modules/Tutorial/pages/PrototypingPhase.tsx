@@ -168,7 +168,7 @@ export default function PrototypingPhase() {
               ? "Fase de Prototipação"
               : "Prototyping Phase"}
           </h1>
-          <p className="text-lg">
+          <p className="text-justify text-lg">
             {language === "pt-BR"
               ? "Do conceito ao concreto: validando ideias com interações reais."
               : "From concept to concrete: validating ideas with real interactions."}
@@ -223,7 +223,7 @@ export default function PrototypingPhase() {
                   </CardHeader>
                   {/* Texto do pop-up */}
                   <CardContent className="p-6">
-                    <p className="space-y-3 text-lg">
+                    <p className="text-justify space-y-3 text-lg">
                       {language == "pt-BR"
                         ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
                         : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
@@ -268,7 +268,7 @@ export default function PrototypingPhase() {
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-center mt-2">
+                <p className="text-justify text-sm text-center mt-2">
                   {language === "pt-BR"
                     ? "Figura 1: Fluxo sugerido para a atividade de prototipação"
                     : "Figure 1: Suggested workflow for the prototyping activity"}
@@ -355,7 +355,7 @@ export default function PrototypingPhase() {
                       ? "O papel do GuideAut"
                       : "The role of GuideAut"}
                   </h4>
-                  <p className="text-blue-700 text-sm mt-1">
+                  <p className="text-justify text-blue-700 text-sm mt-1">
                     {language === "pt-BR"
                       ? "O GuideAut poderá fornecer informações úteis para nortear algumas decisões da equipe, quanto ao que usar ou não usar quanto às cores, formas geométricas (caso necessário) e layouts a serem utilizados durante o design das interfaces do protótipo, por exemplo."
                       : "The GuideAut can provide useful information to guide some design decisions regarding the use of colors, geometric shapes (when necessary), and layout choices for the prototype’s interface design."}
@@ -392,7 +392,7 @@ export default function PrototypingPhase() {
                   ? "Recomendação de Alta Fidelidade"
                   : "High-Fidelity Recommendation"}
               </h4>
-              <p className="mb-4">
+              <p className="text-justify mb-4">
                 {language === "pt-BR"
                   ? "Recomenda-se que para essa apresentação, o protótipo seja de alta fidelidade, e esteja representado em um dispositivo (notebook, tablet, smartphone) físico ou emulado."
                   : "It is recommended that this presentation be made using a high-fidelity prototype displayed on a physical or emulated device (such as a notebook, tablet, or smartphone)."}
@@ -416,7 +416,7 @@ export default function PrototypingPhase() {
               </ul>
             </div>
 
-            <p className="italic">
+            <p className="text-justify italic">
               {language === "pt-BR"
                 ? "No decorrer dessa etapa, os stakeholders podem solicitar mudanças no protótipo apresentado. Tais sugestões devem ser registradas, para garantir que todas as mudanças sejam realizadas."
                 : "During this stage, stakeholders may request changes to the prototype. Such suggestions must be documented to ensure that all necessary modifications are implemented."}
@@ -524,7 +524,7 @@ export default function PrototypingPhase() {
                       setTocOpen(false);
                     }
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-start gap-2 text-white/90${
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white/90${
                     activeSection === item.id
                       ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
