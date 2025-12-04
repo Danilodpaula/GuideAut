@@ -7,12 +7,13 @@ import { useI18n } from "@/core/i18n/I18nContext";
 import {
   CheckCircle2,
   ChevronRight,
-  FileText as FileTextIcon,
+  FileText,
   Heart,
   Info,
   Lightbulb,
   TrendingUp,
   Users,
+  X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -155,9 +156,9 @@ export default function AnalysisPhase() {
         onClick={() => setTocOpen(!tocOpen)}
       >
         {tocOpen ? (
-          <ChevronRight className="h-6 w-6 text-blue-500" />
+          <ChevronRight className="h-6 w-6 text-blue-500 rotate-180" />
         ) : (
-          <FileTextIcon className="h-6 w-6 text-blue-500" />
+          <ChevronRight className="h-6 w-6 text-blue-500" />
         )}
       </button>
 
@@ -215,7 +216,7 @@ export default function AnalysisPhase() {
                         onClick={() => setDiagramOpen(false)}
                         className="p-1 rounded-full"
                       >
-                        <ChevronRight className="h-5 w-5 rotate-90" />
+                        <X className="h-5 w-5" />
                       </button>
                     </CardTitle>
                   </CardHeader>
@@ -628,7 +629,6 @@ export default function AnalysisPhase() {
             {/* Instâncias */}
             <div className="bg-white border rounded-lg p-5 shadow-sm">
               <h4 className="font-semibold text-lg mb-3 flex items-center gap-2 text-slate-800">
-                <FileTextIcon className="h-5 w-5 text-blue-500" />
                 {language === "pt-BR" ? "Instâncias" : "Instances"}
               </h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -765,7 +765,7 @@ export default function AnalysisPhase() {
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
-              <FileTextIcon className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-blue-500" />
               {language === "pt-BR"
                 ? "Tabela de Conteúdos"
                 : "Table of Contents"}

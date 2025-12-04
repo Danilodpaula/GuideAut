@@ -8,11 +8,12 @@ import { useI18n } from "@/core/i18n/I18nContext";
 import {
   Boxes,
   ChevronRight,
-  FileText as FileTextIcon,
+  FileText,
   Info,
   Lightbulb,
   Palette,
   Users,
+  X,
 } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -486,7 +487,7 @@ export default function ProAutProcess() {
         {tocOpen ? (
           <ChevronRight className="h-6 w-6 text-blue-500" />
         ) : (
-          <FileTextIcon className="h-6 w-6 text-blue-500" />
+          <FileText className="h-6 w-6 text-blue-500" />
         )}
       </button>
 
@@ -596,7 +597,7 @@ export default function ProAutProcess() {
                 {language === "pt-BR"
                   ? "Cada fase possui atividades que devem ser realizadas com artefatos disponibilizados na aba"
                   : "Each phase has activities that must be performed with artifacts provided in the"}
-                <FileTextIcon className="h-5 w-5 mx-1" />
+                <FileText className="h-5 w-5 mx-1" />
                 <strong>
                   {language == "pt-BR" ? "Artefatos" : "Artifacts"}
                 </strong>
@@ -629,7 +630,7 @@ export default function ProAutProcess() {
                         onClick={() => setDiagramOpen(false)}
                         className="p-1 rounded-full"
                       >
-                        <ChevronRight className="h-5 w-5 rotate-90" />
+                        <X className="h-5 w-5" />
                       </button>
                     </CardTitle>
                   </CardHeader>
@@ -748,7 +749,7 @@ export default function ProAutProcess() {
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
-              <FileTextIcon className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-blue-500" />
               {language === "pt-BR"
                 ? "Tabela de Conteúdos"
                 : "Table of Contents"}

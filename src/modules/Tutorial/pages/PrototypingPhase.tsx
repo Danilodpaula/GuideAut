@@ -6,12 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useI18n } from "@/core/i18n/I18nContext";
 import {
   ChevronRight,
-  FileText as FileTextIcon,
+  FileText,
   Info,
   Lightbulb,
   PenTool,
   Repeat,
   Users,
+  X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -155,7 +156,7 @@ export default function PrototypingPhase() {
         {tocOpen ? (
           <ChevronRight className="h-6 w-6 text-blue-500" />
         ) : (
-          <FileTextIcon className="h-6 w-6 text-blue-500" />
+          <FileText className="h-6 w-6 text-blue-500" />
         )}
       </button>
 
@@ -216,7 +217,7 @@ export default function PrototypingPhase() {
                         onClick={() => setDiagramOpen(false)}
                         className="p-1 rounded-full"
                       >
-                        <ChevronRight className="h-5 w-5 rotate-90" />
+                        <X className="h-5 w-5" />
                       </button>
                     </CardTitle>
                   </CardHeader>
@@ -481,7 +482,7 @@ export default function PrototypingPhase() {
                   {language === "pt-BR" ? artifact.type_pt : artifact.type_en}
                 </span>
                 <div className="flex items-center gap-2">
-                  <FileTextIcon className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                  <FileText className="h-4 w-4 text-blue-500 flex-shrink-0" />
                   <span className="font-medium">
                     {language === "pt-BR" ? artifact.name_pt : artifact.name_en}
                   </span>
@@ -506,7 +507,7 @@ export default function PrototypingPhase() {
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
-              <FileTextIcon className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-blue-500" />
               {language === "pt-BR"
                 ? "Tabela de Conteúdos"
                 : "Table of Contents"}
