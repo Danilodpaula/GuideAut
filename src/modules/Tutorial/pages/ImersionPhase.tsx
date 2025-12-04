@@ -9,6 +9,7 @@ import {
   FileText,
   FileText as FileTextIcon,
   Info,
+  Lightbulb,
   Package,
   Search,
 } from "lucide-react";
@@ -53,6 +54,7 @@ export default function ImersionPhase() {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
   const [tocOpen, setTocOpen] = useState(false);
+  const [diagramOpen, setDiagramOpen] = useState(false);
 
   // Estrutura da tabela de conteúdos
   const tableOfContents = useMemo(
@@ -163,7 +165,7 @@ export default function ImersionPhase() {
 
       {/* Botão visível apenas em mobile */}
       <button
-        className="fixed bottom-10 right-6 z-50 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
+        className="fixed bottom-10 right-6 z-70 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
         onClick={() => setTocOpen(!tocOpen)}
       >
         {tocOpen ? (
@@ -205,9 +207,66 @@ export default function ImersionPhase() {
                 : "The immersion phase is characterized by approaching the problem. It is at this stage that the team seeks to understand concepts that permeate the theme of the application to be designed."}
             </p>
 
+            {diagramOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div
+                  className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                  onClick={() => setDiagramOpen(false)}
+                />
+
+                {/* Conteúdo do pop-up vem aqui.*/}
+                <Card
+                  className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Header + Botão de Fechar*/}
+                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                    <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
+                      {language === "pt-BR"
+                        ? "Sobre o Diagrama"
+                        : "About the Diagram"}
+                      <button
+                        onClick={() => setDiagramOpen(false)}
+                        className="p-1 rounded-full"
+                      >
+                        <ChevronRight className="h-5 w-5 rotate-90" />
+                      </button>
+                    </CardTitle>
+                  </CardHeader>
+                  {/* Texto do pop-up */}
+                  <CardContent className="p-6">
+                    <p className="space-y-3 text-lg">
+                      {language == "pt-BR"
+                        ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
+                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
             {/* Fluxo da Fase de Imersão */}
-            <div className="my-8 p-4 bg-card rounded-lg border">
-              <div className="max-w-4xl mx-auto flex justify-center">
+            <div className="relative">
+              <div className="max-w-4xl lg:max-w-6xl mx-auto">
+                <div className="flex justify-end p-4">
+                  <Card
+                    className="cursor-pointer border border-blue-100"
+                    onClick={() => setDiagramOpen(!diagramOpen)}
+                  >
+                    <CardContent className=" text-blue-500 p-3">
+                      <div className="flex items-center gap-2">
+                        <strong>
+                          <span className="text-lg">
+                            {language === "pt-BR"
+                              ? "Explicação do diagrama"
+                              : "Diagram Explanation"}
+                          </span>
+                        </strong>
+                        <Lightbulb className="h-6 w-6" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
                 <img
                   src={
                     language === "pt-BR"
@@ -216,16 +275,16 @@ export default function ImersionPhase() {
                   }
                   alt={
                     language === "pt-BR"
-                      ? "Fluxo sugerido para a atividade de Imersão"
-                      : "Suggested flow for Immersion activity"
+                      ? "Figura 1: Fluxo sugerido para a atividade de Imersão"
+                      : "Figure 1: Suggested flow for immersion activity"
                   }
-                  className="rounded-md shadow-sm max-w-full h-auto"
+                  className="rounded-md max-w-full h-auto"
                 />
               </div>
               <p className="text-sm text-center mt-2">
                 {language === "pt-BR"
-                  ? "Fluxo sugerido para a atividade"
-                  : "Suggested flow for the activity"}
+                  ? "Figura 1: Fluxo sugerido para a atividade de Imersão"
+                  : "Figure 1: Suggested flow for immersion activity"}
               </p>
             </div>
 
@@ -281,8 +340,66 @@ export default function ImersionPhase() {
             </h2>
           </div>
 
-          <div className="my-6 p-4 bg-card rounded-lg border">
-            <div className="max-w-4xl mx-auto flex justify-center">
+          {diagramOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                onClick={() => setDiagramOpen(false)}
+              />
+
+              {/* Conteúdo do pop-up vem aqui.*/}
+              <Card
+                className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Header + Botão de Fechar*/}
+                <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                  <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
+                    {language === "pt-BR"
+                      ? "Sobre o Diagrama"
+                      : "About the Diagram"}
+                    <button
+                      onClick={() => setDiagramOpen(false)}
+                      className="p-1 rounded-full"
+                    >
+                      <ChevronRight className="h-5 w-5 rotate-90" />
+                    </button>
+                  </CardTitle>
+                </CardHeader>
+                {/* Texto do pop-up */}
+                <CardContent className="p-6">
+                  <p className="space-y-3 text-lg">
+                    {language == "pt-BR"
+                      ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
+                      : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Fluxo Aprender sobre o contexto*/}
+          <div className="relative">
+            <div className="max-w-4xl lg:max-w-6xl mx-auto">
+              <div className="flex justify-end p-4">
+                <Card
+                  className="cursor-pointer border border-blue-100"
+                  onClick={() => setDiagramOpen(!diagramOpen)}
+                >
+                  <CardContent className="text-blue-500 p-3">
+                    <div className="flex items-center gap-2">
+                      <strong>
+                        <span className="text-lg">
+                          {language === "pt-BR"
+                            ? "Explicação do diagrama"
+                            : "Diagram Explanation"}
+                        </span>
+                      </strong>
+                      <Lightbulb className="h-6 w-6" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
               <img
                 src={
                   language === "pt-BR"
@@ -291,16 +408,16 @@ export default function ImersionPhase() {
                 }
                 alt={
                   language === "pt-BR"
-                    ? "Fluxo sugerido para aprender sobre o contexto"
-                    : "Suggested flow for learning about the context"
+                    ? "Figura 2: Fluxo sugerido para aprender sobre o contexto"
+                    : "Figure 2: Suggested flow for learning about the context"
                 }
-                className="rounded-md shadow-sm max-w-full h-auto"
+                className="rounded-md max-w-full h-auto"
               />
             </div>
             <p className="text-sm text-center mt-2">
               {language === "pt-BR"
-                ? "Fluxo sugerido para a atividade"
-                : "Suggested flow for the activity"}
+                ? "Figura 2: Fluxo sugerido para aprender sobre o contexto"
+                : "Figure 2: Suggested flow for learning about the context"}
             </p>
           </div>
 
@@ -518,9 +635,66 @@ export default function ImersionPhase() {
               ? "A extração de requisitos é a etapa que segue o levantamento da documentação de consulta na atividade Aprender sobre o contexto. É crucial realizar uma compreensão do domínio do seu negócio e definir uma estratégia de extração de informações com as partes interessadas, permitindo extrair requisitos com qualidade e desenvolver confiança com os stakeholders."
               : "Requirements extraction is the step that follows the survey of reference documentation in the Learn about the context activity. It is crucial to perform an understanding of your business domain and define an information extraction strategy with stakeholders, allowing to extract quality requirements and develop trust with stakeholders."}
           </p>
+          {diagramOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div
+                className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                onClick={() => setDiagramOpen(false)}
+              />
 
-          <div className="my-6 p-4 bg-card rounded-lg border">
-            <div className="max-w-4xl mx-auto flex justify-center">
+              {/* Conteúdo do pop-up vem aqui.*/}
+              <Card
+                className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Header + Botão de Fechar*/}
+                <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                  <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
+                    {language === "pt-BR"
+                      ? "Sobre o Diagrama"
+                      : "About the Diagram"}
+                    <button
+                      onClick={() => setDiagramOpen(false)}
+                      className="p-1 rounded-full"
+                    >
+                      <ChevronRight className="h-5 w-5 rotate-90" />
+                    </button>
+                  </CardTitle>
+                </CardHeader>
+                {/* Texto do pop-up */}
+                <CardContent className="p-6">
+                  <p className="space-y-3 text-lg">
+                    {language == "pt-BR"
+                      ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
+                      : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* Fluxo Extrair Requisitos*/}
+          <div className="relative">
+            <div className="max-w-4xl lg:max-w-6xl mx-auto">
+              <div className="flex justify-end p-4">
+                <Card
+                  className="cursor-pointer border border-blue-100"
+                  onClick={() => setDiagramOpen(!diagramOpen)}
+                >
+                  <CardContent className="text-blue-500 p-3">
+                    <div className="flex items-center gap-2">
+                      <strong>
+                        <span className="text-lg">
+                          {language === "pt-BR"
+                            ? "Explicação do diagrama"
+                            : "Diagram Explanation"}
+                        </span>
+                      </strong>
+                      <Lightbulb className="h-6 w-6" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
               <img
                 src={
                   language === "pt-BR"
@@ -529,16 +703,16 @@ export default function ImersionPhase() {
                 }
                 alt={
                   language === "pt-BR"
-                    ? "Fluxo sugerido para extrair requisitos"
-                    : "Suggested flow for extracting requirements"
+                    ? "Figura 3: Fluxo sugerido para extrair requisitos"
+                    : "Figure 3: Suggested flow for extracting requirements"
                 }
-                className="rounded-md shadow-sm max-w-full h-auto"
+                className="rounded-md max-w-full h-auto"
               />
             </div>
             <p className="text-sm text-center mt-2">
               {language === "pt-BR"
-                ? "Fluxo sugerido para a atividade"
-                : "Suggested flow for the activity"}
+                ? "Figura 3: Fluxo sugerido para extrair requisitos"
+                : "Figure 3: Suggested flow for extracting requirements"}
             </p>
           </div>
 
@@ -583,7 +757,7 @@ export default function ImersionPhase() {
                   : "Completing the ACF produces a graph called Autistic Overview Graph (AOG), which allows visualizing the degree of impairment in each of the previously mentioned areas, so that the higher the autistic person's percentage in a given area, the greater the impairment in it."}
               </p>
 
-              <div className="my-6 p-4 bg-card rounded-lg border">
+              <div className="my-6 p-4">
                 <div className="max-w-3xl mx-auto flex justify-center">
                   <img
                     src={
@@ -593,16 +767,16 @@ export default function ImersionPhase() {
                     }
                     alt={
                       language === "pt-BR"
-                        ? "Gráfico de visão geral do Autista (VGA)"
-                        : "Autistic Overview Graph (AOG)"
+                        ? "Figura 4: Gráfico de visão geral do Autista (VGA)"
+                        : "Figure 4: Autistic Overview Graph (AOG)"
                     }
-                    className="rounded-md shadow-sm max-w-full h-auto"
+                    className="rounded-md max-w-full h-auto"
                   />
                 </div>
                 <p className="text-sm text-center mt-2">
                   {language === "pt-BR"
-                    ? "Gráfico de visão geral do Autista (VGA)"
-                    : "Autistic Overview Graph (AOG)"}
+                    ? "Figura 4: Gráfico de visão geral do Autista (VGA)"
+                    : "Figure 4: Autistic Overview Graph (AOG)"}
                 </p>
               </div>
 
@@ -680,7 +854,7 @@ export default function ImersionPhase() {
                           ? "Roteiro de Perguntas para Cliente"
                           : "Questionnaire for Client"
                       }
-                      className="rounded-md shadow-sm max-w-full h-auto"
+                      className="rounded-md max-w-full h-auto"
                     />
                   </div>
                   <h5 className="font-semibold text-lg mb-2">
@@ -708,7 +882,7 @@ export default function ImersionPhase() {
                           ? "Roteiro de Perguntas para Cuidador"
                           : "Questionnaire for Caregiver"
                       }
-                      className="rounded-md shadow-sm max-w-full h-auto"
+                      className="rounded-md max-w-full h-auto"
                     />
                   </div>
                   <h5 className="font-semibold text-lg mb-2">
@@ -736,7 +910,7 @@ export default function ImersionPhase() {
                           ? "Roteiro de Perguntas para Terapeuta"
                           : "Questionnaire for Therapist"
                       }
-                      className="rounded-md shadow-sm max-w-full h-auto"
+                      className="rounded-md max-w-full h-auto"
                     />
                   </div>
                   <h5 className="font-semibold text-lg mb-2">
@@ -925,7 +1099,7 @@ export default function ImersionPhase() {
                       ? "Canvas para entrevista do solicitante (CSS)"
                       : "Canvas for requester interview (CSS)"
                   }
-                  className="rounded-md shadow-sm max-w-full h-auto"
+                  className="rounded-md max-w-full h-auto"
                 />
               </div>
               <h5 className="font-semibold text-lg mb-2">
@@ -953,7 +1127,7 @@ export default function ImersionPhase() {
                       ? "Canvas para entrevista do cuidador (CCA)"
                       : "Canvas for caregiver interview (ACC)"
                   }
-                  className="rounded-md shadow-sm max-w-full h-auto"
+                  className="rounded-md max-w-full h-auto"
                 />
               </div>
               <h5 className="font-semibold text-lg mb-2">
@@ -981,7 +1155,7 @@ export default function ImersionPhase() {
                       ? "Canvas para entrevista do terapeuta (CCT)"
                       : "Canvas for therapist interview (CCT)"
                   }
-                  className="rounded-md shadow-sm max-w-full h-auto"
+                  className="rounded-md max-w-full h-auto"
                 />
               </div>
               <h5 className="font-semibold text-lg mb-2">
@@ -1131,14 +1305,14 @@ export default function ImersionPhase() {
 
       {tocOpen && (
         <div
-          className="fixed w-full h-full bg-black/50 z-40 lg:hidden"
+          className="fixed w-full h-full bg-black/50 z-60 lg:hidden"
           onClick={() => setTocOpen(false)}
         />
       )}
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-50 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-70 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">

@@ -8,6 +8,7 @@ import {
   ChevronRight,
   FileText as FileTextIcon,
   Info,
+  Lightbulb,
   PenTool,
   Repeat,
   Users,
@@ -41,6 +42,7 @@ export default function PrototypingPhase() {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
   const [tocOpen, setTocOpen] = useState(false);
+  const [diagramOpen, setDiagramOpen] = useState(false);
 
   // Estrutura da tabela de conteúdos
   const tableOfContents = useMemo(
@@ -147,7 +149,7 @@ export default function PrototypingPhase() {
 
       {/* Botão visível apenas em mobile */}
       <button
-        className="fixed bottom-10 right-6 z-50 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
+        className="fixed bottom-10 right-6 z-70 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
         onClick={() => setTocOpen(!tocOpen)}
       >
         {tocOpen ? (
@@ -165,7 +167,7 @@ export default function PrototypingPhase() {
               ? "Fase de Prototipação"
               : "Prototyping Phase"}
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg">
             {language === "pt-BR"
               ? "Do conceito ao concreto: validando ideias com interações reais."
               : "From concept to concrete: validating ideas with real interactions."}
@@ -192,8 +194,66 @@ export default function PrototypingPhase() {
                 : "With the prototype in hand, it is possible to evaluate it with the user and, depending on the results, refine it until it becomes a solution that is truly aligned with the needs identified during the process."}
             </p>
 
-            <div className="my-8 p-4 bg-card rounded-lg border">
-              <div className="max-w-6xl mx-auto">
+            {diagramOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div
+                  className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                  onClick={() => setDiagramOpen(false)}
+                />
+
+                {/* Conteúdo do pop-up vem aqui.*/}
+                <Card
+                  className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Header + Botão de Fechar*/}
+                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                    <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
+                      {language === "pt-BR"
+                        ? "Sobre o Diagrama"
+                        : "About the Diagram"}
+                      <button
+                        onClick={() => setDiagramOpen(false)}
+                        className="p-1 rounded-full"
+                      >
+                        <ChevronRight className="h-5 w-5 rotate-90" />
+                      </button>
+                    </CardTitle>
+                  </CardHeader>
+                  {/* Texto do pop-up */}
+                  <CardContent className="p-6">
+                    <p className="space-y-3 text-lg">
+                      {language == "pt-BR"
+                        ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
+                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Fluxo Fase de Ideação*/}
+            <div className="relative">
+              <div className="max-w-4xl lg:max-w-6xl mx-auto">
+                <div className="flex justify-end p-4">
+                  <Card
+                    className="cursor-pointer border border-blue-100"
+                    onClick={() => setDiagramOpen(!diagramOpen)}
+                  >
+                    <CardContent className=" text-blue-500 p-3">
+                      <div className="flex items-center gap-2">
+                        <strong>
+                          <span className="text-lg">
+                            {language === "pt-BR"
+                              ? "Explicação do diagrama"
+                              : "Diagram Explanation"}
+                          </span>
+                        </strong>
+                        <Lightbulb className="h-6 w-6" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
                 <img
                   src={
                     language === "pt-BR"
@@ -202,15 +262,15 @@ export default function PrototypingPhase() {
                   }
                   alt={
                     language === "pt-BR"
-                      ? "Fluxo sugerido para a atividade de Prototipação"
-                      : "Suggested workflow for the Prototyping activity"
+                      ? "Figura 1: Fluxo sugerido para a atividade de prototipação"
+                      : "Figure 1: Suggested workflow for the prototyping activity"
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-muted-foreground text-center mt-2">
+                <p className="text-sm text-center mt-2">
                   {language === "pt-BR"
-                    ? "Fluxo sugerido para a atividade de Análise"
-                    : "Suggested workflow for the Analysis activity"}
+                    ? "Figura 1: Fluxo sugerido para a atividade de prototipação"
+                    : "Figure 1: Suggested workflow for the prototyping activity"}
                 </p>
               </div>
             </div>
@@ -336,7 +396,7 @@ export default function PrototypingPhase() {
                   ? "Recomenda-se que para essa apresentação, o protótipo seja de alta fidelidade, e esteja representado em um dispositivo (notebook, tablet, smartphone) físico ou emulado."
                   : "It is recommended that this presentation be made using a high-fidelity prototype displayed on a physical or emulated device (such as a notebook, tablet, or smartphone)."}
               </p>
-              <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
+              <ul className="list-disc list-inside space-y-1 text-sm">
                 <li>
                   {language === "pt-BR"
                     ? "Torna o processo de revisão mais fluido."
@@ -355,7 +415,7 @@ export default function PrototypingPhase() {
               </ul>
             </div>
 
-            <p className="text-muted-foreground italic">
+            <p className="italic">
               {language === "pt-BR"
                 ? "No decorrer dessa etapa, os stakeholders podem solicitar mudanças no protótipo apresentado. Tais sugestões devem ser registradas, para garantir que todas as mudanças sejam realizadas."
                 : "During this stage, stakeholders may request changes to the prototype. Such suggestions must be documented to ensure that all necessary modifications are implemented."}
@@ -417,7 +477,7 @@ export default function PrototypingPhase() {
                 key={artifact.id}
                 className="flex flex-col bg-white p-3 rounded border shadow-sm"
               >
-                <span className="text-xs font-bold text-muted-foreground mb-1 uppercase tracking-wider">
+                <span className="text-xs font-bold mb-1 uppercase tracking-wider">
                   {language === "pt-BR" ? artifact.type_pt : artifact.type_en}
                 </span>
                 <div className="flex items-center gap-2">
@@ -434,14 +494,14 @@ export default function PrototypingPhase() {
 
       {tocOpen && (
         <div
-          className="fixed w-full h-full bg-black/50 z-40 lg:hidden"
+          className="fixed w-full h-full bg-black/50 z-60 lg:hidden"
           onClick={() => setTocOpen(false)}
         />
       )}
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-50 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-70 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">

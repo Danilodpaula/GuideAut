@@ -10,6 +10,7 @@ import {
   FileText as FileTextIcon,
   Filter,
   Info,
+  Lightbulb,
   MessageSquare,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -25,6 +26,7 @@ export default function IdeationPhase() {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
   const [tocOpen, setTocOpen] = useState(false);
+  const [diagramOpen, setDiagramOpen] = useState(false);
 
   // Estrutura da tabela de conteúdos
   const tableOfContents = useMemo(
@@ -140,7 +142,7 @@ export default function IdeationPhase() {
 
       {/* Botão visível apenas em mobile */}
       <button
-        className="fixed bottom-10 right-6 z-50 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
+        className="fixed bottom-10 right-6 z-70 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
         onClick={() => setTocOpen(!tocOpen)}
       >
         {tocOpen ? (
@@ -156,7 +158,7 @@ export default function IdeationPhase() {
           <h1 className="text-3xl font-bold tracking-tight">
             {language === "pt-BR" ? "Fase de Ideação" : "Ideation Phase"}
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg">
             {language === "pt-BR"
               ? "Gerando ideias criativas através de técnicas colaborativas com a equipe."
               : "Generating creative ideas through collaborative techniques with the team."}
@@ -177,8 +179,66 @@ export default function IdeationPhase() {
                 : "The ideation phase aims to generate ideas through creativity stimuli together with the application development and design team, in accordance with the software/app user's context and expectations. It follows the creation of persona artifacts, empathy maps and the initial version of the Requirements/Constraints Table."}
             </p>
 
-            <div className="my-6 p-4 bg-card rounded-lg border">
-              <div className="max-w-4xl mx-auto flex justify-center">
+            {diagramOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div
+                  className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                  onClick={() => setDiagramOpen(false)}
+                />
+
+                {/* Conteúdo do pop-up vem aqui.*/}
+                <Card
+                  className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Header + Botão de Fechar*/}
+                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                    <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
+                      {language === "pt-BR"
+                        ? "Sobre o Diagrama"
+                        : "About the Diagram"}
+                      <button
+                        onClick={() => setDiagramOpen(false)}
+                        className="p-1 rounded-full"
+                      >
+                        <ChevronRight className="h-5 w-5 rotate-90" />
+                      </button>
+                    </CardTitle>
+                  </CardHeader>
+                  {/* Texto do pop-up */}
+                  <CardContent className="p-6">
+                    <p className="space-y-3 text-lg">
+                      {language == "pt-BR"
+                        ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; "
+                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu lectus urna. Nulla sit amet vehicula ligula, quis lacinia metus. Fusce eu blandit lacus. Suspendisse vel lacus feugiat, bibendum magna eget, pellentesque diam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vivamus pellentesque viverra tempor. Suspendisse potenti. Praesent rutrum pulvinar est id pharetra. Nam sed lacus augue. Donec turpis urna, auctor posuere lobortis nec, ultricies et odio. Morbi vulputate nec ipsum lobortis auctor. Proin dolor purus, sollicitudin ac mattis tristique, malesuada ac leo. Maecenas molestie risus ut arcu volutpat rutrum. Aliquam efficitur vel dolor pellentesque porta."}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Fluxo Fase de Ideação*/}
+            <div className="relative">
+              <div className="max-w-4xl lg:max-w-6xl mx-auto">
+                <div className="flex justify-end p-4">
+                  <Card
+                    className="cursor-pointer border border-blue-100"
+                    onClick={() => setDiagramOpen(!diagramOpen)}
+                  >
+                    <CardContent className=" text-blue-500 p-3">
+                      <div className="flex items-center gap-2">
+                        <strong>
+                          <span className="text-lg">
+                            {language === "pt-BR"
+                              ? "Explicação do diagrama"
+                              : "Diagram Explanation"}
+                          </span>
+                        </strong>
+                        <Lightbulb className="h-6 w-6" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
                 <img
                   src={
                     language === "pt-BR"
@@ -187,16 +247,16 @@ export default function IdeationPhase() {
                   }
                   alt={
                     language === "pt-BR"
-                      ? "Visão Geral da Fase de Ideação"
-                      : "Ideation Phase Overview"
+                      ? "Figura 1: Fluxo sugerido para a atividade de ideação"
+                      : "Figure 1: Suggested workflow for the ideation activity"
                   }
                   className="rounded-md shadow-sm max-w-full h-auto"
                 />
               </div>
-              <p className="text-sm text-muted-foreground text-center mt-2">
+              <p className="text-sm text-center mt-2">
                 {language === "pt-BR"
-                  ? "Visão Geral desta fase"
-                  : "Overview of this phase"}
+                  ? "Figura 1: Fluxo sugerido para a atividade de ideação"
+                  : "Figure 1: Suggested workflow for the ideation activity"}
               </p>
             </div>
 
@@ -326,22 +386,22 @@ export default function IdeationPhase() {
                 : "Certain applications can help in the creation and execution of brainstorming sessions such as Miro, Google JamBoard and Figma's FigJam. It's up to the development team to choose the application compatible with their way of working."}
             </p>
 
-            <div className="my-6 p-4 bg-card rounded-lg border">
-              <div className="max-w-4xl mx-auto flex justify-center">
+            <div className="my-6 p-4">
+              <div className="max-w-4xl lg:max-w-6xl mx-auto">
                 <img
                   src="src/modules/Tutorial/assets/ideation-phase/ExemploBrainstorm.jpg"
                   alt={
                     language === "pt-BR"
-                      ? "Template de Board no Miro para sessão de brainstorming"
-                      : "Miro Board Template for brainstorming session"
+                      ? "Figura 2: Template de Board no Miro para sessão de brainstorming"
+                      : "Figure 2: Miro Board Template for brainstorming session"
                   }
                   className="rounded-md shadow-sm max-w-full h-auto"
                 />
               </div>
-              <p className="text-sm text-muted-foreground text-center mt-2">
+              <p className="text-sm text-center mt-2">
                 {language === "pt-BR"
-                  ? "Template de Board no Miro para sessão de brainstorming"
-                  : "Miro Board Template for brainstorming session"}
+                  ? "Figura 2: Template de Board no Miro para sessão de brainstorming"
+                  : "Figure 2: Miro Board Template for brainstorming session"}
               </p>
             </div>
 
@@ -351,7 +411,7 @@ export default function IdeationPhase() {
                 : "Note that it is through brainstorming sessions that three other columns of the Requirements/Constraints Table (RCT) will be filled."}
             </p>
 
-            {/* Tabela TRR */}
+            {/* Tabela TRR Inicial*/}
             <div className="my-6 p-4 bg-card rounded-lg border">
               <div className="max-w-6xl mx-auto">
                 <h4 className="font-semibold text-lg mb-4 text-center">
@@ -406,7 +466,7 @@ export default function IdeationPhase() {
                   </table>
                 </div>
 
-                <p className="text-sm text-muted-foreground text-center mt-2">
+                <p className="text-sm text-center mt-2">
                   {language === "pt-BR"
                     ? "Parte do TRR que será preenchido nesta fase"
                     : "Part of RCT that will be filled in this phase"}
@@ -787,7 +847,7 @@ export default function IdeationPhase() {
                   : "As a result of this activity, the filling of the requirements/interface scenarios table should be completed. See an example following the scenario of the app for teaching Spatial Notions and laterality:"}
               </p>
 
-              {/* Tabela TRR Completa - Substituindo imagem por tabela HTML */}
+              {/* Tabela TRR Final*/}
               <div className="my-6 p-4 bg-card rounded-lg border">
                 <div className="max-w-6xl mx-auto">
                   <h4 className="font-semibold text-lg mb-4 text-center">
@@ -898,7 +958,7 @@ export default function IdeationPhase() {
                     </table>
                   </div>
 
-                  <p className="text-sm text-muted-foreground text-center mt-2">
+                  <p className="text-sm text-center mt-2">
                     {language === "pt-BR"
                       ? "TRR do app para Ensino de Noções espaciais e lateralidade"
                       : "RCT for Spatial Notions and Laterality Teaching App"}
@@ -912,14 +972,14 @@ export default function IdeationPhase() {
 
       {tocOpen && (
         <div
-          className="fixed w-full h-full bg-black/50 z-40 lg:hidden"
+          className="fixed w-full h-full bg-black/50 z-60 lg:hidden"
           onClick={() => setTocOpen(false)}
         />
       )}
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-50 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-70 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
