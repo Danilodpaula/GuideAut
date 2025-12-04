@@ -82,6 +82,7 @@ export default function ProAutProcess() {
   const { language } = useI18n();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
+  const [tocOpen, setTocOpen] = useState(false);
 
   // Estrutura da tabela de conteúdos com paths de navegação
   const tableOfContents = useMemo(
@@ -473,9 +474,22 @@ export default function ProAutProcess() {
   ];
 
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col lg:flex-row gap-6 relative">
       {/* Conteúdo Principal */}
-      <div className="flex-1 space-y-6 p-6 animate-fade-in">
+
+      {/* Botão visível apenas em mobile */}
+      <button
+        className="fixed bottom-10 right-6 z-50 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
+        onClick={() => setTocOpen(!tocOpen)}
+      >
+        {tocOpen ? (
+          <ChevronRight className="h-6 w-6 text-blue-500" />
+        ) : (
+          <FileTextIcon className="h-6 w-6 text-blue-500" />
+        )}
+      </button>
+
+      <div className="flex-1 space-y-6 p-6 animate-fade-in order-1 lg:order-1">
         {/* Cabeçalho da página */}
         <div className="space-y-4">
           <h1 className="text-3xl font-bold tracking-tight">
@@ -663,9 +677,18 @@ export default function ProAutProcess() {
         </div>
       </div>
 
+      {tocOpen && (
+        <div
+          className="fixed w-full h-full bg-black/50 z-40 lg:hidden"
+          onClick={() => setTocOpen(false)}
+        />
+      )}
+
       {/* Tabela de Conteúdos */}
-      <div className="w-full lg:w-80 flex-shrink-0 p-6 lg:pt-6 lg:pr-6 lg:sticky lg:top-20 self-start max-h-[calc(100vh-5rem)] overflow-y-auto order-first lg:order-none">
-        <Card className="shadow-lg border-l-4 border-l-blue-500">
+      <div
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-50 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+      >
+        <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
               <FileTextIcon className="h-5 w-5 text-blue-500" />
@@ -679,8 +702,13 @@ export default function ProAutProcess() {
               {tableOfContents.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavigation(item)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white/90${
+                  onClick={() => {
+                    handleNavigation(item);
+                    if (window.innerWidth < 1024) {
+                      setTocOpen(false);
+                    }
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-start gap-2 text-white/90${
                     activeSection === item.id
                       ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
@@ -693,7 +721,9 @@ export default function ProAutProcess() {
                         : "text-gray-400"
                     }`}
                   />
-                  <span className="text-sm">{item.title}</span>
+                  <span className="text-sm text-left break-words">
+                    {item.title}
+                  </span>
                 </button>
               ))}
             </nav>
