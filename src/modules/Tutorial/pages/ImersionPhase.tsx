@@ -846,15 +846,28 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCS-pt-br.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCS-en-us.png"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CCS-pt-br-lightTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CCS-en-us-lightTheme.png"
                       }
                       alt={
                         language === "pt-BR"
                           ? "Roteiro de Perguntas para Cliente"
                           : "Questionnaire for Client"
                       }
-                      className="rounded-md max-w-full h-auto"
+                      className="block dark:hidden rounded-md max-w-full h-auto"
+                    />
+                    <img
+                      src={
+                        language === "pt-BR"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CCS-pt-br-darkTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CCS-en-us-darkTheme.png"
+                      }
+                      alt={
+                        language === "pt-BR"
+                          ? "Roteiro de Perguntas para Cuidador"
+                          : "Questionnaire for Caregiver"
+                      }
+                      className="hidden dark:block rounded-md max-w-full h-auto"
                     />
                   </div>
                   <h5 className="font-semibold text-lg mb-2">
@@ -874,15 +887,28 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCA-pt-br.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCA-en-us.png"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CCA-pt-br-lightTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CCA-en-us-lightTheme.png"
                       }
                       alt={
                         language === "pt-BR"
                           ? "Roteiro de Perguntas para Cuidador"
                           : "Questionnaire for Caregiver"
                       }
-                      className="rounded-md max-w-full h-auto"
+                      className="block dark:hidden rounded-md max-w-full h-auto"
+                    />
+                    <img
+                      src={
+                        language === "pt-BR"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CCA-pt-br-darkTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CCA-en-us-darkTheme.png"
+                      }
+                      alt={
+                        language === "pt-BR"
+                          ? "Roteiro de Perguntas para Cuidador"
+                          : "Questionnaire for Caregiver"
+                      }
+                      className="hidden dark:block rounded-md max-w-full h-auto"
                     />
                   </div>
                   <h5 className="font-semibold text-lg mb-2">
@@ -902,15 +928,28 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CTA-pt-br.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CTA-en-us.png"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CTA-pt-br-lightTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CTA-en-us-lightTheme.png"
                       }
                       alt={
                         language === "pt-BR"
                           ? "Roteiro de Perguntas para Terapeuta"
                           : "Questionnaire for Therapist"
                       }
-                      className="rounded-md max-w-full h-auto"
+                      className="block dark:hidden rounded-md max-w-full h-auto"
+                    />
+                    <img
+                      src={
+                        language === "pt-BR"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CTA-pt-br-darkTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CTA-en-us-darkTheme.png"
+                      }
+                      alt={
+                        language === "pt-BR"
+                          ? "Roteiro de Perguntas para Cuidador"
+                          : "Questionnaire for Caregiver"
+                      }
+                      className="hidden dark:block rounded-md max-w-full h-auto"
                     />
                   </div>
                   <h5 className="font-semibold text-lg mb-2">
