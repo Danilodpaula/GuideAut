@@ -23,6 +23,38 @@ import { useNavigate } from "react-router-dom";
  * Ideal para orientar equipes na geração e refinamento de ideias para interfaces acessíveis.
  */
 export default function IdeationPhase() {
+  // Artefatos da fase de ideação
+  const phaseArtifacts = [
+    {
+      id: "trr-inicial",
+      type_pt: "Entrada",
+      type_en: "Input",
+      name_pt: "Tabela de Requisitos/Restrições (TRR) Inicial",
+      name_en: "Initial Requirements/Constraints Table (RCT)",
+    },
+    {
+      id: "personas",
+      type_pt: "Entrada",
+      type_en: "Input",
+      name_pt: "Personas (PersonAut)",
+      name_en: "Personas (PersonAut)",
+    },
+    {
+      id: "mapa-empatia",
+      type_pt: "Entrada",
+      type_en: "Input",
+      name_pt: "Mapa de Empatia (EmpathyAut)",
+      name_en: "Empathy Map (EmpathyAut)",
+    },
+    {
+      id: "trr-completa",
+      type_pt: "Saída",
+      type_en: "Output",
+      name_pt: "Tabela de Requisitos/Restrições (TRR) Completa",
+      name_en: "Complete Requirements/Constraints Table (RCT)",
+    },
+  ];
+
   const { language } = useI18n();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
@@ -143,13 +175,13 @@ export default function IdeationPhase() {
 
       {/* Botão visível apenas em mobile */}
       <button
-        className="fixed bottom-10 right-6 z-70 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
+        className="fixed bottom-10 right-6 z-[1001] gap-2 p-3 border border-blue-400 bg-blue-50 dark:border-blue-800 rounded-lg lg:hidden mb-4"
         onClick={() => setTocOpen(!tocOpen)}
       >
         {tocOpen ? (
-          <ChevronRight className="h-6 w-6 text-blue-500" />
+          <ChevronRight className="h-6 w-6 text-blue-500 dark:text-blue-800 rotate-180" />
         ) : (
-          <FileText className="h-6 w-6 text-blue-500" />
+          <FileText className="h-6 w-6 text-blue-500 dark:text-blue-800" />
         )}
       </button>
 
@@ -174,7 +206,7 @@ export default function IdeationPhase() {
           </div>
 
           <div className="space-y-4 text-lg">
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "A fase de ideação tem como objetivo gerar ideias por meio de estímulos de criatividade em conjunto com a equipe de desenvolvimento e design da aplicação, em conformidade com o contexto e expectativas do usuário do software/app. Ela segue a criação dos artefatos de personas, mapas de empatia e a versão inicial da Tabela de Requisitos/Restrições."
                 : "The ideation phase aims to generate ideas through creativity stimuli together with the application development and design team, in accordance with the software/app user's context and expectations. It follows the creation of persona artifacts, empathy maps and the initial version of the Requirements/Constraints Table."}
@@ -396,7 +428,7 @@ export default function IdeationPhase() {
                   className="rounded-md shadow-sm max-w-full h-auto"
                 />
               </div>
-              <p className="text-sm text-center mt-2">
+              <p className="text-lg text-center mt-2">
                 {language === "pt-BR"
                   ? "Figura 1: Fluxo sugerido para a atividade de ideação"
                   : "Figure 1: Suggested workflow for the ideation activity"}
@@ -412,7 +444,7 @@ export default function IdeationPhase() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-blue-800 dark:text-blue-200 space-y-3">
-                <ul className="space-y-3 list-disc list-inside mb-4 ml-4">
+                <ul className="text-lg text-justify space-y-3 list-disc list-inside mb-4 ml-4">
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
                       {language === "pt-BR"
@@ -474,7 +506,7 @@ export default function IdeationPhase() {
           </div>
 
           <div className="space-y-4">
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "Nesta atividade, a equipe utiliza a técnica de brainstorming (tempestade de ideias), uma prática para aumentar a qualidade das ideias, com a colaboração dos envolvidos (pais/mães, especialistas e o solicitante), além do time de desenvolvimento. É neste momento que as pessoas devem se reunir para apresentar ideias e resolver problemas de forma criativa."
                 : "In this activity, the team uses the brainstorming technique, a practice to increase the quality of ideas, with the collaboration of those involved (parents, specialists and the requester), in addition to the development team. It is at this moment that people should come together to present ideas and solve problems creatively."}
@@ -491,7 +523,7 @@ export default function IdeationPhase() {
               </CardHeader>
               <CardContent>
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                  <ol className="text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
+                  <ol className="text-lg text-justify text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
                     <li className="text-justify">
                       {language === "pt-BR"
                         ? "Marcar a sessão de brainstorming, de preferência, com os designers/desenvolvedores, solicitante, um especialista e um pai/mãe, no mínimo;"
@@ -532,12 +564,12 @@ export default function IdeationPhase() {
               </CardContent>
             </Card>
 
-            {/* Card de info adaptado para modo claro/escuro */}
+            {/* Card de info */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
+                  <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                     {language === "pt-BR"
                       ? "Muitas equipes de trabalho atualmente já não estão no mesmo local físico e as sessões de brainstorming remotas já se tornaram comuns porém a interação face a face é perdida, assim como a comunicação não verbal e espontaneidade que ocorrem em uma sessão presencial, por isso, o brainstorming presencial é indicado pelo ProAut."
                       : "Many work teams are no longer in the same physical location and remote brainstorming sessions have become common, but face-to-face interaction is lost, as well as non-verbal communication and spontaneity that occur in an in-person session, so in-person brainstorming is recommended by ProAut."}
@@ -546,7 +578,7 @@ export default function IdeationPhase() {
               </div>
             </div>
 
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "Certos aplicativos podem ajudar na criação e realização das sessões de brainstorming como o Miro, o Google JamBoard e o FigJam do Figma. Fica a escolha do time de desenvolvimento escolher o aplicativo compatível com sua forma de trabalho."
                 : "Certain applications can help in the creation and execution of brainstorming sessions such as Miro, Google JamBoard and Figma's FigJam. It's up to the development team to choose the application compatible with their way of working."}
@@ -564,36 +596,10 @@ export default function IdeationPhase() {
                   className="rounded-md shadow-sm max-w-full h-auto"
                 />
               </div>
-              <p className="text-justify text-sm text-center mt-2">
+              <p className="text-lg text-justify text-sm text-center">
                 {language === "pt-BR"
                   ? "Figura 2: Template de Board no Miro para sessão de brainstorming"
                   : "Figure 2: Miro Board Template for brainstorming session"}
-              </p>
-            </div>
-
-            <p>
-              {language === "pt-BR"
-                ? "Observe que é através das sessões de brainstorming que outras três colunas da Tabela de Requisitos/Restrições (TRR) serão preenchidas."
-                : "Note that it is through brainstorming sessions that three other columns of the Requirements/Constraints Table (RCT) will be filled."}
-            </p>
-
-            {/* Imagem da parte do TRR que será preenchido */}
-            <div className="my-6 p-4">
-              <div className="max-w-4xl lg:max-w-6xl mx-auto">
-                <img
-                  src="CAMINHO_DA_IMAGEM_TRR_PARCIAL"
-                  alt={
-                    language === "pt-BR"
-                      ? "Parte do TRR que será preenchido nesta fase"
-                      : "Part of RCT that will be filled in this phase"
-                  }
-                  className="rounded-md shadow-sm max-w-full h-auto"
-                />
-              </div>
-              <p className="text-sm text-center mt-2">
-                {language === "pt-BR"
-                  ? "Parte do TRR que será preenchido nesta fase"
-                  : "Part of RCT that will be filled in this phase"}
               </p>
             </div>
           </div>
@@ -617,13 +623,13 @@ export default function IdeationPhase() {
 
           <div className="space-y-6">
             <div className="space-y-4">
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Para cada item de requisito, os participantes poderão contribuir com sugestões sobre como serão feitas as interações (cenários) daquele requisito. Normalmente, começamos com uma ideia geral e depois definimos um objetivo mais específico após termos a oportunidade de discutir ideias."
                   : "For each requirement item, participants can contribute with suggestions on how the interactions (scenarios) of that requirement will be done. Usually, we start with a general idea and then define a more specific objective after having the opportunity to discuss ideas."}
               </p>
 
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Em geral, abra cada bloco para discussão de ideias com 'Como poderíamos...'."
                   : "In general, open each block for idea discussion with 'How could we...'."}
@@ -640,7 +646,7 @@ export default function IdeationPhase() {
                 </CardHeader>
                 <CardContent>
                   <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                    <p className="text-blue-700 dark:text-blue-300 mb-2">
+                    <p className="text-lg text-blue-700 dark:text-blue-300 mb-2">
                       <strong>
                         {language === "pt-BR" ? "Requisito:" : "Requirement:"}
                       </strong>{" "}
@@ -648,7 +654,7 @@ export default function IdeationPhase() {
                         ? "Mostrar o conceito de esquerda/direita, usando uma pessoa como referência central."
                         : "Show the concept of left/right, using a person as central reference."}
                     </p>
-                    <p className="text-blue-700 dark:text-blue-300 mt-2">
+                    <p className="text-lg text-justify text-blue-700 dark:text-blue-300 mt-2">
                       {language === "pt-BR"
                         ? "O maior obstáculo é que o lado esquerdo do personagem na tela aparece no lado direito do campo de visão do usuário. Então, Como poderíamos... resolver a ambiguidade da visão espelho de forma imediata e intuitiva?"
                         : "The biggest obstacle is that the left side of the character on screen appears on the right side of the user's field of vision. So, How could we... solve the mirror vision ambiguity in an immediate and intuitive way?"}
@@ -657,13 +663,13 @@ export default function IdeationPhase() {
                 </CardContent>
               </Card>
 
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Após abertura de ideias para os integrantes da equipe, é possível supor que algumas soluções sejam apresentadas como"
                   : "After opening ideas to team members, it's possible to assume that some solutions would be presented such as"}
               </p>
 
-              <ul className="space-y-2 list-disc list-inside ml-4">
+              <ul className="text-lg text-justify space-y-2 list-disc list-inside ml-4">
                 <li>
                   {language === "pt-BR"
                     ? "Apresentar o conceito de lateralidade, tendo como referência uma pessoa no centro da tela."
@@ -681,13 +687,13 @@ export default function IdeationPhase() {
                 </li>
               </ul>
 
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Elenque as ideias em post-its. E lembre-se dos princípios essenciais do brainstorming:"
                   : "List the ideas on post-its. And remember the essential principles of brainstorming:"}
               </p>
 
-              <ol className="space-y-3 list-decimal list-inside ml-4">
+              <ol className=" text-lg text-justifyspace-y-3 list-decimal list-inside ml-4">
                 <li>
                   {language === "pt-BR"
                     ? "Não critique, nem permita críticas às ideias propostas, para não atrapalhar o processo criativo. A avaliação ficará para um momento posterior."
@@ -706,12 +712,12 @@ export default function IdeationPhase() {
               </ol>
             </div>
 
-            {/* Card de info adaptado para modo claro/escuro */}
+            {/* Card de info */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
+                  <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                     {language === "pt-BR"
                       ? "Durante a sessão de brainstorming, podem surgir novos requisitos não identificados na fase anterior. Caso isso ocorra e o solicitante esteja participando da sessão de brainstorming, ele poderá ser questionado para validar a necessidade do(s) novo(s) requisito(s) identificado(s), caso contrário ele poderá ser questionado em um outro momento previamente agendado."
                       : "During the brainstorming session, new requirements not identified in the previous phase may arise. If this occurs and the requester is participating in the brainstorming session, they can be questioned to validate the need for the new identified requirement(s), otherwise they can be questioned at another previously scheduled time."}
@@ -738,12 +744,12 @@ export default function IdeationPhase() {
             </h2>
           </div>
 
-          {/* Card de info adaptado para modo claro/escuro */}
+          {/* Card de info */}
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
             <div className="flex items-start space-x-3">
               <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
               <div>
-                <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
+                <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                   {language === "pt-BR"
                     ? "Os clientes/cuidadores/solicitantes são incentivados a colaborar nesta atividade."
                     : "Clients/caregivers/requesters are encouraged to collaborate in this activity."}
@@ -754,7 +760,7 @@ export default function IdeationPhase() {
 
           <div className="space-y-6">
             <div className="space-y-4">
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Com as ideias elencadas, é necessário escolher quais efetivamente irão compor a aplicação. O ProAut sugere a técnica do cardápio das ideias, uma técnica de brainwriting, que ajuda a organizar, compilar e ilustrar melhor as ideias que irão compor o 'cardápio'. Indicaremos duas formas de conduzir com esta técnica."
                   : "With the listed ideas, it's necessary to choose which ones will effectively compose the application. ProAut suggests the idea menu technique, a brainwriting technique, that helps organize, compile and better illustrate the ideas that will compose the 'menu'. We will indicate two ways to conduct with this technique."}
@@ -774,7 +780,7 @@ export default function IdeationPhase() {
                   </CardHeader>
                   <CardContent>
                     <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                      <ol className="text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
+                      <ol className="text-lg text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
                         <li className="text-justify">
                           {language === "pt-BR"
                             ? "Caso seja realizada logo após a sessão de brainstorming, permanecer com o mesmo moderador da atividade anterior, ou selecionar outro;"
@@ -817,7 +823,7 @@ export default function IdeationPhase() {
                   </CardHeader>
                   <CardContent>
                     <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                      <ol className="text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
+                      <ol className="text-lg text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
                         <li className="text-justify">
                           {language === "pt-BR"
                             ? "Liste todos os requisitos juntamente com as respectivas ideias de cenário sugeridas em um painel ou lousa visível para todos os participantes."
@@ -844,12 +850,12 @@ export default function IdeationPhase() {
                 </Card>
               </div>
 
-              {/* Card de info adaptado para modo claro/escuro */}
+              {/* Card de info*/}
               <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
                 <div className="flex items-start space-x-3">
                   <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                   <div>
-                    <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
+                    <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                       {language === "pt-BR"
                         ? "INFO: Se não deseja seguir com o cardápio de ideias, outras técnicas de brainwriting são sugeridas como a matriz de posicionamento."
                         : "INFO: If you don't want to proceed with the idea menu, other brainwriting techniques are suggested such as the positioning matrix."}
@@ -860,13 +866,13 @@ export default function IdeationPhase() {
             </div>
 
             <div className="space-y-4">
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Após a análise e seleção feita anteriormente, ocorre a definição dos elementos principais e complementares dos cenários de interação selecionados. Esses elementos correspondem a um detalhamento de como os elementos que compõem o cenário devem ser apresentados na interface a ser elaborada. Ou seja, se a descrição do cenário selecionado cita um objeto, nesta atividade deve-sedefinir qual o objeto (como principal) e a cor ou formato do objeto (como complementar)."
                   : "After the analysis and selection done previously, the definition of main and complementary elements of the selected interaction scenarios occurs. These elements correspond to a detailing of how the elements that compose the scenario should be presented in the interface to be elaborated. That is, if the description of the selected scenario mentions an object, in this activity one must define which object (as main) and the color or format of the object (as complementary)."}
               </p>
 
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Como resultado desta atividade, deve-se completar o preenchimento da Tabela de requisitos/cenários de interface. Veja um exemplo seguindo o cenário do app para ensino de Noções espaciais e lateralidade:"
                   : "As a result of this activity, the filling of the requirements/interface scenarios table should be completed. See an example following the scenario of the app for teaching Spatial Notions and laterality:"}
@@ -874,18 +880,35 @@ export default function IdeationPhase() {
 
               {/* Imagem do TRR completo */}
               <div className="my-6 p-4">
-                <div className="max-w-4xl lg:max-w-6xl mx-auto">
+                <div className="max-w-4xl lg:max-w-6xl">
                   <img
-                    src="CAMINHO_DA_IMAGEM_TRR_COMPLETO"
+                    src={
+                      language === "pt-BR"
+                        ? "src/modules/Tutorial/assets/ideation-phase/finalTRR-pt-br-lightTheme.png"
+                        : "src/modules/Tutorial/assets/ideation-phase/finalTRR-en-us-lightTheme.png"
+                    }
                     alt={
                       language === "pt-BR"
                         ? "TRR do app para Ensino de Noções espaciais e lateralidade"
                         : "RCT for Spatial Notions and Laterality Teaching App"
                     }
-                    className="rounded-md shadow-sm max-w-full h-auto"
+                    className="block dark:hidden rounded-md shadow-sm max-w-full h-auto mx-auto"
+                  />
+                  <img
+                    src={
+                      language === "pt-BR"
+                        ? "src/modules/Tutorial/assets/ideation-phase/finalTRR-pt-br-darkTheme.png"
+                        : "src/modules/Tutorial/assets/ideation-phase/finalTRR-en-us-darkTheme.png"
+                    }
+                    alt={
+                      language === "pt-BR"
+                        ? "TRR do app para Ensino de Noções espaciais e lateralidade"
+                        : "RCT for Spatial Notions and Laterality Teaching App"
+                    }
+                    className="hidden dark:block rounded-md shadow-sm max-w-full h-auto mx-auto"
                   />
                 </div>
-                <p className="text-sm text-center mt-2">
+                <p className="text-lg text-sm text-center mt-2">
                   {language === "pt-BR"
                     ? "TRR do app para Ensino de Noções espaciais e lateralidade"
                     : "RCT for Spatial Notions and Laterality Teaching App"}
@@ -894,18 +917,43 @@ export default function IdeationPhase() {
             </div>
           </div>
         </section>
+
+        {/* Artefatos da Fase */}
+        <div className="mt-8 p-6 rounded-lg border">
+          <h3 className="text-xl font-semibold mb-4">
+            {language === "pt-BR" ? "Artefatos da Fase" : "Phase Artifacts"}
+          </h3>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {phaseArtifacts.map((artifact) => (
+              <li
+                key={artifact.id}
+                className="flex flex-col p-3 rounded border shadow-sm"
+              >
+                <span className="text-xs font-bold mb-1 uppercase tracking-wider">
+                  {language === "pt-BR" ? artifact.type_pt : artifact.type_en}
+                </span>
+                <div className="flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                  <span className="font-medium text-base">
+                    {language === "pt-BR" ? artifact.name_pt : artifact.name_en}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       {tocOpen && (
         <div
-          className="fixed w-full h-full bg-black/50 z-60 lg:hidden"
+          className="fixed w-full h-full bg-black/50 z-[999] lg:hidden"
           onClick={() => setTocOpen(false)}
         />
       )}
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-70 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">

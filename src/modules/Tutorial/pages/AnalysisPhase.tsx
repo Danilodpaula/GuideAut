@@ -179,13 +179,13 @@ export default function AnalysisPhase() {
 
       {/* Botão visível apenas em mobile */}
       <button
-        className="fixed bottom-10 right-6 z-70 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
+        className="fixed bottom-10 right-6 z-[1001] gap-2 p-3 border border-blue-400 bg-blue-50 dark:border-blue-800 rounded-lg lg:hidden mb-4"
         onClick={() => setTocOpen(!tocOpen)}
       >
         {tocOpen ? (
-          <ChevronRight className="h-6 w-6 text-blue-500 rotate-180" />
+          <ChevronRight className="h-6 w-6 text-blue-500 dark:text-blue-800 rotate-180" />
         ) : (
-          <ChevronRight className="h-6 w-6 text-blue-500" />
+          <FileText className="h-6 w-6 text-blue-500 dark:text-blue-800" />
         )}
       </button>
 
@@ -195,7 +195,7 @@ export default function AnalysisPhase() {
           <h1 className="text-3xl font-bold tracking-tight">
             {language === "pt-BR" ? "Fase de Análise" : "Analysis Phase"}
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg">
             {language === "pt-BR"
               ? "Transformando dados em empatia e requisitos em soluções."
               : "Transforming data into empathy and requirements into solutions."}
@@ -210,12 +210,12 @@ export default function AnalysisPhase() {
           </div>
 
           <div className="space-y-4 text-lg leading-relaxed">
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "A fase de Análise é o momento de aproximação do problema. Agora que a equipe coletou diversos dados na imersão, é preciso mergulhar nessas informações e avaliar as implicações do desafio sob o ponto de vista de todos os envolvidos (stakeholders)."
                 : "The Analysis phase is the moment to approach the problem. Now that the team has collected various data during immersion, it is necessary to dive into this information and evaluate the implications of the challenge from the point of view of all stakeholders involved."}
             </p>
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "A fase de Análise tem como objetivo aprofundar as informações obtidas na fase de Imersão e iniciar as principais propostas de solução."
                 : "The Analysis phase aims to delve deeper into the information obtained in the Immersion phase and initiate the main proposed solutions."}
@@ -434,7 +434,11 @@ export default function AnalysisPhase() {
                   </Card>
                 </div>
                 <img
-                  src="CAMINHO_DA_IMAGEM_DIAGRAMA_ANALISE"
+                  src={
+                    language === "pt-BR"
+                      ? "src/modules/Tutorial/assets/analysis-phase/FluxoAnalise-pt-br.png"
+                      : "src/modules/Tutorial/assets/analysis-phase/FluxoAnalise-en-us.png"
+                  }
                   alt={
                     language === "pt-BR"
                       ? "Figura 1: Fluxo sugerido para a atividade de Análise"
@@ -442,7 +446,7 @@ export default function AnalysisPhase() {
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-center mt-2">
+                <p className="text-lg text-center mt-2">
                   {language === "pt-BR"
                     ? "Figura 1: Fluxo sugerido para a atividade de Análise"
                     : "Figure 1: Suggested workflow for the Analysis activity"}
@@ -458,7 +462,7 @@ export default function AnalysisPhase() {
                   {language === "pt-BR" ? "Resumo da Fase" : "Phase Summary"}
                 </CardTitle>
               </CardHeader>
-              <CardContent className="text-blue-800 dark:text-blue-200 space-y-3">
+              <CardContent className="text-lg text-blue-800 dark:text-blue-200 space-y-3">
                 <ul className="space-y-3 list-disc list-inside mb-4 ml-4">
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
@@ -518,18 +522,18 @@ export default function AnalysisPhase() {
           </div>
 
           <div className="space-y-4">
-            <p>
+            <p className="text-justify text-lg">
               {language === "pt-BR"
                 ? "Nesta atividade, você deve usar as múltiplas fontes de dados (os diferentes Canvas) geradas na fase anterior para criar uma Lista Inicial de Requisitos e Restrições."
                 : "In this activity, you must use the multiple data sources (the different Canvases) generated in the previous phase to create an Initial List of Requirements and Constraints."}
             </p>
 
-            {/* Card de info adaptado para modo claro/escuro */}
+            {/* Card de info */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
+                  <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                     {language === "pt-BR"
                       ? "INFO: O termo 'Lista Inicial' é usado porque, nesta etapa, você vai definir apenas a identificação e a descrição do requisito. O detalhamento visual ocorrerá na próxima fase."
                       : "INFO: The term 'Initial List' is used because, at this stage, you will define only the identification and description of the requirement. Visual detailing will occur in the next phase."}
@@ -742,7 +746,7 @@ export default function AnalysisPhase() {
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-center mt-2">
+                <p className="text-lg text-center mt-2">
                   {language === "pt-BR"
                     ? "Figura 2: Fluxo sugerido para triangular dados"
                     : "Figure 2: Suggested workflow for data triangulation"}
@@ -750,7 +754,7 @@ export default function AnalysisPhase() {
               </div>
             </div>
 
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "Você deve cruzar as informações. O que vai para a lista não é apenas o que o solicitante pediu, mas o resultado da combinação com o que os pais e especialistas informaram."
                 : "You must cross-reference the information. What goes on the list is not just what the requester asked for, but the result of the combination with what parents and specialists reported."}
@@ -765,7 +769,7 @@ export default function AnalysisPhase() {
 
               <Card className="border-l-4 border-l-blue-500">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <CardTitle className="text-lg text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
                     <Lightbulb className="text-blue-600 dark:text-blue-400 h-5 w-5" />
                     {language === "pt-BR"
                       ? "Sugestão de Procedimento"
@@ -774,7 +778,7 @@ export default function AnalysisPhase() {
                 </CardHeader>
                 <CardContent>
                   <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                    <ol className="text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
+                    <ol className="text-lg text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Reúna todos os Canvas preenchidos (CSS, CCA, CTA) e o FCA;"
@@ -815,16 +819,33 @@ export default function AnalysisPhase() {
             <div className="my-6 p-4">
               <div className="max-w-4xl lg:max-w-6xl mx-auto">
                 <img
-                  src="CAMINHO_DA_IMAGEM_EXEMPLO_TRR"
+                  src={
+                    language === "pt-BR"
+                      ? "src/modules/Tutorial/assets/analysis-phase/initialTRR-pt-br-lightTheme.png"
+                      : "src/modules/Tutorial/assets/analysis-phase/initialTRR-en-us-lightTheme.png"
+                  }
                   alt={
                     language === "pt-BR"
-                      ? "Figura 3: Exemplo de Lista Inicial de Requisitos/Restrições (TRR)"
-                      : "Figure 3: Example of Initial Requirements/Constraints List (RCT)"
+                      ? "TRR do app para Ensino de Noções espaciais e lateralidade"
+                      : "RCT for Spatial Notions and Laterality Teaching App"
                   }
-                  className="w-full h-auto rounded-md shadow-sm"
+                  className="block dark:hidden rounded-md shadow-sm max-w-full h-auto mx-auto"
+                />
+                <img
+                  src={
+                    language === "pt-BR"
+                      ? "src/modules/Tutorial/assets/analysis-phase/initialTRR-pt-br-darkTheme.png"
+                      : "src/modules/Tutorial/assets/analysis-phase/initialTRR-en-us-darkTheme.png"
+                  }
+                  alt={
+                    language === "pt-BR"
+                      ? "TRR do app para Ensino de Noções espaciais e lateralidade"
+                      : "RCT for Spatial Notions and Laterality Teaching App"
+                  }
+                  className="hidden dark:block rounded-md shadow-sm max-w-full h-auto mx-auto"
                 />
               </div>
-              <p className="text-sm text-center mt-2">
+              <p className="text-lg text-center mt-2">
                 {language === "pt-BR"
                   ? "Figura 3: Exemplo de Lista Inicial de Requisitos/Restrições (TRR)"
                   : "Figure 3: Example of Initial Requirements/Constraints List (RCT)"}
@@ -847,20 +868,20 @@ export default function AnalysisPhase() {
           </div>
 
           <div className="space-y-6">
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "A atividade de gerar Personas serve para criar objetos de empatia. Cada persona deve corresponder a um FCA preenchido."
                 : "The activity of generating Personas serves to create empathy objects. Each persona must correspond to a completed FCA."}
             </p>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-lg font-semibold">
                 {language === "pt-BR"
                   ? "Dados para construção das Personas:"
                   : "Data for Personas construction:"}
               </h3>
 
-              <ul className="space-y-2 list-disc list-inside ml-4">
+              <ul className="text-lg text-justify space-y-2 list-disc list-inside ml-4">
                 <li>
                   {language === "pt-BR"
                     ? "Analise as seções do Canvas do Cuidador (CCA)."
@@ -888,7 +909,7 @@ export default function AnalysisPhase() {
               </CardHeader>
               <CardContent>
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                  <ol className="text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
+                  <ol className="text-lg text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
                     <li className="text-justify">
                       {language === "pt-BR"
                         ? " Transcreva atividades que acalmam/estressam dos Canvas."
@@ -919,24 +940,59 @@ export default function AnalysisPhase() {
               </CardContent>
             </Card>
 
-            {/* Imagem do exemplo de Persona */}
-            <div className="my-6 p-4">
-              <div className="max-w-4xl lg:max-w-6xl mx-auto">
-                <img
-                  src="CAMINHO_DA_IMAGEM_EXEMPLO_PERSONA"
-                  alt={
-                    language === "pt-BR"
-                      ? "Figura 4: Exemplo de Persona (PersonAut)"
-                      : "Figure 4: Example of Persona (PersonAut)"
-                  }
-                  className="w-full h-auto rounded-md shadow-sm"
-                />
+            {/* Imagem dos exemplo de modelos do PersonAut */}
+            <div className="grid gap-8 md:grid-cols-2 mt-8">
+              {/* Modelo 1 */}
+              <div className="border-2 border-gray-300 rounded-xl p-6">
+                <div className="mb-6 flex justify-center">
+                  <div className="w-full max-w-md overflow-hidden rounded-lg">
+                    <img
+                      src={
+                        language === "pt-BR"
+                          ? "src/modules/Tutorial/assets/analysis-phase/personAut1-pt-br.png"
+                          : "src/modules/Tutorial/assets/analysis-phase/personAut1-en-us.png"
+                      }
+                      alt={
+                        language === "pt-BR"
+                          ? "Figura 4: Modelo 1 - PersonAut"
+                          : "Figure 4: Model 1 - PersonAut"
+                      }
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+                <h5 className="text-lg mb-3 text-center">
+                  {language === "pt-BR"
+                    ? "Figura 4: Modelo 1 - PersonAut"
+                    : "Figure 4: Model 1 - PersonAut"}
+                </h5>
               </div>
-              <p className="text-sm text-center mt-2">
-                {language === "pt-BR"
-                  ? "Figura 4: Exemplo de Persona (PersonAut)"
-                  : "Figure 4: Example of Persona (PersonAut)"}
-              </p>
+
+              {/* Modelo 2 */}
+              <div className="border-2 border-gray-300 rounded-xl p-6">
+                <div className="mb-6 flex justify-center">
+                  <div className="w-full max-w-md overflow-hidden rounded-lg">
+                    <img
+                      src={
+                        language === "pt-BR"
+                          ? "src/modules/Tutorial/assets/analysis-phase/personAut2-pt-br.png"
+                          : "src/modules/Tutorial/assets/analysis-phase/personAut2-en-us.png"
+                      }
+                      alt={
+                        language === "pt-BR"
+                          ? "Figura 5: Modelo 2 - PersonAut"
+                          : "Figure 5: Model 2 - PersonAut"
+                      }
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+                <h5 className="text-lg mb-3 text-center">
+                  {language === "pt-BR"
+                    ? "Figura 5: Modelo 2 - PersonAut"
+                    : "Figure 5: Model 2 - PersonAut"}
+                </h5>
+              </div>
             </div>
           </div>
         </section>
@@ -955,20 +1011,20 @@ export default function AnalysisPhase() {
           </div>
 
           <div className="space-y-6">
-            <p>
+            <p className="text-lg text-justify">
               {language === "pt-BR"
                 ? "O ProAut oferece um recurso adicional para geração de empatia: um Mapa de Empatia denominado EmpathyAut."
                 : "ProAut offers an additional resource for generating empathy: an Empathy Map named EmpathyAut."}
             </p>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-lg font-semibold">
                 {language === "pt-BR"
                   ? "Obtenção das Instâncias:"
                   : "Obtaining Instances:"}
               </h3>
 
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "As instâncias do EmpathyAut são obtidas diretamente do Formulário de Caracterização do Autista (FCA) e do Canvas do Cliente (CCS)."
                   : "EmpathyAut instances are obtained directly from the Autistic Characterization Form (FCA) and the Client Canvas (CSS)."}
@@ -976,19 +1032,19 @@ export default function AnalysisPhase() {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-lg font-semibold">
                 {language === "pt-BR"
                   ? "Complementaridade:"
                   : "Complementarity:"}
               </h3>
 
-              <p>
+              <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "O PersonAut e o EmpathyAut devem se complementar para tornar o processo de empatia rico e preciso."
                   : "PersonAut and EmpathyAut must complement each other to make the empathy process rich and accurate."}
               </p>
 
-              <ul className="space-y-2 list-disc list-inside ml-4">
+              <ul className="text-lg text-justify space-y-2 list-disc list-inside ml-4">
                 <li>
                   <strong>EmpathyAut:</strong>{" "}
                   {language === "pt-BR"
@@ -1015,7 +1071,7 @@ export default function AnalysisPhase() {
               </CardHeader>
               <CardContent>
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                  <ol className="text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
+                  <ol className="text-lg text-justify text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
                     <li className="text-justify">
                       {language === "pt-BR"
                         ? "Use os dados do FCA para preencher as áreas de limitação;"
@@ -1056,12 +1112,12 @@ export default function AnalysisPhase() {
               </CardContent>
             </Card>
 
-            {/* Card de info adaptado para modo claro/escuro */}
+            {/* Card de info */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
+                  <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                     {language === "pt-BR"
                       ? "INFO: Embora a equipe possa escolher entre o PersonAut e o EmpathyAut, sugere-se o uso de ambos, pois suas informações se referem a diferentes aspectos da pessoa."
                       : "INFO: Although the team can choose between PersonAut and EmpathyAut, it is suggested to use both, as their information refers to different aspects of the person."}
@@ -1074,19 +1130,23 @@ export default function AnalysisPhase() {
             <div className="my-6 p-4">
               <div className="max-w-4xl lg:max-w-6xl mx-auto">
                 <img
-                  src="CAMINHO_DA_IMAGEM_EXEMPLO_MAPA_EMPATIA"
+                  src={
+                    language === "pt-BR"
+                      ? "src/modules/Tutorial/assets/analysis-phase/empathyAut-pt-br.png"
+                      : "src/modules/Tutorial/assets/analysis-phase/empathyAut-en-us.png"
+                  }
                   alt={
                     language === "pt-BR"
-                      ? "Figura 5: Exemplo de Mapa de Empatia (EmpathyAut)"
-                      : "Figure 5: Example of Empathy Map (EmpathyAut)"
+                      ? "Figura 6: Exemplo de Mapa de Empatia (EmpathyAut)"
+                      : "Figure 6: Example of Empathy Map (EmpathyAut)"
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
               </div>
-              <p className="text-sm text-center mt-2">
+              <p className="text-lg text-center mt-2">
                 {language === "pt-BR"
-                  ? "Figura 5: Exemplo de Mapa de Empatia (EmpathyAut)"
-                  : "Figure 5: Example of Empathy Map (EmpathyAut)"}
+                  ? "Figura 6: Exemplo de Mapa de Empatia (EmpathyAut)"
+                  : "Figure 6: Example of Empathy Map (EmpathyAut)"}
               </p>
             </div>
           </div>
@@ -1101,7 +1161,7 @@ export default function AnalysisPhase() {
             {phaseArtifacts.map((artifact) => (
               <li
                 key={artifact.id}
-                className="flex flex-col p-3 rounded border shadow-sm"
+                className="flex flex-col p-3 rounded border"
               >
                 <span className="text-xs font-bold mb-1 uppercase tracking-wider">
                   {language === "pt-BR" ? artifact.type_pt : artifact.type_en}
@@ -1120,14 +1180,14 @@ export default function AnalysisPhase() {
 
       {tocOpen && (
         <div
-          className="fixed w-full h-full bg-black/50 z-60 lg:hidden"
+          className="fixed w-full h-full bg-black/50 z-[999] lg:hidden"
           onClick={() => setTocOpen(false)}
         />
       )}
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-70 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">

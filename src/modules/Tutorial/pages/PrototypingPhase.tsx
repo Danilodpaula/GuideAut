@@ -52,7 +52,8 @@ export default function PrototypingPhase() {
       {
         id: "proaut-phases",
         title: language === "pt-BR" ? "Fases do Processo" : "Process Phases",
-        type: "scroll",
+        type: "navigate",
+        path: "/proaut-process",
       },
       {
         id: "imersao",
@@ -156,13 +157,13 @@ export default function PrototypingPhase() {
 
       {/* Botão visível apenas em mobile */}
       <button
-        className="fixed bottom-10 right-6 z-70 gap-2 p-3 border border-blue-100 bg-blue-50 rounded-lg lg:hidden mb-4"
+        className="fixed bottom-10 right-6 z-[1001] gap-2 p-3 border border-blue-400 bg-blue-50 dark:border-blue-800 rounded-lg lg:hidden mb-4"
         onClick={() => setTocOpen(!tocOpen)}
       >
         {tocOpen ? (
-          <ChevronRight className="h-6 w-6 text-blue-500" />
+          <ChevronRight className="h-6 w-6 text-blue-500 dark:text-blue-800 rotate-180" />
         ) : (
-          <FileText className="h-6 w-6 text-blue-500" />
+          <FileText className="h-6 w-6 text-blue-500 dark:text-blue-800" />
         )}
       </button>
 
@@ -435,7 +436,7 @@ export default function PrototypingPhase() {
               </div>
             </div>
 
-            {/* Resumo da Fase - Atualizado para usar a mesma lógica da fase de imersão */}
+            {/* Resumo da Fase */}
             <Card className="border border-blue-200 dark:border-blue-800 mt-6 bg-blue-50 dark:bg-blue-900/20">
               <CardHeader className="pb-3">
                 <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
@@ -507,7 +508,7 @@ export default function PrototypingPhase() {
                 : "In this activity, the design team uses the project requirements as a reference to construct the first version of the prototype. The process begins with a detailed interpretation of the specifications documented in the TRR, followed by an analysis of the low-fidelity suggestions provided. When applicable, design guides—such as GuideAut—are also consulted to guide decisions regarding colors, geometric shapes, spacing, components, and inclusive design patterns."}
             </p>
 
-            {/* Card de informação atualizado para usar a lógica da fase de imersão */}
+            {/* Card de info */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
@@ -597,7 +598,7 @@ export default function PrototypingPhase() {
               </CardContent>
             </Card>
 
-            {/* Card de informação para registro de observações */}
+            {/* Card de info */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
@@ -737,14 +738,14 @@ export default function PrototypingPhase() {
 
       {tocOpen && (
         <div
-          className="fixed w-full h-full bg-black/50 z-60 lg:hidden"
+          className="fixed w-full h-full bg-black/50 z-[999] lg:hidden"
           onClick={() => setTocOpen(false)}
         />
       )}
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-70 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
