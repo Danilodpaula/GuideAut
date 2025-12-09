@@ -5,12 +5,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useI18n } from "@/core/i18n/I18nContext";
 import {
+  CheckCircle,
   ChevronRight,
-  FileText as FileTextIcon,
+  FileText,
   Info,
+  Lightbulb,
   PenTool,
   Repeat,
   Users,
+  X,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -40,14 +43,17 @@ export default function PrototypingPhase() {
   const { language } = useI18n();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
+  const [tocOpen, setTocOpen] = useState(false);
+  const [diagramOpen, setDiagramOpen] = useState(false);
 
-  // Estrutura da tabela de conteúdos
+  // Estrutura da tabela de conteúdos - atualizada com nova seção
   const tableOfContents = useMemo(
     () => [
       {
         id: "proaut-phases",
         title: language === "pt-BR" ? "Fases do Processo" : "Process Phases",
-        type: "scroll",
+        type: "navigate",
+        path: "/proaut-process",
       },
       {
         id: "imersao",
@@ -86,6 +92,11 @@ export default function PrototypingPhase() {
       {
         id: "refinar-prototipo",
         title: language === "pt-BR" ? "Refinar Protótipo" : "Refine Prototype",
+        type: "scroll",
+      },
+      {
+        id: "conclusao-fase",
+        title: language === "pt-BR" ? "Conclusão da Fase" : "Phase Conclusion",
         type: "scroll",
       },
     ],
@@ -141,9 +152,22 @@ export default function PrototypingPhase() {
   };
 
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col lg:flex-row gap-6 relative">
       {/* Conteúdo Principal */}
-      <div className="flex-1 space-y-8 p-6 animate-fade-in">
+
+      {/* Botão visível apenas em mobile */}
+      <button
+        className="fixed bottom-10 right-6 z-[1001] gap-2 p-3 border border-blue-400 bg-blue-50 dark:border-blue-800 rounded-lg lg:hidden mb-4"
+        onClick={() => setTocOpen(!tocOpen)}
+      >
+        {tocOpen ? (
+          <ChevronRight className="h-6 w-6 text-blue-500 dark:text-blue-800 rotate-180" />
+        ) : (
+          <FileText className="h-6 w-6 text-blue-500 dark:text-blue-800" />
+        )}
+      </button>
+
+      <div className="flex-1 space-y-6 p-6 animate-fade-in order-1 lg:order-1">
         {/* Cabeçalho da página */}
         <div className="space-y-4">
           <h1 className="text-3xl font-bold tracking-tight">
@@ -151,10 +175,10 @@ export default function PrototypingPhase() {
               ? "Fase de Prototipação"
               : "Prototyping Phase"}
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-justify text-lg">
             {language === "pt-BR"
-              ? "Do conceito ao concreto: validando ideias com interações reais."
-              : "From concept to concrete: validating ideas with real interactions."}
+              ? "Transformando ideias em algo visual, palpável e interativo para validar decisões de design."
+              : "Transforming ideas into something visual, tangible, and interactive to validate design decisions."}
           </p>
         </div>
 
@@ -167,19 +191,230 @@ export default function PrototypingPhase() {
           </div>
 
           <div className="space-y-4 text-lg leading-relaxed">
-            <p>
+            <p className="text-justify">
               {language === "pt-BR"
-                ? "A Prototipação é um processo no qual se busca transferir ideias do âmbito conceitual para o concreto. Consiste em todo e qualquer objeto, seja físico ou virtual, que simula uma interação para validar uma ideia, de forma que se produza uma versão inicial da interface idealizada."
-                : "Prototyping is a process in which ideas are transferred from the conceptual domain to a tangible form. It consists of creating any object, whether physical or virtual, that simulates an interaction to validate an idea, resulting in an initial version of the idealized interface."}
-            </p>
-            <p>
-              {language === "pt-BR"
-                ? "Com o protótipo em mãos, é possível avaliá-lo junto ao usuário, e dependendo do resultado, refiná-lo até transformá-lo em uma solução que realmente esteja alinhada às necessidades levantadas no processo."
-                : "With the prototype in hand, it is possible to evaluate it with the user and, depending on the results, refine it until it becomes a solution that is truly aligned with the needs identified during the process."}
+                ? "A fase de Prototipação tem como objetivo transformar ideias, requisitos e conceitos desenvolvidos nas etapas anteriores em algo visual, palpável e interativo. Um protótipo pode ser físico ou virtual e serve para simular a experiência do usuário, validar decisões de design e antecipar ajustes antes do desenvolvimento final. Essa etapa permite que a equipe explore soluções, teste hipóteses e descubra pontos de melhoria rapidamente, reduzindo custos e garantindo que o produto final esteja alinhado às necessidades reais dos usuários e stakeholders."
+                : "The Prototyping phase aims to transform ideas, requirements, and concepts developed in previous stages into something visual, tangible, and interactive. A prototype may be physical or virtual and is used to simulate the user experience, validate design decisions, and anticipate adjustments before the final development. This stage allows the team to explore solutions, test hypotheses, and quickly identify improvement points, reducing costs and ensuring that the final product aligns with the actual needs of users and stakeholders."}
             </p>
 
-            <div className="my-8 p-4 bg-card rounded-lg border">
-              <div className="max-w-6xl mx-auto">
+            {diagramOpen && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                <div
+                  className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                  onClick={() => setDiagramOpen(false)}
+                />
+
+                {/* Conteúdo do pop-up vem aqui.*/}
+                <Card
+                  className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Header + Botão de Fechar*/}
+                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                    <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
+                      {language === "pt-BR"
+                        ? "Sobre o Diagrama"
+                        : "About the Diagram"}
+                      <button
+                        onClick={() => setDiagramOpen(false)}
+                        className="p-1 rounded-full"
+                      >
+                        <X className="h-5 w-5" />
+                      </button>
+                    </CardTitle>
+                  </CardHeader>
+                  {/* Texto do pop-up atualizado */}
+                  <CardContent className="p-6">
+                    <div className="space-y-4 text-lg">
+                      {language === "pt-BR" ? (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <span className="text-2xl">◯</span>
+                            <span className="font-semibold">- Iniciar</span>
+                          </div>
+
+                          <div className="ml-6 space-y-3">
+                            <div>
+                              <p className="font-medium">
+                                <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
+                                  [4.1]
+                                </span>
+                                Criar protótipo
+                              </p>
+                              <p className="ml-8 mt-1 text-justify">
+                                Transformar as ideias de interface em uma
+                                representação visual e interativa, permitindo
+                                simular como a aplicação irá funcionar. No
+                                ProAut, isso envolve montar telas, definir
+                                layouts, organizar elementos e criar fluxos que
+                                representem o uso real do sistema. O protótipo
+                                serve como uma prévia do produto final,
+                                permitindo avaliações e ajustes antes do
+                                desenvolvimento.
+                              </p>
+                            </div>
+
+                            <div>
+                              <p className="font-medium">
+                                <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
+                                  [4.2]
+                                </span>
+                                Validar protótipo
+                              </p>
+                              <p className="ml-8 mt-1 text-justify">
+                                Apresentar e testar a versão criada com os
+                                stakeholders — como solicitante, cuidador,
+                                terapeuta e usuários — para verificar se ele
+                                atende às necessidades do projeto. No ProAut,
+                                essa validação ajuda a identificar problemas,
+                                confirmar decisões de design e receber sugestões
+                                de melhoria. É o momento de garantir que o
+                                protótipo faz sentido, está claro e realmente
+                                funciona para o público autista antes de seguir
+                                para o refinamento e desenvolvimento.
+                              </p>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="text-2xl">⬦</span>
+                              <span className="font-semibold">- Melhoria?</span>
+                            </div>
+
+                            <div className="ml-8 grid grid-cols-2 gap-2">
+                              <div className="bg-green-50 border border-green-200 rounded p-2 text-center">
+                                <span className="font-medium text-green-700">
+                                  [Sim]
+                                </span>
+                              </div>
+                              <div className="bg-blue-50 border border-blue-200 rounded p-2 text-center">
+                                <span className="font-medium text-blue-700">
+                                  [Não]
+                                </span>
+                              </div>
+                            </div>
+
+                            <div>
+                              <p className="font-medium">
+                                <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
+                                  [4.3]
+                                </span>
+                                Refinar protótipo
+                              </p>
+                              <p className="ml-8 mt-1 text-justify">
+                                Ajustar, melhorar e corrigir a versão inicial
+                                com base no feedback recebido durante a
+                                validação. No ProAut, isso envolve revisar
+                                problemas apontados, atualizar elementos
+                                visuais, reorganizar fluxos e deixar a interface
+                                mais adequada para o usuário autista. O
+                                refinamento é iterativo e continua até que o
+                                protótipo alcance um nível satisfatório de
+                                clareza, funcionalidade e usabilidade.
+                              </p>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex items-center gap-2">
+                            <span className="text-2xl">◯</span>
+                            <span className="font-semibold">Start</span>
+                          </div>
+
+                          <div className="ml-6 space-y-4">
+                            <div>
+                              <p className="font-medium">
+                                <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
+                                  [4.1]
+                                </span>
+                                Create Prototype
+                              </p>
+                              <p className="ml-8 mt-1 text-justify">
+                                Transform interface ideas into a visual and
+                                interactive representation, simulating how the
+                                application will work.
+                              </p>
+                            </div>
+
+                            <div>
+                              <p className="font-medium">
+                                <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
+                                  [4.2]
+                                </span>
+                                Validate Prototype
+                              </p>
+                              <p className="ml-8 mt-1 text-justify">
+                                Present and test the prototype with stakeholders
+                                to confirm whether it meets project needs and
+                                identify necessary improvements.
+                              </p>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="text-2xl">⬦</span>
+                              <span className="font-semibold">
+                                Improvements needed?
+                              </span>
+                            </div>
+
+                            <div className="ml-8 grid grid-cols-2 gap-2">
+                              <div className="bg-green-50 border border-green-200 rounded p-2 text-center">
+                                <span className="font-medium text-green-700">
+                                  [Yes] →
+                                </span>
+                              </div>
+                              <div className="bg-blue-50 border border-blue-200 rounded p-2 text-center">
+                                <span className="font-medium text-blue-700">
+                                  [No] → [4.3]
+                                </span>
+                              </div>
+                            </div>
+
+                            <div>
+                              <p className="font-medium">
+                                <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
+                                  [4.3]
+                                </span>
+                                Refine Prototype
+                              </p>
+                              <p className="ml-8 mt-1 text-justify">
+                                Adjust and improve the prototype based on
+                                validation feedback. This cycle continues until
+                                the prototype reaches a satisfactory level of
+                                clarity, functionality, and usability.
+                              </p>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Fluxo Fase de Prototipação */}
+            <div className="relative">
+              <div className="max-w-4xl lg:max-w-6xl mx-auto">
+                <div className="flex justify-end p-4">
+                  <Card
+                    className="cursor-pointer border border-blue-100"
+                    onClick={() => setDiagramOpen(!diagramOpen)}
+                  >
+                    <CardContent className="text-blue-500 p-3">
+                      <div className="flex items-center gap-2">
+                        <strong>
+                          <span className="text-lg">
+                            {language === "pt-BR"
+                              ? "Explicação do diagrama"
+                              : "Diagram Explanation"}
+                          </span>
+                        </strong>
+                        <Lightbulb className="h-6 w-6" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
                 <img
                   src={
                     language === "pt-BR"
@@ -188,61 +423,68 @@ export default function PrototypingPhase() {
                   }
                   alt={
                     language === "pt-BR"
-                      ? "Fluxo sugerido para a atividade de Prototipação"
-                      : "Suggested workflow for the Prototyping activity"
+                      ? "Figura 1: Fluxo sugerido para a atividade de prototipação"
+                      : "Figure 1: Suggested workflow for the prototyping activity"
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-muted-foreground text-center mt-2">
+                <p className="text-justify text-sm text-center mt-2">
                   {language === "pt-BR"
-                    ? "Fluxo sugerido para a atividade de Análise"
-                    : "Suggested workflow for the Analysis activity"}
+                    ? "Figura 1: Fluxo sugerido para a atividade de prototipação"
+                    : "Figure 1: Suggested workflow for the prototyping activity"}
                 </p>
               </div>
             </div>
 
-            <div className="p-4 mt-4">
-              <ul className="space-y-2 list-none">
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Atividades:" : "Activities:"}
-                  </span>
-                  <span>
+            {/* Resumo da Fase */}
+            <Card className="border border-blue-200 dark:border-blue-800 mt-6 bg-blue-50 dark:bg-blue-900/20">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <Info className="text-blue-600 dark:text-blue-400 h-5 w-5" />
+                  {language === "pt-BR" ? "Resumo da Fase" : "Phase Summary"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-blue-800 dark:text-blue-200 space-y-3">
+                <ul className="space-y-3 list-disc list-inside mb-4 ml-4">
+                  <li>
+                    <strong className="text-blue-700 dark:text-blue-300">
+                      {language === "pt-BR"
+                        ? "Atividades da Fase:"
+                        : "Phase Activities:"}
+                    </strong>{" "}
                     {language === "pt-BR"
                       ? "Criar Protótipo, Validar Protótipo e Refinar Protótipo."
                       : "Create Prototype, Validate Prototype, and Refine Prototype."}
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Entrada:" : "Input:"}
-                  </span>
-                  <span>
+                  </li>
+                  <li>
+                    <strong className="text-blue-700 dark:text-blue-300">
+                      {language === "pt-BR"
+                        ? "Entrada da fase:"
+                        : "Phase input:"}
+                    </strong>{" "}
                     {language === "pt-BR" ? "TRR Completa" : "Complete TRR"}
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Saída:" : "Output:"}
-                  </span>
-                  <span>
+                  </li>
+                  <li>
+                    <strong className="text-blue-700 dark:text-blue-300">
+                      {language === "pt-BR"
+                        ? "Saída da fase:"
+                        : "Phase output:"}
+                    </strong>{" "}
                     {language === "pt-BR"
                       ? "Protótipo validado"
                       : "Validated Prototype"}
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Envolvidos:" : "Involved:"}
-                  </span>
-                  <span>
+                  </li>
+                  <li>
+                    <strong className="text-blue-700 dark:text-blue-300">
+                      {language === "pt-BR" ? "Envolvidos:" : "Involved:"}
+                    </strong>{" "}
                     {language === "pt-BR"
-                      ? "Equipe de desenvolvimento, terapeuta(s), cuidador(es) e cliente(s)."
-                      : "Development team, therapist(s), caregiver(s), and client(s)."}
-                  </span>
-                </li>
-              </ul>
-            </div>
+                      ? "Equipe de desenvolvimento, terapeuta(s) e cuidador(es) (quando aplicável), cliente(s) e usuário(s) finais."
+                      : "Development team, therapist(s), caregiver(s) (when applicable), and client(s)."}
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -259,35 +501,37 @@ export default function PrototypingPhase() {
             </h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="text-justify space-y-4 text-lg leading-relaxed">
             <p>
               {language === "pt-BR"
-                ? "Para iniciar o desenvolvimento do protótipo, o time de design deverá seguir os requisitos e suas respectivas especificações. Para cada um deles, o time avalia a sugestão de baixa fidelidade contida na TRR, e procura representá-la no protótipo gerado."
-                : "To begin the prototype development, the design team must follow the requirements and their respective specifications. For each requirement, the team evaluates the low-fidelity suggestion included in the TRR and seeks to represent it in the generated prototype."}
-            </p>
-            <p>
-              {language === "pt-BR"
-                ? "Além disso, o time poderá consultar o GuideAut quantas vezes for necessário."
-                : "Additionally, the team may consult the GuideAut as many times as necessary."}
+                ? "Nessa atividade, o time de design utiliza os requisitos do projeto como referência para construir a primeira versão do protótipo. O processo parte da interpretação detalhada das especificações registradas na TRR, seguida da análise das sugestões de baixa fidelidade fornecidas. Quando aplicável, também são consultados guias de design — como o GuideAut — que orientam o uso adequado de cores, formas geométricas, espaçamentos, componentes e padrões de design inclusivo."
+                : "In this activity, the design team uses the project requirements as a reference to construct the first version of the prototype. The process begins with a detailed interpretation of the specifications documented in the TRR, followed by an analysis of the low-fidelity suggestions provided. When applicable, design guides—such as GuideAut—are also consulted to guide decisions regarding colors, geometric shapes, spacing, components, and inclusive design patterns."}
             </p>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-5">
-              <div className="flex items-start gap-3">
-                <Info className="h-5 w-5 text-blue-700 mt-1 flex-shrink-0" />
+            {/* Card de info */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+              <div className="flex items-start space-x-3">
+                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <h4 className="font-semibold text-blue-800">
+                  <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">
                     {language === "pt-BR"
-                      ? "O papel do GuideAut"
-                      : "The role of GuideAut"}
+                      ? "Orientação pelo GuideAut"
+                      : "Guidance by GuideAut"}
                   </h4>
-                  <p className="text-blue-700 text-sm mt-1">
+                  <p className="text-justify text-blue-800 dark:text-blue-200">
                     {language === "pt-BR"
-                      ? "O GuideAut poderá fornecer informações úteis para nortear algumas decisões da equipe, quanto ao que usar ou não usar quanto às cores, formas geométricas (caso necessário) e layouts a serem utilizados durante o design das interfaces do protótipo, por exemplo."
-                      : "The GuideAut can provide useful information to guide some design decisions regarding the use of colors, geometric shapes (when necessary), and layout choices for the prototype’s interface design."}
+                      ? "Quando aplicável, também são consultados guias de design — como o GuideAut — que orientam o uso adequado de cores, formas geométricas, espaçamentos, componentes e padrões de design inclusivo."
+                      : "When applicable, design guides—such as GuideAut—are also consulted to guide decisions regarding colors, geometric shapes, spacing, components, and inclusive design patterns."}
                   </p>
                 </div>
               </div>
             </div>
+
+            <p>
+              {language === "pt-BR"
+                ? "O objetivo é produzir uma representação coerente com a visão do projeto, estruturada de forma organizada e consistente com as necessidades dos usuários."
+                : "The objective is to produce a coherent representation of the project's vision, structured in an organized manner and consistent with users' needs."}
+            </p>
           </div>
         </section>
 
@@ -304,56 +548,79 @@ export default function PrototypingPhase() {
             </h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="text-justify space-y-4 text-lg leading-relaxed">
             <p>
               {language === "pt-BR"
-                ? "Após a finalização do protótipo, este é validado pelos stakeholders envolvidos. Tal atividade pode acontecer por meio de uma reunião com os envolvidos, apresentando o que foi projetado."
-                : "After completing the prototype, it is validated by the stakeholders involved. This activity may take place in a meeting where the designed prototype is presented."}
+                ? "Após a construção do protótipo, inicia-se sua validação com os stakeholders. Essa validação geralmente ocorre em reuniões ou apresentações, preferencialmente utilizando-se um protótipo de alta fidelidade exibido em um dispositivo físico ou emulado, como smartphones, tablets ou notebooks. Essa abordagem facilita a visualização em escala real, a identificação de problemas e a avaliação da navegabilidade e das funcionalidades simuladas."
+                : "After the prototype is created, validation with stakeholders begins. This validation typically occurs in meetings or presentations, preferably using a high-fidelity prototype displayed on a physical or emulated device such as a smartphone, tablet, or laptop. This approach helps stakeholders visualize the design at real scale, identify issues, and evaluate navigation and simulated functionalities."}
             </p>
 
-            <div className="bg-card border rounded-lg p-6 shadow-sm">
-              <h4 className="font-semibold text-lg mb-3 border-b pb-2">
-                {language === "pt-BR"
-                  ? "Recomendação de Alta Fidelidade"
-                  : "High-Fidelity Recommendation"}
-              </h4>
-              <p className="mb-4">
-                {language === "pt-BR"
-                  ? "Recomenda-se que para essa apresentação, o protótipo seja de alta fidelidade, e esteja representado em um dispositivo (notebook, tablet, smartphone) físico ou emulado."
-                  : "It is recommended that this presentation be made using a high-fidelity prototype displayed on a physical or emulated device (such as a notebook, tablet, or smartphone)."}
-              </p>
-              <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
-                <li>
+            {/* Card de benefícios atualizado para usar a lógica da fase de imersão */}
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <Lightbulb className="text-blue-600 dark:text-blue-400 h-5 w-5" />
                   {language === "pt-BR"
-                    ? "Torna o processo de revisão mais fluido."
-                    : "Makes the review process more fluid."}
-                </li>
-                <li>
-                  {language === "pt-BR"
-                    ? "Permite visualizar o projeto em escala real e validar funcionalidades."
-                    : "Allows visualizing the project at real scale and validate its functionalities."}
-                </li>
-                <li>
-                  {language === "pt-BR"
-                    ? "Permite observar se as decisões de design estão de acordo com o esperado."
-                    : "Enables observing whether design decisions align with expectations."}
-                </li>
-              </ul>
+                    ? "Benefícios da Validação com Alta Fidelidade"
+                    : "Benefits of High-Fidelity Validation"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <p className="text-justify text-blue-700 dark:text-blue-300 mb-3">
+                    {language === "pt-BR"
+                      ? "Essa abordagem facilita a visualização em escala real, a identificação de problemas e a avaliação da navegabilidade e das funcionalidades simuladas."
+                      : "This approach helps stakeholders visualize the design at real scale, identify issues, and evaluate navigation and simulated functionalities."}
+                  </p>
+                  <ul className="text-blue-700 dark:text-blue-300 list-disc list-inside ml-4 space-y-2">
+                    <li>
+                      {language === "pt-BR"
+                        ? "Visualização do projeto em escala real"
+                        : "Visualizing the design at real scale"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Identificação de problemas"
+                        : "Identification of issues"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Avaliação da navegabilidade"
+                        : "Evaluation of navigation"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Avaliação das funcionalidades simuladas"
+                        : "Evaluation of simulated functionalities"}
+                    </li>
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Card de info */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+              <div className="flex items-start space-x-3">
+                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
+                    <strong>
+                      {language === "pt-BR"
+                        ? "Registro das Observações:"
+                        : "Recording Observations:"}
+                    </strong>{" "}
+                    {language === "pt-BR"
+                      ? "Durante a validação, os envolvidos podem sugerir ajustes ou apontar inconsistências, e todas as observações devem ser registradas para garantir que nenhum ponto seja perdido."
+                      : "During validation, participants may suggest adjustments or point out inconsistencies. All observations must be recorded to ensure that no change request is overlooked."}
+                  </p>
+                </div>
+              </div>
             </div>
-
-            <p className="text-muted-foreground italic">
-              {language === "pt-BR"
-                ? "No decorrer dessa etapa, os stakeholders podem solicitar mudanças no protótipo apresentado. Tais sugestões devem ser registradas, para garantir que todas as mudanças sejam realizadas."
-                : "During this stage, stakeholders may request changes to the prototype. Such suggestions must be documented to ensure that all necessary modifications are implemented."}
-            </p>
           </div>
         </section>
 
         {/* --- ATIVIDADE: REFINAR PROTÓTIPO --- */}
-        <section
-          id="refinar-prototipo"
-          className="scroll-m-20 space-y-6 mt-12 pt-8 border-t"
-        >
+        <section id="refinar-prototipo" className="scroll-m-20 space-y-6 mt-12">
           <div className="flex items-center gap-3">
             <div className="bg-orange-100 p-2 rounded-full">
               <Repeat className="h-6 w-6 text-orange-600" />
@@ -365,35 +632,86 @@ export default function PrototypingPhase() {
             </h2>
           </div>
 
-          <div className="space-y-4">
+          <div className="text-justify space-y-4 text-lg leading-relaxed">
             <p>
               {language === "pt-BR"
-                ? "Conforme comentado anteriormente, nesta etapa é importante que todos os itens de melhoria apontados pelos stakeholders componham o refinamento do protótipo proposto."
-                : "As mentioned previously, it is essential that all improvement items identified by stakeholders are incorporated into the proposed prototype refinement."}
+                ? "Concluída a validação, inicia-se o processo de refinamento. Essa etapa consiste na análise de todas as sugestões recebidas, na realização dos ajustes necessários e, se for o caso, em nova revisão com a equipe e stakeholders. Esse ciclo pode repetir-se diversas vezes até que o protótipo atinja um nível satisfatório de qualidade e esteja plenamente alinhado às expectativas do cliente e às necessidades dos usuários finais."
+                : "Once validation is completed, the refinement process begins. This stage involves analyzing all suggestions received, making the necessary adjustments, and, if needed, performing another review with the team and stakeholders. This cycle may repeat several times until the prototype reaches a satisfactory quality level and is fully aligned with client expectations and user needs."}
             </p>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-5 text-center">
-              <p className="font-medium text-green-900 text-lg mb-2">
-                {language === "pt-BR" ? "Ciclo de Iteração" : "Iteration Cycle"}
-              </p>
-              <p className="text-green-800">
-                {language === "pt-BR"
-                  ? "O refinamento e validação compõem um ciclo de iteração até que o protótipo esteja em um nível satisfatório para os stakeholders, especialmente para o cliente."
-                  : "The refinement and validation form an iterative cycle that continues until the prototype reaches a level considered satisfactory by the stakeholders, especially the client."}
-              </p>
-              <div className="mt-4 pt-4 border-t border-green-200">
-                <p className="font-bold text-green-900">
-                  {language === "pt-BR"
-                    ? "Com o fim do ciclo, entende-se que o protótipo está pronto para ser desenvolvido de fato."
-                    : "Once this cycle is completed, the prototype is deemed ready for actual development."}
-                </p>
-              </div>
+            {/* Card de ciclo iterativo atualizado para usar a lógica da fase de imersão */}
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <Repeat className="text-blue-600 dark:text-blue-400 h-5 w-5" />
+                  {language === "pt-BR" ? "Ciclo Iterativo" : "Iterative Cycle"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <p className="text-justify text-blue-700 dark:text-blue-300 mb-3">
+                    {language === "pt-BR"
+                      ? "Esse ciclo pode repetir-se diversas vezes até que o protótipo atinja um nível satisfatório de qualidade e esteja plenamente alinhado às expectativas do cliente e às necessidades dos usuários finais."
+                      : "This cycle may repeat several times until the prototype reaches a satisfactory quality level and is fully aligned with client expectations and user needs."}
+                  </p>
+                  <div className="mt-4 pt-4 border-t border-blue-200">
+                    <p className="font-bold text-blue-700 dark:text-blue-300 text-center">
+                      {language === "pt-BR"
+                        ? "Quando todos os elementos estão aprovados, o protótipo é considerado pronto para seguir para o desenvolvimento."
+                        : "When all elements are approved, the prototype is considered ready for development."}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* --- CONCLUSÃO DA FASE --- */}
+        <section
+          id="conclusao-fase"
+          className="scroll-m-20 space-y-6 mt-12 pt-8 border-t"
+        >
+          <div className="flex items-center gap-3">
+            <div className="bg-green-100 p-2 rounded-full">
+              <CheckCircle className="h-6 w-6 text-green-600" />
             </div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              {language === "pt-BR" ? "Conclusão da Fase" : "Phase Conclusion"}
+            </h2>
+          </div>
+
+          <div className="space-y-4 text-lg leading-relaxed">
+            {/* Card de conclusão atualizado para usar a lógica da fase de imersão */}
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <CheckCircle className="text-blue-600 dark:text-blue-400 h-5 w-5" />
+                  {language === "pt-BR" ? "Conclusão" : "Conclusion"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <p className="text-justify text-blue-700 dark:text-blue-300 mb-4">
+                    {language === "pt-BR"
+                      ? "A Prototipação é essencial para garantir que o projeto avance com segurança e clareza. Ela permite validar ideias, reduzir retrabalho, identificar problemas com antecedência e assegurar que a solução final atenda aos requisitos funcionais, visuais e de experiência do usuário."
+                      : "The Prototyping phase is essential to ensure that the project progresses with clarity and confidence. It enables the validation of ideas, reduces rework, identifies issues early, and ensures that the final solution meets functional, visual, and user experience requirements."}
+                  </p>
+                  <div className="mt-4 pt-4 border-t border-blue-200">
+                    <p className="font-bold text-blue-700 dark:text-blue-300 text-center">
+                      {language === "pt-BR"
+                        ? "Ao final dessa fase, a equipe possui uma representação concreta e validada da interface, servindo como base sólida para o desenvolvimento."
+                        : "By the end of this phase, the team has a concrete and validated representation of the interface, serving as a solid foundation for development."}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
         {/* Resumo dos Artefatos */}
-        <div className="mt-8 bg-slate-50 p-6 rounded-lg border">
+        <div className="mt-8 p-6 rounded-lg border">
           <h3 className="text-xl font-semibold mb-4">
             {language === "pt-BR" ? "Artefatos da Fase" : "Phase Artifacts"}
           </h3>
@@ -401,13 +719,13 @@ export default function PrototypingPhase() {
             {phaseArtifacts.map((artifact) => (
               <li
                 key={artifact.id}
-                className="flex flex-col bg-white p-3 rounded border shadow-sm"
+                className="flex flex-col p-3 rounded border shadow-sm"
               >
-                <span className="text-xs font-bold text-muted-foreground mb-1 uppercase tracking-wider">
+                <span className="text-xs font-bold mb-1 uppercase tracking-wider">
                   {language === "pt-BR" ? artifact.type_pt : artifact.type_en}
                 </span>
                 <div className="flex items-center gap-2">
-                  <FileTextIcon className="h-4 w-4 text-blue-500 flex-shrink-0" />
+                  <FileText className="h-4 w-4 text-blue-500 flex-shrink-0" />
                   <span className="font-medium">
                     {language === "pt-BR" ? artifact.name_pt : artifact.name_en}
                   </span>
@@ -418,12 +736,21 @@ export default function PrototypingPhase() {
         </div>
       </div>
 
+      {tocOpen && (
+        <div
+          className="fixed w-full h-full bg-black/50 z-[999] lg:hidden"
+          onClick={() => setTocOpen(false)}
+        />
+      )}
+
       {/* Tabela de Conteúdos */}
-      <div className="w-full lg:w-80 flex-shrink-0 p-6 lg:pt-6 lg:pr-6 lg:sticky lg:top-20 self-start max-h-[calc(100vh-5rem)] overflow-y-auto order-first lg:order-none">
-        <Card className="shadow-lg border-l-4 border-l-blue-500">
+      <div
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+      >
+        <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2">
-              <FileTextIcon className="h-5 w-5 text-blue-500" />
+              <FileText className="h-5 w-5 text-blue-500" />
               {language === "pt-BR"
                 ? "Tabela de Conteúdos"
                 : "Table of Contents"}
@@ -434,8 +761,13 @@ export default function PrototypingPhase() {
               {tableOfContents.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavigation(item)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white${
+                  onClick={() => {
+                    handleNavigation(item);
+                    if (window.innerWidth < 1024) {
+                      setTocOpen(false);
+                    }
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 ${
                     activeSection === item.id
                       ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
                       : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
@@ -448,7 +780,9 @@ export default function PrototypingPhase() {
                         : "text-gray-400"
                     }`}
                   />
-                  <span className="text-sm">{item.title}</span>
+                  <span className="text-sm text-left break-words">
+                    {item.title}
+                  </span>
                 </button>
               ))}
             </nav>

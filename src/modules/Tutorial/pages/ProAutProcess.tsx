@@ -8,7 +8,7 @@ import { useI18n } from "@/core/i18n/I18nContext";
 import {
   Boxes,
   ChevronRight,
-  FileText as FileTextIcon,
+  FileText,
   Info,
   Lightbulb,
   Palette,
@@ -82,6 +82,7 @@ export default function ProAutProcess() {
   const { language } = useI18n();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
+  const [tocOpen, setTocOpen] = useState(false);
 
   // Estrutura da tabela de conteúdos com paths de navegação
   const tableOfContents = useMemo(
@@ -173,11 +174,15 @@ export default function ProAutProcess() {
       id: "imersao",
       name: language === "pt-BR" ? "1. Imersão" : "1. Immersion",
       icon: Users,
-      color: "bg-blue-500",
+      bgColor: "bg-blue-50 dark:bg-blue-900/20",
+      borderColor: "border-blue-200 dark:border-blue-800",
+      iconColor: "bg-blue-500 dark:bg-blue-600",
+      titleBgColor: "bg-blue-100 dark:bg-blue-800",
+      titleBorderColor: "border-l-blue-400 dark:border-l-blue-600",
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               Antes de realizar a elicitação dos requisitos, é de extrema
               importância que todos os envolvidos no projeto conheçam o domínio
               do problema a ser resolvido pela aplicação a ser desenvolvida.
@@ -186,7 +191,7 @@ export default function ProAutProcess() {
               que a pessoa autista participe do processo de design da
               tecnologia. É neste aspecto que a imersão trabalha.
             </p>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               A fase de imersão é a fase caracterizada pela aproximação do
               problema. É nesta etapa que a equipe busca conhecer conceitos que
               permeiam o tema da aplicação a ser projetada.
@@ -214,7 +219,7 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               Before performing requirements elicitation, it is extremely
               important that everyone involved in the project knows the domain
               of the problem to be solved by the application to be developed. We
@@ -223,7 +228,7 @@ export default function ProAutProcess() {
               autistic person to participate in the technology design process.
               This is the aspect that immersion works on.
             </p>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               The immersion phase is characterized by approaching the problem.
               It is at this stage that the team seeks to understand concepts
               that permeate the theme of the application to be designed.
@@ -254,17 +259,21 @@ export default function ProAutProcess() {
       id: "analise",
       name: language === "pt-BR" ? "2. Análise" : "2. Analysis",
       icon: Lightbulb,
-      color: "bg-yellow-500",
+      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+      borderColor: "border-yellow-200 dark:border-yellow-800",
+      iconColor: "bg-yellow-500 dark:bg-yellow-600",
+      titleBgColor: "bg-yellow-100 dark:bg-yellow-800",
+      titleBorderColor: "border-l-yellow-400 dark:border-l-yellow-600",
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               A fase de Análise é o momento de aproximação do problema. Agora
               que a equipe coletou diversos dados na imersão, é preciso
               mergulhar nessas informações e avaliar as implicações do desafio
               sob o ponto de vista de todos os envolvidos (stakeholders).
             </p>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               A fase de Análise tem como objetivo aprofundar as informações
               obtidas na fase de Imersão e iniciar as principais propostas de
               solução.
@@ -291,14 +300,14 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               The Analysis phase is the moment to approach the problem. Now that
               the team has collected various data during immersion, it is
               necessary to dive into this information and evaluate the
               implications of the challenge from the point of view of all
               stakeholders involved.
             </p>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               The Analysis phase aims to delve deeper into the information
               obtained in the Immersion phase and initiate the main proposed
               solutions.
@@ -328,11 +337,15 @@ export default function ProAutProcess() {
       id: "ideacao",
       name: language === "pt-BR" ? "3. Ideação" : "3. Ideation",
       icon: Palette,
-      color: "bg-green-500",
+      bgColor: "bg-green-50 dark:bg-green-900/20",
+      borderColor: "border-green-200 dark:border-green-800",
+      iconColor: "bg-green-500 dark:bg-green-600",
+      titleBgColor: "bg-green-100 dark:bg-green-800",
+      titleBorderColor: "border-l-green-400 dark:border-l-green-600",
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               A fase de ideação tem como objetivo gerar ideias por meio de
               estímulos de criatividade em conjunto com a equipe de
               desenvolvimento e design da aplicação, em conformidade com o
@@ -363,7 +376,7 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               The ideation phase aims to generate ideas through creativity
               stimuli together with the application development and design team,
               in accordance with the software/app user's context and
@@ -398,18 +411,22 @@ export default function ProAutProcess() {
       id: "prototipacao",
       name: language === "pt-BR" ? "4. Prototipação" : "4. Prototyping",
       icon: Boxes,
-      color: "bg-purple-500",
+      bgColor: "bg-purple-50 dark:bg-purple-900/20",
+      borderColor: "border-purple-200 dark:border-purple-800",
+      iconColor: "bg-purple-500 dark:bg-purple-600",
+      titleBgColor: "bg-purple-100 dark:bg-purple-800",
+      titleBorderColor: "border-l-purple-400 dark:border-l-purple-600",
       description:
         language === "pt-BR" ? (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               A Prototipação é um processo no qual se busca transferir ideias do
               âmbito conceitual para o concreto. Consiste em todo e qualquer
               objeto, seja físico ou virtual, que simula uma interação para
               validar uma ideia, de forma que se produza uma versão inicial da
               interface idealizada.
             </p>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               Com o protótipo em mãos, é possível avaliá-lo junto ao usuário, e
               dependendo do resultado, refiná-lo até transformá-lo em uma
               solução que realmente esteja alinhada às necessidades levantadas
@@ -436,14 +453,14 @@ export default function ProAutProcess() {
           </>
         ) : (
           <>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               Prototyping is a process in which ideas are transferred from the
               conceptual domain to a tangible form. It consists of creating any
               object, whether physical or virtual, that simulates an interaction
               to validate an idea, resulting in an initial version of the
               idealized interface.
             </p>
-            <p className="mb-4">
+            <p className="text-lg text-justify mb-4">
               With the prototype in hand, it is possible to evaluate it with the
               user and, depending on the results, refine it until it becomes a
               solution that is truly aligned with the needs identified during
@@ -473,17 +490,30 @@ export default function ProAutProcess() {
   ];
 
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col lg:flex-row gap-6 relative">
       {/* Conteúdo Principal */}
-      <div className="flex-1 space-y-6 p-6 animate-fade-in">
+
+      {/* Botão visível apenas em mobile */}
+      <button
+        className="fixed bottom-10 right-6 z-[1001] gap-2 p-3 border border-blue-400 bg-blue-50 dark:border-blue-800 rounded-lg lg:hidden mb-4"
+        onClick={() => setTocOpen(!tocOpen)}
+      >
+        {tocOpen ? (
+          <ChevronRight className="h-6 w-6 text-blue-500 dark:text-blue-800" />
+        ) : (
+          <FileText className="h-6 w-6 text-blue-500 dark:text-blue-800" />
+        )}
+      </button>
+
+      <div className="flex-1 space-y-6 p-6 animate-fade-in order-1 lg:order-1">
         {/* Cabeçalho da página */}
         <div className="space-y-4">
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold tracking-tight dark:text-white">
             {language === "pt-BR" ? "Visão geral do ProAut" : "ProAut Overview"}
           </h1>
 
           {/* Introdução ao ProAut */}
-          <div className="space-y-4 text-lg">
+          <div className="space-y-4 text-lg dark:text-gray-300">
             <p>
               {language === "pt-BR"
                 ? "Muitas tecnologias atuais são, geralmente, inacessíveis, pois as pessoas que criam as tecnologias convencionais não incorporam, regularmente, design acessível e como desenvolvedores, sabemos que cada etapa do desenvolvimento de uma aplicação precisa ser meticulosamente idealizada e analisada antes de ser propriamente implementada."
@@ -501,17 +531,15 @@ export default function ProAutProcess() {
             </p>
           </div>
 
-          {/* Informação sobre as fases */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          {/* Card de info */}
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
             <div className="flex items-start space-x-3">
-              <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="text-yellow-800 font-medium">
-                  {language === "pt-BR"
-                    ? "INFO: O ProAut é indicado, principalmente, para construção de protótipos de baixa fidelidade."
-                    : "INFO: ProAut is mainly recommended for building low-fidelity prototypes."}
-                </p>
-              </div>
+              <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+              <p className="text-justify text-blue-800 dark:text-blue-200">
+                {language === "pt-BR"
+                  ? "O ProAut é indicado, principalmente, para construção de protótipos de baixa fidelidade."
+                  : "ProAut is mainly recommended for building low-fidelity prototypes."}
+              </p>
             </div>
           </div>
         </div>
@@ -519,12 +547,12 @@ export default function ProAutProcess() {
         {/* Fases do processo */}
         <div className="grid gap-6">
           <section id="proaut-phases" className="space-y-12 scroll-m-20 pt-6">
-            <h2 className="text-3xl font-bold tracking-tight border-b pb-2">
+            <h2 className="text-3xl font-bold tracking-tight border-b pb-2 dark:text-white dark:border-gray-700">
               {language === "pt-BR" ? "Fases do Processo" : "Process Phases"}
             </h2>
 
-            <div className="space-y-4">
-              <p className="text-lg">
+            <div className="space-y-4 dark:text-gray-300">
+              <p className="text-justify text-lg">
                 {language === "pt-BR"
                   ? "O ProAut possui 4 fases: Fase de imersão, Análise, Ideação e Prototipação. Nas quais:"
                   : "ProAut has 4 phases: Immersion phase, Analysis, Ideation and Prototyping. In which:"}
@@ -558,7 +586,6 @@ export default function ProAutProcess() {
                     {language === "pt-BR"
                       ? "Fase de ideação"
                       : "Ideation phase"}
-                    :
                   </strong>{" "}
                   {language === "pt-BR"
                     ? "conheça requisitos, reunindo a equipe de desenvolvimento para uma comunicação aberta acerca de melhorias, adições e remoções de ferramentas pensadas para resolver o problema definido;"
@@ -577,11 +604,11 @@ export default function ProAutProcess() {
                 </li>
               </ul>
 
-              <p className="text-lg pt-2 flex items-center gap-1 flex-wrap">
+              <p className="text-justify text-lg pt-2 flex items-center gap-1 flex-wrap">
                 {language === "pt-BR"
                   ? "Cada fase possui atividades que devem ser realizadas com artefatos disponibilizados na aba"
                   : "Each phase has activities that must be performed with artifacts provided in the"}
-                <FileTextIcon className="h-5 w-5 mx-1" />
+                <FileText className="h-5 w-5 mx-1 dark:text-gray-400" />
                 <strong>
                   {language == "pt-BR" ? "Artefatos" : "Artifacts"}
                 </strong>
@@ -593,8 +620,8 @@ export default function ProAutProcess() {
             </div>
 
             {/* Fluxograma ProAut*/}
-            <div className="my-8 p-4 bg-card rounded-lg border">
-              <div className="max-w-3xl mx-auto">
+            <div className="relative">
+              <div className="max-w-4xl lg:max-w-6xl mx-auto">
                 <img
                   src={
                     language === "pt-BR"
@@ -608,7 +635,7 @@ export default function ProAutProcess() {
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-center mt-2">
+                <p className="text-justify text-sm text-center mt-2 dark:text-gray-400">
                   {language === "pt-BR"
                     ? "Figura 1: Diagrama ilustrativo do processo ProAut"
                     : "Figure 1: Illustrative diagram of the ProAut process"}
@@ -616,7 +643,7 @@ export default function ProAutProcess() {
               </div>
             </div>
 
-            <div className="space-y-4 text-lg">
+            <div className="space-y-4 text-lg dark:text-gray-300">
               <p>
                 {language === "pt-BR"
                   ? "Cada atividade possui sua particularidade e funcionalidade dado às necessidades do seu desenvolvimento. Elas são baseadas em técnicas já consolidadas de entrevistas, Desk Research, geração de personas e mapa de empatias, por exemplo, montadas para o contexto do TEA."
@@ -629,33 +656,32 @@ export default function ProAutProcess() {
                   : "If you have used ProAut before and are in doubt about any activity or artifact, access the mentioned content through the Table of Contents in the left sidebar. If you have never used it, we strongly recommend that you proceed with the tutorial until you feel comfortable exploring the artifacts and starting your prototyping journey!"}
               </p>
             </div>
-
             {phases.map((phase) => {
               const Icon = phase.icon;
               const deliverables = phaseDeliverables[phase.id] || [];
 
               return (
                 <React.Fragment key={phase.id}>
+                  {/* Card de Título da Fase - Atualizado com cores do modo claro/escuro */}
                   <div
-                    className={`rounded-lg flex items-start gap-4 p-4
-                                  ${phase.id === "imersao" ? "bg-blue-50 border-l-8 border-blue-400" : ""}
-                                  ${phase.id === "analise" ? "bg-yellow-50 border-l-8 border-yellow-400" : ""}
-                                  ${phase.id === "ideacao" ? "bg-green-50 border-l-8 border-green-400" : ""}
-                                  ${phase.id === "prototipacao" ? "bg-purple-50 border-l-8 border-purple-400" : ""}
-                  `}
+                    className={`rounded-lg flex items-start gap-4 p-4 border ${phase.bgColor} ${phase.borderColor} ${phase.titleBorderColor} border-l-8`}
                   >
-                    <div className={`${phase.color} p-3 rounded-xl shrink-0`}>
+                    <div
+                      className={`${phase.iconColor} p-3 rounded-xl shrink-0`}
+                    >
                       <Icon className="h-6 w-6 text-white/90" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-3xl font-bold leading-none tracking-tight pt-1 text-black">
+                      <h3 className="text-3xl font-bold leading-none tracking-tight pt-1 dark:text-white">
                         {phase.name}
                       </h3>
                     </div>
                   </div>
 
                   {/* Descrição da Fase */}
-                  <div className="text-base space-y-4">{phase.description}</div>
+                  <div className="text-base space-y-4 dark:text-gray-300">
+                    {phase.description}
+                  </div>
                 </React.Fragment>
               );
             })}
@@ -663,12 +689,21 @@ export default function ProAutProcess() {
         </div>
       </div>
 
+      {tocOpen && (
+        <div
+          className="fixed w-full h-full bg-black/50 z-[999] lg:hidden"
+          onClick={() => setTocOpen(false)}
+        />
+      )}
+
       {/* Tabela de Conteúdos */}
-      <div className="w-full lg:w-80 flex-shrink-0 p-6 lg:pt-6 lg:pr-6 lg:sticky lg:top-20 self-start max-h-[calc(100vh-5rem)] overflow-y-auto order-first lg:order-none">
-        <Card className="shadow-lg border-l-4 border-l-blue-500">
+      <div
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+      >
+        <Card className="border-l-4 border-l-blue-500 dark:border-l-blue-600 dark:bg-gray-900 dark:border-gray-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg flex items-center gap-2">
-              <FileTextIcon className="h-5 w-5 text-blue-500" />
+            <CardTitle className="text-lg flex items-center gap-2 dark:text-white">
+              <FileText className="h-5 w-5 text-blue-500 dark:text-blue-400" />
               {language === "pt-BR"
                 ? "Tabela de Conteúdos"
                 : "Table of Contents"}
@@ -679,21 +714,28 @@ export default function ProAutProcess() {
               {tableOfContents.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavigation(item)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white/90${
+                  onClick={() => {
+                    handleNavigation(item);
+                    if (window.innerWidth < 1024) {
+                      setTocOpen(false);
+                    }
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 ${
                     activeSection === item.id
-                      ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
+                      ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-l-4 border-l-blue-500 dark:border-l-blue-400 font-medium"
+                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-800 dark:hover:text-gray-200"
                   }`}
                 >
                   <ChevronRight
                     className={`h-3 w-3 transition-transform duration-200 ${
                       activeSection === item.id
-                        ? "text-blue-500 rotate-90"
-                        : "text-gray-400"
+                        ? "text-blue-500 dark:text-blue-400 rotate-90"
+                        : "text-gray-400 dark:text-gray-500"
                     }`}
                   />
-                  <span className="text-sm">{item.title}</span>
+                  <span className="text-sm text-left break-words">
+                    {item.title}
+                  </span>
                 </button>
               ))}
             </nav>
