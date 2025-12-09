@@ -5,6 +5,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useI18n } from "@/core/i18n/I18nContext";
 import {
+  ArrowLeft,
+  ArrowRight,
   ChevronRight,
   FileText,
   Info,
@@ -12,8 +14,6 @@ import {
   Package,
   Search,
   X,
-  ArrowRight,
-  ArrowLeft,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -1450,7 +1450,7 @@ export default function ImersionPhase() {
                     src={
                       language === "pt-BR"
                         ? "src/modules/Tutorial/assets/imersion-phase/VGA-pt-br.png"
-                        : "src/modules/Tutorial/assets/imersion-phase/VGA-pt-br.png"
+                        : "src/modules/Tutorial/assets/imersion-phase/VGA-en-us.png"
                     }
                     alt={
                       language === "pt-BR"
