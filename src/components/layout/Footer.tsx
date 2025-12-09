@@ -8,7 +8,7 @@ export const Footer = () => {
   const { t } = useI18n();
 
   return (
-    <footer className="border-t bg-muted/95 backdrop-blur supports-[backdrop-filter]:bg-muted/60 text-muted-foreground text-xs transition-colors sticky bottom-0 z-40 w-full">
+    <footer className="border-t bg-muted/95 backdrop-blur supports-[backdrop-filter]:bg-muted/60 text-muted-foreground text-xs transition-colors bottom-0 z-40 w-full">
       <div className="mx-auto w-full max-w-8xl px-4 py-2.5">
         {/* Grid de 3 colunas; ícones centralizados verticalmente no footer */}
         <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3">

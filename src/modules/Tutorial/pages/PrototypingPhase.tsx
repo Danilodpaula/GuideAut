@@ -1,47 +1,91 @@
-// PrototypingPhase.tsx
-// Página informativa do GuideAut que descreve a Fase de Prototipação do processo ProAut.
-// Detalha a criação, validação e refinamento do protótipo com base na TRR Completa.
+// ProAutProcess.tsx
+// Página informativa do GuideAut que descreve o processo ProAut.
+// Apresenta as 4 fases do método baseado em Design Thinking, atividades,
+// artefatos gerados e recursos adicionais para equipes de desenvolvimento.
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useI18n } from "@/core/i18n/I18nContext";
 import {
+  Boxes,
   ChevronRight,
-  FileText as FileTextIcon,
+  FileText,
   Info,
-  PenTool,
-  Repeat,
+  Lightbulb,
+  Palette,
   Users,
+  ArrowRight,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 /**
- * 🧩 Componente principal da página "Fase de Prototipação".
- * Abrange as atividades de Criar, Validar e Refinar o protótipo.
+ * 🧩 Componente principal da página "Processo ProAut".
+ * Mostra cada fase do processo com atividades, artefatos e botões de download.
+ * Ideal para orientar equipes que aplicam o método no desenvolvimento de interfaces acessíveis.
  */
-export default function PrototypingPhase() {
-  const phaseArtifacts = [
-    {
-      id: "trr-completa",
-      type_pt: "Entrada",
-      type_en: "Input",
-      name_pt: "TRR Completa",
-      name_en: "Complete TRR",
-    },
-    {
-      id: "prototipo-validado",
-      type_pt: "Saída",
-      type_en: "Output",
-      name_pt: "Protótipo Validado",
-      name_en: "Validated Prototype",
-    },
-  ];
+export default function ProAutProcess() {
+  const phaseDeliverables = {
+    imersao: [
+      {
+        id: "es",
+        name_pt: "Formulários de entrevista",
+        name_en: "Interview Forms",
+      },
+      {
+        id: "fca",
+        name_pt: "Ficha de Caracterização do Autista (FCA)",
+        name_en: "Autistic Characterization Form (ACF)",
+      },
+      {
+        id: "mc",
+        name_pt: "Canvas (CCS, CCA, CTA)",
+        name_en: "Canvases (RSC, ACC, ATC)",
+      },
+    ],
+    analise: [
+      {
+        id: "tir",
+        name_pt: "Tabela Inicial de Requisitos/Restrições de Interface",
+        name_en: "Initial Interface Requirements/Constraints Table",
+      },
+      {
+        id: "pa",
+        name_pt: "Template Persona Autista",
+        name_en: "Autistic Persona Template",
+      },
+      {
+        id: "mp",
+        name_pt: "Template Mapa de Empatia",
+        name_en: "Empathy Map Template",
+      },
+    ],
+    ideacao: [
+      {
+        id: "tfr",
+        name_pt: "Tabela Final de Requisitos/Restrições de Interface",
+        name_en: "Final Interface Requirements/Constraints Table",
+      },
+    ],
+    prototipacao: [
+      {
+        id: "prot",
+        name_pt: "Protótipo Interativo",
+        name_en: "Interactive Prototype",
+      },
+      {
+        id: "rel",
+        name_pt: "Relatório de Validação",
+        name_en: "Validation Report",
+      },
+    ],
+  };
 
   const { language } = useI18n();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState("");
+  const [tocOpen, setTocOpen] = useState(false);
 
-  // Estrutura da tabela de conteúdos
+  // Estrutura da tabela de conteúdos com paths de navegação
   const tableOfContents = useMemo(
     () => [
       {
@@ -68,25 +112,10 @@ export default function PrototypingPhase() {
         path: "/ideation-phase",
       },
       {
-        id: "visao-geral",
+        id: "prototipacao",
         title: language === "pt-BR" ? "4. Prototipação" : "4. Prototyping",
-        type: "scroll",
-      },
-      {
-        id: "criar-prototipo",
-        title: language === "pt-BR" ? "Criar Protótipo" : "Create Prototype",
-        type: "scroll",
-      },
-      {
-        id: "validar-prototipo",
-        title:
-          language === "pt-BR" ? "Validar Protótipo" : "Validate Prototype",
-        type: "scroll",
-      },
-      {
-        id: "refinar-prototipo",
-        title: language === "pt-BR" ? "Refinar Protótipo" : "Refine Prototype",
-        type: "scroll",
+        type: "navigate",
+        path: "/prototyping-phase",
       },
     ],
     [language],
@@ -94,7 +123,7 @@ export default function PrototypingPhase() {
 
   // Rola para o topo assim que a página carrega
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0, 0);
   }, []);
 
   // Efeito para detectar a seção ativa durante o scroll
@@ -140,290 +169,568 @@ export default function PrototypingPhase() {
     }
   };
 
+  // Estrutura de fases do processo ProAut, com conteúdo bilíngue
+  const phases = [
+    {
+      id: "imersao",
+      name: language === "pt-BR" ? "1. Imersão" : "1. Immersion",
+      icon: Users,
+      bgColor: "bg-blue-50 dark:bg-blue-900/20",
+      borderColor: "border-blue-200 dark:border-blue-800",
+      iconColor: "bg-blue-500 dark:bg-blue-600",
+      titleBgColor: "bg-blue-100 dark:bg-blue-800",
+      titleBorderColor: "border-l-blue-400 dark:border-l-blue-600",
+      description:
+        language === "pt-BR" ? (
+          <>
+            <p className="text-lg text-justify mb-4">
+              Antes de realizar a elicitação dos requisitos, é de extrema
+              importância que todos os envolvidos no projeto conheçam o domínio
+              do problema a ser resolvido pela aplicação a ser desenvolvida.
+              Acreditamos que a abordagem para alcançar tal domínio é ser capaz
+              de estabelecer uma comunicação ativa com seu usuário, permitindo
+              que a pessoa autista participe do processo de design da
+              tecnologia. É neste aspecto que a imersão trabalha.
+            </p>
+            <p className="text-lg text-justify mb-4">
+              A fase de imersão é a fase caracterizada pela aproximação do
+              problema. É nesta etapa que a equipe busca conhecer conceitos que
+              permeiam o tema da aplicação a ser projetada.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Entrada da fase:</strong> a ideia ou visão geral de
+                aplicação.
+              </li>
+              <li>
+                <strong>Saída da fase:</strong> CCA (Canvas dos Cuidadores de
+                Autistas); CTA (Canvas dos Terapeutas de Autistas); CSS (Canvas
+                do Solicitante do Software); Formulário de Caracterização do
+                Autista; e VGA (Gráfico de Visão Geral do Autista).
+              </li>
+              <li>
+                <strong>Envolvidos:</strong> Pais, especialistas, solicitantes
+                de software, designers/desenvolvedores.
+              </li>
+              <li>
+                <strong>Atividades da Fase:</strong> Aprender sobre o contexto,
+                Elicitar Requisitos e Consolidar Dados.
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <p className="text-lg text-justify mb-4">
+              Before performing requirements elicitation, it is of utmost
+              importance that everyone involved in the project knows the domain
+              of the problem to be solved by the application to be developed. We
+              believe that the approach to achieve such domain is to be able to
+              establish active communication with your user, allowing the
+              autistic person to participate in the technology design process.
+              This is the aspect in which immersion works.
+            </p>
+            <p className="text-lg text-justify mb-4">
+              The immersion phase is characterized by the approach to the
+              problem. It is at this stage that the team seeks to know concepts
+              that permeate the theme of the application to be designed.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Phase input:</strong> the idea or application overview.
+              </li>
+              <li>
+                <strong>Phase output:</strong> ACC (Autistic Caregivers Canvas);
+                ATC (Autistic Therapists Canvas); RSC (Software Requester
+                Canvas); Autistic Characterization Form (ACF); and AOG (Autistic
+                Overview Graph).
+              </li>
+              <li>
+                <strong>Involved:</strong> Parents, specialists, software
+                requesters, designers/developers.
+              </li>
+              <li>
+                <strong>Phase Activities:</strong> Learn about the context,
+                Elicit Requirements and Consolidate Data.
+              </li>
+            </ul>
+          </>
+        ),
+    },
+    {
+      id: "analise",
+      name: language === "pt-BR" ? "2. Análise" : "2. Analysis",
+      icon: Lightbulb,
+      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
+      borderColor: "border-yellow-200 dark:border-yellow-800",
+      iconColor: "bg-yellow-500 dark:bg-yellow-600",
+      titleBgColor: "bg-yellow-100 dark:bg-yellow-800",
+      titleBorderColor: "border-l-yellow-400 dark:border-l-yellow-600",
+      description:
+        language === "pt-BR" ? (
+          <>
+            <p className="text-lg text-justify mb-4">
+              A fase de Análise é o momento de aproximação do problema. Agora
+              que a equipe coletou diversos dados na imersão, é preciso
+              mergulhar nessas informações e avaliar as implicações do desafio
+              sob o ponto de vista de todos os envolvidos (stakeholders).
+            </p>
+            <p className="text-lg text-justify mb-4">
+              A fase de Análise tem como objetivo aprofundar as informações
+              obtidas na fase de Imersão e iniciar as principais propostas de
+              solução.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Entrada da fase:</strong> Canvas preenchidos
+                (Solicitante, Cuidadores, Terapeutas), ACF respondido e Gráfico
+                VGA.
+              </li>
+              <li>
+                <strong>Envolvidos:</strong> Time de desenvolvimento,
+                cuidador(es) e/ou terapeuta(s).
+              </li>
+              <li>
+                <strong>Atividades da Fase:</strong> Triangular dos Dados, Gerar
+                Mapa de Empatia e Gerar de Personas.
+              </li>
+              <li>
+                <strong>Saída da fase:</strong> Lista Inicial de
+                Requisitos/Restrições, Personas e Mapa de Empatia.
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <p className="text-lg text-justify mb-4">
+              The Analysis phase is the moment of approaching the problem. Now
+              that the team has collected various data in immersion, it is
+              necessary to dive into this information and evaluate the
+              implications of the challenge from the point of view of all
+              involved (stakeholders).
+            </p>
+            <p className="text-lg text-justify mb-4">
+              The Analysis phase aims to deepen the information obtained in the
+              Immersion phase and initiate the main solution proposals.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Phase input:</strong> Filled Canvases (Requester,
+                Caregivers, Therapists), answered ACF, and AOG Graph.
+              </li>
+              <li>
+                <strong>Involved:</strong> Development team, caregiver(s),
+                and/or therapist(s).
+              </li>
+              <li>
+                <strong>Phase Activities:</strong> Triangulate Data, Generate
+                Empathy Map, and Generate Personas.
+              </li>
+              <li>
+                <strong>Phase output:</strong> Initial Requirements/Constraints
+                List, Personas, and Empathy Map.
+              </li>
+            </ul>
+          </>
+        ),
+    },
+    {
+      id: "ideacao",
+      name: language === "pt-BR" ? "3. Ideação" : "3. Ideation",
+      icon: Palette,
+      bgColor: "bg-green-50 dark:bg-green-900/20",
+      borderColor: "border-green-200 dark:border-green-800",
+      iconColor: "bg-green-500 dark:bg-green-600",
+      titleBgColor: "bg-green-100 dark:bg-green-800",
+      titleBorderColor: "border-l-green-400 dark:border-l-green-600",
+      description:
+        language === "pt-BR" ? (
+          <>
+            <p className="text-lg text-justify mb-4">
+              A fase de ideação tem como objetivo gerar ideias por meio de
+              estímulos de criatividade em conjunto com a equipe de
+              desenvolvimento e design da aplicação, em conformidade com o
+              contexto e expectativas do usuário do software/app. Ela segue a
+              criação dos artefatos de personas, mapas de empatia e a versão
+              inicial da Tabela de Requisitos/Restrições.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Entrada da fase:</strong> a Lista Inicial de
+                Requisitos/Restrições da Interface (TRR), o Mapa de Empatia e as
+                Personas.
+              </li>
+              <li>
+                <strong>Saída da fase:</strong> Lista Atualizada da Tabela de
+                Requisitos/Restrições da Interface (TRR) completa.
+              </li>
+              <li>
+                <strong>Envolvidos:</strong> Pais, especialistas, solicitantes
+                de software, designers/desenvolvedores.
+              </li>
+              <li>
+                <strong>Atividades da Fase:</strong> Definir Itens de
+                Requisitos/Restrições, Especificar Itens Requisitos e
+                Gerar/Refinar Ideias de Interface.
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <p className="text-lg text-justify mb-4">
+              The ideation phase aims to generate ideas through creativity
+              stimuli together with the application development and design team,
+              in compliance with the context and expectations of the
+              software/app user. It follows the creation of persona artifacts,
+              empathy maps, and the initial version of the
+              Requirements/Constraints Table.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Phase input:</strong> the Initial Interface
+                Requirements/Constraints List (RCT), the Empathy Map, and the
+                Personas.
+              </li>
+              <li>
+                <strong>Phase output:</strong> Updated List of the complete
+                Interface Requirements/Constraints Table (RCT).
+              </li>
+              <li>
+                <strong>Involved:</strong> Parents, specialists, software
+                requesters, designers/developers.
+              </li>
+              <li>
+                <strong>Phase Activities:</strong> Define
+                Requirements/Constraints Items, Specify Requirements Items, and
+                Generate/Refine Interface Ideas.
+              </li>
+            </ul>
+          </>
+        ),
+    },
+    {
+      id: "prototipacao",
+      name: language === "pt-BR" ? "4. Prototipação" : "4. Prototyping",
+      icon: Boxes,
+      bgColor: "bg-purple-50 dark:bg-purple-900/20",
+      borderColor: "border-purple-200 dark:border-purple-800",
+      iconColor: "bg-purple-500 dark:bg-purple-600",
+      titleBgColor: "bg-purple-100 dark:bg-purple-800",
+      titleBorderColor: "border-l-purple-400 dark:border-l-purple-600",
+      description:
+        language === "pt-BR" ? (
+          <>
+            <p className="text-lg text-justify mb-4">
+              A Prototipação é um processo no qual se busca transferir ideias do
+              âmbito conceitual para o concreto. Consiste em todo e qualquer
+              objeto, seja físico ou virtual, que simula uma interação para
+              validar uma ideia, de forma que se produza uma versão inicial da
+              interface idealizada.
+            </p>
+            <p className="text-lg text-justify mb-4">
+              Com o protótipo em mãos, é possível avaliá-lo junto ao usuário, e
+              dependendo do resultado, refiná-lo até transformá-lo em uma
+              solução que realmente esteja alinhada às necessidades levantadas
+              no processo.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Entrada da fase:</strong> Lista Atualizada da Tabela de
+                Requisitos/Restrições da Interface (TRR) completa.
+              </li>
+              <li>
+                <strong>Saída da fase:</strong> Protótipos de baixa, média e
+                alta fidelidade.
+              </li>
+              <li>
+                <strong>Envolvidos:</strong> Designers/desenvolvedores,
+                usuários, cuidadores e especialistas.
+              </li>
+              <li>
+                <strong>Atividades da Fase:</strong> Desenvolver protótipos,
+                Validar com usuários e Refinar iterativamente.
+              </li>
+            </ul>
+          </>
+        ) : (
+          <>
+            <p className="text-lg text-justify mb-4">
+              Prototyping is a process in which one seeks to transfer ideas from
+              the conceptual scope to the concrete one. It consists of any and
+              every object, whether physical or virtual, that simulates an
+              interaction to validate an idea, so that an initial version of the
+              idealized interface is produced.
+            </p>
+            <p className="text-lg text-justify mb-4">
+              With the prototype in hand, it is possible to evaluate it with the
+              user, and depending on the result, refine it until transforming it
+              into a solution that is truly aligned with the needs raised in the
+              process.
+            </p>
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
+              <li>
+                <strong>Phase input:</strong> Updated List of the complete
+                Interface Requirements/Constraints Table (RCT).
+              </li>
+              <li>
+                <strong>Phase output:</strong> Low, medium, and high fidelity
+                prototypes.
+              </li>
+              <li>
+                <strong>Involved:</strong> Designers/developers, users,
+                caregivers, and specialists.
+              </li>
+              <li>
+                <strong>Phase Activities:</strong> Develop prototypes, Validate
+                with users, and Refine iteratively.
+              </li>
+            </ul>
+          </>
+        ),
+    },
+  ];
+
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col lg:flex-row gap-6 relative">
       {/* Conteúdo Principal */}
-      <div className="flex-1 space-y-8 p-6 animate-fade-in">
+
+      {/* Botão visível apenas em mobile */}
+      <button
+        className="fixed bottom-10 right-6 z-[1001] gap-2 p-3 border border-blue-400 bg-blue-50 dark:border-blue-800 rounded-lg lg:hidden mb-4"
+        onClick={() => setTocOpen(!tocOpen)}
+      >
+        {tocOpen ? (
+          <ChevronRight className="h-6 w-6 text-blue-500 dark:text-blue-800" />
+        ) : (
+          <FileText className="h-6 w-6 text-blue-500 dark:text-blue-800" />
+        )}
+      </button>
+
+      <div className="flex-1 space-y-6 p-6 animate-fade-in order-1 lg:order-1">
         {/* Cabeçalho da página */}
         <div className="space-y-4">
-          <h1 className="text-3xl font-bold tracking-tight">
-            {language === "pt-BR"
-              ? "Fase de Prototipação"
-              : "Prototyping Phase"}
+          <h1 className="text-3xl font-bold tracking-tight dark:text-white">
+            {language === "pt-BR" ? "Visão geral do ProAut" : "ProAut Overview"}
           </h1>
-          <p className="text-lg text-muted-foreground">
-            {language === "pt-BR"
-              ? "Do conceito ao concreto: validando ideias com interações reais."
-              : "From concept to concrete: validating ideas with real interactions."}
-          </p>
-        </div>
 
-        {/* --- VISÃO GERAL --- */}
-        <section id="visao-geral" className="scroll-m-20 space-y-6">
-          <div className="flex items-center gap-2 border-b pb-2">
-            <h2 className="text-2xl font-bold tracking-tight">
-              {language === "pt-BR" ? "Visão Geral" : "Overview"}
-            </h2>
+          {/* Introdução ao ProAut */}
+          <div className="space-y-4 text-lg dark:text-gray-300">
+            <p className="text-justify">
+              {language === "pt-BR"
+                ? "Muitas tecnologias atuais são, geralmente, inacessíveis, pois as pessoas que criam as tecnologias convencionais não incorporam, regularmente, design acessível e como desenvolvedores, sabemos que cada etapa do desenvolvimento de uma aplicação precisa ser meticulosamente idealizada e analisada antes de ser propriamente implementada."
+                : "Many current technologies are generally inaccessible because the people who create conventional technologies do not regularly incorporate accessible design, and as developers, we know that each stage of application development needs to be meticulously idealized and analyzed before being properly implemented."}
+            </p>
+            <p className="text-justify">
+              {language === "pt-BR"
+                ? "O grande impasse é: somos levados a ignorar muitos contextos importantes que precisam ser desvendados para evitar problemas com aqueles que mais devemos satisfazer, os clientes e inevitavelmente, até mesmo as coisas mais simples passam despercebidas dado certos contextos. É nesse entremeio que a falta de cuidado no desenvolvimento de tecnologias para usuários com condições neurodivergentes fica evidente."
+                : "The great impasse is: we are led to ignore many important contexts that need to be unveiled to avoid problems with those we must satisfy the most, the clients, and inevitably, even the simplest things go unnoticed given certain contexts. It is in this gap that the lack of care in developing technologies for users with neurodivergent conditions becomes evident."}
+            </p>
+            <p className="text-justify">
+              {language === "pt-BR"
+                ? "Mitigar esse problema é o nosso objetivo e o GuideAut, como ferramenta WEB colaborativa, disponibiliza as ferramentas e repositório de informações necessárias para que sua equipe possa facilmente construir um protótipo de qualidade da sua aplicação. Com o ProAut, o processo baseado em Design Thinking (DT) que permeia o funcionamento do GuideAut, é possível realizar o alinhamento de requisitos com foco nos autistas."
+                : "Mitigating this problem is our goal, and GuideAut, as a collaborative WEB tool, provides the tools and information repository necessary for your team to easily build a quality prototype of your application. With ProAut, the Design Thinking (DT) based process that permeates GuideAut's functioning, it is possible to perform requirements alignment focusing on autistic individuals."}
+            </p>
           </div>
 
-          <div className="space-y-4 text-lg leading-relaxed">
-            <p>
-              {language === "pt-BR"
-                ? "A Prototipação é um processo no qual se busca transferir ideias do âmbito conceitual para o concreto. Consiste em todo e qualquer objeto, seja físico ou virtual, que simula uma interação para validar uma ideia, de forma que se produza uma versão inicial da interface idealizada."
-                : "Prototyping is a process in which ideas are transferred from the conceptual domain to a tangible form. It consists of creating any object, whether physical or virtual, that simulates an interaction to validate an idea, resulting in an initial version of the idealized interface."}
-            </p>
-            <p>
-              {language === "pt-BR"
-                ? "Com o protótipo em mãos, é possível avaliá-lo junto ao usuário, e dependendo do resultado, refiná-lo até transformá-lo em uma solução que realmente esteja alinhada às necessidades levantadas no processo."
-                : "With the prototype in hand, it is possible to evaluate it with the user and, depending on the results, refine it until it becomes a solution that is truly aligned with the needs identified during the process."}
-            </p>
+          {/* Card de info */}
+          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+            <div className="flex items-start space-x-3">
+              <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+              <p className="text-justify text-blue-800 dark:text-blue-200">
+                {language === "pt-BR"
+                  ? "O ProAut é indicado, principalmente, para construção de protótipos de baixa fidelidade."
+                  : "ProAut is indicated, primarily, for the construction of low-fidelity prototypes."}
+              </p>
+            </div>
+          </div>
+        </div>
 
-            <div className="my-8 p-4 bg-card rounded-lg border">
-              <div className="max-w-6xl mx-auto">
+        {/* Fases do processo */}
+        <div className="grid gap-6">
+          <section id="proaut-phases" className="space-y-12 scroll-m-20 pt-6">
+            <h2 className="text-3xl font-bold tracking-tight border-b pb-2 dark:text-white dark:border-gray-700">
+              {language === "pt-BR" ? "Fases do Processo" : "Process Phases"}
+            </h2>
+
+            <div className="space-y-4 dark:text-gray-300">
+              <p className="text-justify text-lg">
+                {language === "pt-BR"
+                  ? "O ProAut possui 4 fases: Fase de imersão, Análise, Ideação e Prototipação. Nas quais:"
+                  : "ProAut has 4 phases: Immersion, Analysis, Ideation, and Prototyping Phase. In which:"}
+              </p>
+
+              <ul className="space-y-3 text-lg list-disc list-inside text-justify">
+                <li>
+                  <strong>
+                    {language === "pt-BR"
+                      ? "Fase de imersão"
+                      : "Immersion phase"}
+                    :
+                  </strong>{" "}
+                  {language === "pt-BR"
+                    ? "você conhece aspectos relacionados ao autismo, adaptação da fase de imersão original do DT. Te direciona para uma solução e guia na geração de documentação para definir o problema a ser resolvido;"
+                    : "you get to know aspects related to autism, an adaptation of the original DT immersion phase. It directs you to a solution and guides you in generating documentation to define the problem to be solved;"}
+                </li>
+                <li>
+                  <strong>
+                    {language === "pt-BR"
+                      ? "Fase de análise"
+                      : "Analysis phase"}
+                    :
+                  </strong>{" "}
+                  {language === "pt-BR"
+                    ? "observe padrões e elimine discordâncias na documentação da fase de imersão. Isso possibilita gerar empatia e personas com mais precisão;"
+                    : "observe patterns and eliminate discrepancies in the immersion phase documentation. This enables generating empathy and personas with more precision;"}
+                </li>
+                <li>
+                  <strong>
+                    {language === "pt-BR"
+                      ? "Fase de ideação"
+                      : "Ideation phase"}
+                    :
+                  </strong>{" "}
+                  {language === "pt-BR"
+                    ? "conheça requisitos, reunindo a equipe de desenvolvimento para uma comunicação aberta acerca de melhorias, adições e remoções de ferramentas pensadas para resolver o problema definido;"
+                    : "get to know requirements, gathering the development team for open communication about improvements, additions, and removals of tools designed to solve the defined problem;"}
+                </li>
+                <li>
+                  <strong>
+                    {language === "pt-BR"
+                      ? "Fase de prototipação"
+                      : "Prototyping phase"}
+                    :
+                  </strong>{" "}
+                  {language === "pt-BR"
+                    ? "a concepção do protótipo e seu refinamento."
+                    : "the conception of the prototype and its refinement."}
+                </li>
+              </ul>
+
+              <p className="text-justify text-lg pt-2 flex items-center gap-1 flex-wrap">
+                {language === "pt-BR"
+                  ? "Cada fase possui atividades que devem ser realizadas com artefatos disponibilizados na aba"
+                  : "Each phase has activities that must be performed with artifacts available in the"}
+                <FileText className="h-5 w-5 mx-1 dark:text-gray-400" />
+                <strong>
+                  {language == "pt-BR" ? "Artefatos" : "Artifacts"}
+                </strong>
+                {""}
+                {language === "pt-BR"
+                  ? "da barra lateral esquerda da página atual."
+                  : "tab on the left sidebar of the current page."}
+              </p>
+            </div>
+
+            {/* Fluxograma ProAut*/}
+            <div className="relative">
+              <div className="max-w-4xl lg:max-w-6xl mx-auto">
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/prototyping-phase/FluxoPrototipacao-pt-br.png"
-                      : "src/modules/Tutorial/assets/prototyping-phase/FluxoPrototipacao-en-us.png"
+                      ? "src/modules/Tutorial/assets/imersion-phase/FluxoProAut-pt-br.png"
+                      : "src/modules/Tutorial/assets/imersion-phase/FluxoProAut-en-us.png"
                   }
                   alt={
                     language === "pt-BR"
-                      ? "Fluxo sugerido para a atividade de Prototipação"
-                      : "Suggested workflow for the Prototyping activity"
+                      ? "Diagrama do processo ProAut"
+                      : "ProAut process diagram"
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-sm text-muted-foreground text-center mt-2">
+                <p className="text-sm text-center mt-2 dark:text-gray-400">
                   {language === "pt-BR"
-                    ? "Fluxo sugerido para a atividade de Análise"
-                    : "Suggested workflow for the Analysis activity"}
+                    ? "Figura 1: Diagrama ilustrativo do processo ProAut"
+                    : "Figure 1: Illustrative diagram of the ProAut process"}
                 </p>
               </div>
             </div>
 
-            <div className="p-4 mt-4">
-              <ul className="space-y-2 list-none">
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Atividades:" : "Activities:"}
-                  </span>
-                  <span>
-                    {language === "pt-BR"
-                      ? "Criar Protótipo, Validar Protótipo e Refinar Protótipo."
-                      : "Create Prototype, Validate Prototype, and Refine Prototype."}
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Entrada:" : "Input:"}
-                  </span>
-                  <span>
-                    {language === "pt-BR" ? "TRR Completa" : "Complete TRR"}
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Saída:" : "Output:"}
-                  </span>
-                  <span>
-                    {language === "pt-BR"
-                      ? "Protótipo validado"
-                      : "Validated Prototype"}
-                  </span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="font-bold min-w-[120px]">
-                    {language === "pt-BR" ? "Envolvidos:" : "Involved:"}
-                  </span>
-                  <span>
-                    {language === "pt-BR"
-                      ? "Equipe de desenvolvimento, terapeuta(s), cuidador(es) e cliente(s)."
-                      : "Development team, therapist(s), caregiver(s), and client(s)."}
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* --- ATIVIDADE: CRIAR PROTÓTIPO --- */}
-        <section id="criar-prototipo" className="scroll-m-20 space-y-6 mt-12">
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-full">
-              <PenTool className="h-6 w-6 text-blue-600" />
-            </div>
-            <h2 className="text-2xl font-bold tracking-tight">
-              {language === "pt-BR"
-                ? "Atividade: Criar Protótipo"
-                : "Activity: Create Prototype"}
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            <p>
-              {language === "pt-BR"
-                ? "Para iniciar o desenvolvimento do protótipo, o time de design deverá seguir os requisitos e suas respectivas especificações. Para cada um deles, o time avalia a sugestão de baixa fidelidade contida na TRR, e procura representá-la no protótipo gerado."
-                : "To begin the prototype development, the design team must follow the requirements and their respective specifications. For each requirement, the team evaluates the low-fidelity suggestion included in the TRR and seeks to represent it in the generated prototype."}
-            </p>
-            <p>
-              {language === "pt-BR"
-                ? "Além disso, o time poderá consultar o GuideAut quantas vezes for necessário."
-                : "Additionally, the team may consult the GuideAut as many times as necessary."}
-            </p>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-5">
-              <div className="flex items-start gap-3">
-                <Info className="h-5 w-5 text-blue-700 mt-1 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-blue-800">
-                    {language === "pt-BR"
-                      ? "O papel do GuideAut"
-                      : "The role of GuideAut"}
-                  </h4>
-                  <p className="text-blue-700 text-sm mt-1">
-                    {language === "pt-BR"
-                      ? "O GuideAut poderá fornecer informações úteis para nortear algumas decisões da equipe, quanto ao que usar ou não usar quanto às cores, formas geométricas (caso necessário) e layouts a serem utilizados durante o design das interfaces do protótipo, por exemplo."
-                      : "The GuideAut can provide useful information to guide some design decisions regarding the use of colors, geometric shapes (when necessary), and layout choices for the prototype’s interface design."}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* --- ATIVIDADE: VALIDAR PROTÓTIPO --- */}
-        <section id="validar-prototipo" className="scroll-m-20 space-y-6 mt-12">
-          <div className="flex items-center gap-3">
-            <div className="bg-purple-100 p-2 rounded-full">
-              <Users className="h-6 w-6 text-purple-600" />
-            </div>
-            <h2 className="text-2xl font-bold tracking-tight">
-              {language === "pt-BR"
-                ? "Atividade: Validar Protótipo"
-                : "Activity: Validate Prototype"}
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            <p>
-              {language === "pt-BR"
-                ? "Após a finalização do protótipo, este é validado pelos stakeholders envolvidos. Tal atividade pode acontecer por meio de uma reunião com os envolvidos, apresentando o que foi projetado."
-                : "After completing the prototype, it is validated by the stakeholders involved. This activity may take place in a meeting where the designed prototype is presented."}
-            </p>
-
-            <div className="bg-card border rounded-lg p-6 shadow-sm">
-              <h4 className="font-semibold text-lg mb-3 border-b pb-2">
+            <div className="space-y-4 text-lg dark:text-gray-300">
+              <p className="text-justify">
                 {language === "pt-BR"
-                  ? "Recomendação de Alta Fidelidade"
-                  : "High-Fidelity Recommendation"}
-              </h4>
-              <p className="mb-4">
+                  ? "Cada atividade possui sua particularidade e funcionalidade dado às necessidades do seu desenvolvimento. Elas são baseadas em técnicas já consolidadas de entrevistas, Desk Research, geração de personas e mapa de empatias, por exemplo, montadas para o contexto do TEA."
+                  : "Each activity has its particularity and functionality given the needs of your development. They are based on already consolidated techniques such as interviews, Desk Research, persona generation and empathy maps, for example, tailored for the ASD context."}
+              </p>
+
+              <p className="text-justify">
                 {language === "pt-BR"
-                  ? "Recomenda-se que para essa apresentação, o protótipo seja de alta fidelidade, e esteja representado em um dispositivo (notebook, tablet, smartphone) físico ou emulado."
-                  : "It is recommended that this presentation be made using a high-fidelity prototype displayed on a physical or emulated device (such as a notebook, tablet, or smartphone)."}
+                  ? "Caso já tenha feito uso do ProAut anteriormente e esteja em dúvida acerca de alguma atividade ou artefato, acesse o referido conteúdo através da Tabela de Conteúdos na barra lateral esquerda. Caso nunca tenha usado, recomendamos fortemente que prossiga pelo tutorial até se sentir confortável para explorar os artefatos e iniciar a sua jornada de prototipação!"
+                  : "If you have used ProAut before and are in doubt about any activity or artifact, access the mentioned content through the Table of Contents in the left sidebar. If you have never used it, we strongly recommend that you proceed with the tutorial until you feel comfortable exploring the artifacts and starting your prototyping journey!"}
               </p>
-              <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
-                <li>
-                  {language === "pt-BR"
-                    ? "Torna o processo de revisão mais fluido."
-                    : "Makes the review process more fluid."}
-                </li>
-                <li>
-                  {language === "pt-BR"
-                    ? "Permite visualizar o projeto em escala real e validar funcionalidades."
-                    : "Allows visualizing the project at real scale and validate its functionalities."}
-                </li>
-                <li>
-                  {language === "pt-BR"
-                    ? "Permite observar se as decisões de design estão de acordo com o esperado."
-                    : "Enables observing whether design decisions align with expectations."}
-                </li>
-              </ul>
             </div>
+            {phases.map((phase) => {
+              const Icon = phase.icon;
+              const deliverables = phaseDeliverables[phase.id] || [];
 
-            <p className="text-muted-foreground italic">
-              {language === "pt-BR"
-                ? "No decorrer dessa etapa, os stakeholders podem solicitar mudanças no protótipo apresentado. Tais sugestões devem ser registradas, para garantir que todas as mudanças sejam realizadas."
-                : "During this stage, stakeholders may request changes to the prototype. Such suggestions must be documented to ensure that all necessary modifications are implemented."}
-            </p>
-          </div>
-        </section>
+              return (
+                <React.Fragment key={phase.id}>
+                  {/* Card de Título da Fase - Atualizado com cores do modo claro/escuro */}
+                  <div
+                    className={`rounded-lg flex items-start gap-4 p-4 border ${phase.bgColor} ${phase.borderColor} ${phase.titleBorderColor} border-l-8`}
+                  >
+                    <div
+                      className={`${phase.iconColor} p-3 rounded-xl shrink-0`}
+                    >
+                      <Icon className="h-6 w-6 text-white/90" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-3xl font-bold leading-none tracking-tight pt-1 dark:text-white">
+                        {phase.name}
+                      </h3>
+                    </div>
+                  </div>
 
-        {/* --- ATIVIDADE: REFINAR PROTÓTIPO --- */}
-        <section
-          id="refinar-prototipo"
-          className="scroll-m-20 space-y-6 mt-12 pt-8 border-t"
-        >
-          <div className="flex items-center gap-3">
-            <div className="bg-orange-100 p-2 rounded-full">
-              <Repeat className="h-6 w-6 text-orange-600" />
-            </div>
-            <h2 className="text-2xl font-bold tracking-tight">
-              {language === "pt-BR"
-                ? "Atividade: Refinar Protótipo"
-                : "Activity: Refine Prototype"}
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            <p>
-              {language === "pt-BR"
-                ? "Conforme comentado anteriormente, nesta etapa é importante que todos os itens de melhoria apontados pelos stakeholders componham o refinamento do protótipo proposto."
-                : "As mentioned previously, it is essential that all improvement items identified by stakeholders are incorporated into the proposed prototype refinement."}
-            </p>
-
-            <div className="bg-green-50 border border-green-200 rounded-lg p-5 text-center">
-              <p className="font-medium text-green-900 text-lg mb-2">
-                {language === "pt-BR" ? "Ciclo de Iteração" : "Iteration Cycle"}
-              </p>
-              <p className="text-green-800">
-                {language === "pt-BR"
-                  ? "O refinamento e validação compõem um ciclo de iteração até que o protótipo esteja em um nível satisfatório para os stakeholders, especialmente para o cliente."
-                  : "The refinement and validation form an iterative cycle that continues until the prototype reaches a level considered satisfactory by the stakeholders, especially the client."}
-              </p>
-              <div className="mt-4 pt-4 border-t border-green-200">
-                <p className="font-bold text-green-900">
-                  {language === "pt-BR"
-                    ? "Com o fim do ciclo, entende-se que o protótipo está pronto para ser desenvolvido de fato."
-                    : "Once this cycle is completed, the prototype is deemed ready for actual development."}
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Resumo dos Artefatos */}
-        <div className="mt-8 bg-slate-50 p-6 rounded-lg border">
-          <h3 className="text-xl font-semibold mb-4">
-            {language === "pt-BR" ? "Artefatos da Fase" : "Phase Artifacts"}
-          </h3>
-          <ul className="grid gap-4 sm:grid-cols-2">
-            {phaseArtifacts.map((artifact) => (
-              <li
-                key={artifact.id}
-                className="flex flex-col bg-white p-3 rounded border shadow-sm"
-              >
-                <span className="text-xs font-bold text-muted-foreground mb-1 uppercase tracking-wider">
-                  {language === "pt-BR" ? artifact.type_pt : artifact.type_en}
+                  {/* Descrição da Fase */}
+                  <div className="text-base space-y-4 dark:text-gray-300">
+                    {phase.description}
+                  </div>
+                </React.Fragment>
+              );
+            })}
+          </section>
+          {/* --- INICIO DO NOVO BOTÃO --- */}
+          <div className="pt-4 pb-8">
+            <button
+              onClick={() => navigate("/imersion-phase")}
+              className="group w-full relative overflow-hidden rounded-xl bg-blue-600 hover:bg-blue-700 text-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center justify-between"
+            >
+              <div className="relative z-10 flex flex-col items-start gap-1">
+                <span className="text-blue-100 text-sm font-medium uppercase tracking-wider">
+                  {language === "pt-BR" ? "Próximo Passo" : "Next Step"}
                 </span>
-                <div className="flex items-center gap-2">
-                  <FileTextIcon className="h-4 w-4 text-blue-500 flex-shrink-0" />
-                  <span className="font-medium">
-                    {language === "pt-BR" ? artifact.name_pt : artifact.name_en}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
+                <span className="text-2xl font-bold flex items-center gap-2">
+                  {language === "pt-BR"
+                    ? "Ir para Fase 1: Imersão"
+                    : "Go to Phase 1: Immersion"}
+                </span>
+              </div>
+
+              <div className="relative z-10 bg-white/20 p-3 rounded-full group-hover:bg-white/30 transition-colors">
+                <ArrowRight className="h-6 w-6 text-white" />
+              </div>
+
+              {/* Efeito decorativo de fundo */}
+              <div className="absolute -right-12 -bottom-12 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:w-48 group-hover:h-48 transition-all duration-500" />
+            </button>
+          </div>
+          {/* --- FIM DO NOVO BOTÃO --- */}
         </div>
       </div>
 
+      {tocOpen && (
+        <div
+          className="fixed w-full h-full bg-black/50 z-[999] lg:hidden"
+          onClick={() => setTocOpen(false)}
+        />
+      )}
+
       {/* Tabela de Conteúdos */}
-      <div className="w-full lg:w-80 flex-shrink-0 p-6 lg:pt-6 lg:pr-6 lg:sticky lg:top-20 self-start max-h-[calc(100vh-5rem)] overflow-y-auto order-first lg:order-none">
-        <Card className="shadow-lg border-l-4 border-l-blue-500">
+      <div
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+      >
+        <Card className="border-l-4 border-l-blue-500 dark:border-l-blue-600 dark:bg-gray-900 dark:border-gray-700">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg flex items-center gap-2">
-              <FileTextIcon className="h-5 w-5 text-blue-500" />
+            <CardTitle className="text-lg flex items-center gap-2 dark:text-white">
+              <FileText className="h-5 w-5 text-blue-500 dark:text-blue-400" />
               {language === "pt-BR"
                 ? "Tabela de Conteúdos"
                 : "Table of Contents"}
@@ -434,21 +741,28 @@ export default function PrototypingPhase() {
               {tableOfContents.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavigation(item)}
-                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-white${
+                  onClick={() => {
+                    handleNavigation(item);
+                    if (window.innerWidth < 1024) {
+                      setTocOpen(false);
+                    }
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 ${
                     activeSection === item.id
-                      ? "bg-blue-50 text-blue-700 border-l-4 border-l-blue-500 font-medium"
-                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-800"
+                      ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-l-4 border-l-blue-500 dark:border-l-blue-400 font-medium"
+                      : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-800 dark:hover:text-gray-200"
                   }`}
                 >
                   <ChevronRight
                     className={`h-3 w-3 transition-transform duration-200 ${
                       activeSection === item.id
-                        ? "text-blue-500 rotate-90"
-                        : "text-gray-400"
+                        ? "text-blue-500 dark:text-blue-400 rotate-90"
+                        : "text-gray-400 dark:text-gray-500"
                     }`}
                   />
-                  <span className="text-sm">{item.title}</span>
+                  <span className="text-sm text-left break-words">
+                    {item.title}
+                  </span>
                 </button>
               ))}
             </nav>
