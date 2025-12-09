@@ -13,6 +13,7 @@ import {
   Lightbulb,
   Palette,
   Users,
+  ArrowRight,
 } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +29,7 @@ export default function ProAutProcess() {
       {
         id: "es",
         name_pt: "Formulários de entrevista",
-        name_en: "Interviews Formularies",
+        name_en: "Interview Forms",
       },
       {
         id: "fca",
@@ -38,14 +39,14 @@ export default function ProAutProcess() {
       {
         id: "mc",
         name_pt: "Canvas (CCS, CCA, CTA)",
-        name_en: "Canvas (CCS, CCA, CTA)",
+        name_en: "Canvases (RSC, ACC, ATC)",
       },
     ],
     analise: [
       {
         id: "tir",
         name_pt: "Tabela Inicial de Requisitos/Restrições de Interface",
-        name_en: "Initial Table of Interface Requirements/Constraints",
+        name_en: "Initial Interface Requirements/Constraints Table",
       },
       {
         id: "pa",
@@ -62,7 +63,7 @@ export default function ProAutProcess() {
       {
         id: "tfr",
         name_pt: "Tabela Final de Requisitos/Restrições de Interface",
-        name_en: "Final Table of Interface Requirements/Constraints",
+        name_en: "Final Interface Requirements/Constraints Table",
       },
     ],
     prototipacao: [
@@ -196,7 +197,7 @@ export default function ProAutProcess() {
               problema. É nesta etapa que a equipe busca conhecer conceitos que
               permeiam o tema da aplicação a ser projetada.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
                 <strong>Entrada da fase:</strong> a ideia ou visão geral de
                 aplicação.
@@ -220,27 +221,27 @@ export default function ProAutProcess() {
         ) : (
           <>
             <p className="text-lg text-justify mb-4">
-              Before performing requirements elicitation, it is extremely
-              important that everyone involved in the project knows the domain
+              Before performing requirements elicitation, it is of utmost
+              importance that everyone involved in the project knows the domain
               of the problem to be solved by the application to be developed. We
               believe that the approach to achieve such domain is to be able to
               establish active communication with your user, allowing the
               autistic person to participate in the technology design process.
-              This is the aspect that immersion works on.
+              This is the aspect in which immersion works.
             </p>
             <p className="text-lg text-justify mb-4">
               The immersion phase is characterized by approaching the problem.
               It is at this stage that the team seeks to understand concepts
               that permeate the theme of the application to be designed.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
-                <strong>Phase input:</strong> the application idea or overview.
+                <strong>Phase input:</strong> the idea or application overview.
               </li>
               <li>
                 <strong>Phase output:</strong> ACC (Autistic Caregivers Canvas);
                 ATC (Autistic Therapists Canvas); RSC (Software Requester
-                Canvas); Autistic Characterization Form (ACF); and AOG (Autistic
+                Canvas); Autistic Characterization Form; and AOG (Autistic
                 Overview Graph).
               </li>
               <li>
@@ -249,7 +250,7 @@ export default function ProAutProcess() {
               </li>
               <li>
                 <strong>Phase Activities:</strong> Learn about the context,
-                Elicit Requirements and Consolidate Data.
+                Elicit Requirements, and Consolidate Data.
               </li>
             </ul>
           </>
@@ -278,7 +279,7 @@ export default function ProAutProcess() {
               obtidas na fase de Imersão e iniciar as principais propostas de
               solução.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
                 <strong>Entrada da fase:</strong> Canvas preenchidos
                 (Solicitante, Cuidadores, Terapeutas), ACF respondido e Gráfico
@@ -301,33 +302,32 @@ export default function ProAutProcess() {
         ) : (
           <>
             <p className="text-lg text-justify mb-4">
-              The Analysis phase is the moment to approach the problem. Now that
-              the team has collected various data during immersion, it is
+              The Analysis phase is the moment of approaching the problem. Now
+              that the team has collected various data in immersion, it is
               necessary to dive into this information and evaluate the
               implications of the challenge from the point of view of all
-              stakeholders involved.
+              involved (stakeholders).
             </p>
             <p className="text-lg text-justify mb-4">
-              The Analysis phase aims to delve deeper into the information
-              obtained in the Immersion phase and initiate the main proposed
-              solutions.
+              The Analysis phase aims to deepen the information obtained in the
+              Immersion phase and initiate the main solution proposals.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
-                <strong>Phase Input:</strong> Filled Canvases (Requester,
-                Caregivers, Therapists), answered ACF and AOG Graph.
+                <strong>Phase input:</strong> Filled Canvases (Requester,
+                Caregivers, Therapists), answered ACF, and AOG Graph.
               </li>
               <li>
-                <strong>Involved:</strong> Development team, caregiver(s) and/or
-                therapist(s).
+                <strong>Involved:</strong> Development team, caregiver(s),
+                and/or therapist(s).
               </li>
               <li>
-                <strong>Phase Activities:</strong> Triangular Data Analysis,
-                Generate Empathy Map, and Generate Personas.
+                <strong>Phase Activities:</strong> Triangulate Data, Generate
+                Empathy Map, and Generate Personas.
               </li>
               <li>
-                <strong>Phase Output:</strong> Initial Requirements/Constraints
-                Table (RCT), Personas and Empathy Map.
+                <strong>Phase output:</strong> Initial Requirements/Constraints
+                List, Personas, and Empathy Map.
               </li>
             </ul>
           </>
@@ -353,7 +353,7 @@ export default function ProAutProcess() {
               criação dos artefatos de personas, mapas de empatia e a versão
               inicial da Tabela de Requisitos/Restrições.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
                 <strong>Entrada da fase:</strong> a Lista Inicial de
                 Requisitos/Restrições da Interface (TRR), o Mapa de Empatia e as
@@ -379,20 +379,20 @@ export default function ProAutProcess() {
             <p className="text-lg text-justify mb-4">
               The ideation phase aims to generate ideas through creativity
               stimuli together with the application development and design team,
-              in accordance with the software/app user's context and
-              expectations. It follows the creation of persona artifacts,
-              empathy maps and the initial version of the
+              in compliance with the context and expectations of the
+              software/app user. It follows the creation of persona artifacts,
+              empathy maps, and the initial version of the
               Requirements/Constraints Table.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
                 <strong>Phase input:</strong> the Initial Interface
-                Requirements/Constraints List (RCT), the Empathy Map and the
+                Requirements/Constraints List (RCT), the Empathy Map, and the
                 Personas.
               </li>
               <li>
-                <strong>Phase output:</strong> Updated Complete Interface
-                Requirements/Constraints Table (RCT) List.
+                <strong>Phase output:</strong> Updated List of the complete
+                Interface Requirements/Constraints Table (RCT).
               </li>
               <li>
                 <strong>Involved:</strong> Parents, specialists, software
@@ -400,7 +400,7 @@ export default function ProAutProcess() {
               </li>
               <li>
                 <strong>Phase Activities:</strong> Define
-                Requirements/Constraints Items, Specify Requirements Items and
+                Requirements/Constraints Items, Specify Requirements Items, and
                 Generate/Refine Interface Ideas.
               </li>
             </ul>
@@ -432,7 +432,7 @@ export default function ProAutProcess() {
               solução que realmente esteja alinhada às necessidades levantadas
               no processo.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
                 <strong>Entrada da fase:</strong> Lista Atualizada da Tabela de
                 Requisitos/Restrições da Interface (TRR) completa.
@@ -454,34 +454,34 @@ export default function ProAutProcess() {
         ) : (
           <>
             <p className="text-lg text-justify mb-4">
-              Prototyping is a process in which ideas are transferred from the
-              conceptual domain to a tangible form. It consists of creating any
-              object, whether physical or virtual, that simulates an interaction
-              to validate an idea, resulting in an initial version of the
-              idealized interface.
+              Prototyping is a process in which one seeks to transfer ideas from
+              the conceptual scope to the concrete one. It consists of any and
+              every object, whether physical or virtual, that simulates an
+              interaction to validate an idea, so that an initial version of the
+              idealized interface is produced.
             </p>
             <p className="text-lg text-justify mb-4">
               With the prototype in hand, it is possible to evaluate it with the
-              user and, depending on the results, refine it until it becomes a
-              solution that is truly aligned with the needs identified during
-              the process.
+              user, and depending on the result, refine it until transforming it
+              into a solution that is truly aligned with the needs raised in the
+              process.
             </p>
-            <ul className="space-y-3 text-lg list-disc list-inside mb-4">
+            <ul className="space-y-3 text-lg list-disc list-inside mb-4 text-justify">
               <li>
-                <strong>Phase Input:</strong> Updated Complete Interface
-                Requirements/Constraints Table (RCT) List.
+                <strong>Phase input:</strong> Updated List of the complete
+                Interface Requirements/Constraints Table (RCT).
               </li>
               <li>
-                <strong>Phase Output:</strong> Low, medium and high fidelity
+                <strong>Phase output:</strong> Low, medium, and high fidelity
                 prototypes.
               </li>
               <li>
                 <strong>Involved:</strong> Designers/developers, users,
-                caregivers and specialists.
+                caregivers, and specialists.
               </li>
               <li>
                 <strong>Phase Activities:</strong> Develop prototypes, Validate
-                with users and Refine iteratively.
+                with users, and Refine iteratively.
               </li>
             </ul>
           </>
@@ -514,20 +514,20 @@ export default function ProAutProcess() {
 
           {/* Introdução ao ProAut */}
           <div className="space-y-4 text-lg dark:text-gray-300">
-            <p>
+            <p className="text-justify">
               {language === "pt-BR"
                 ? "Muitas tecnologias atuais são, geralmente, inacessíveis, pois as pessoas que criam as tecnologias convencionais não incorporam, regularmente, design acessível e como desenvolvedores, sabemos que cada etapa do desenvolvimento de uma aplicação precisa ser meticulosamente idealizada e analisada antes de ser propriamente implementada."
-                : "Many current technologies are generally inaccessible because the people who create conventional technologies do not regularly incorporate accessible design, and as developers, we know that each stage of application development needs to be meticulously conceived and analyzed before being properly implemented."}
+                : "Many current technologies are generally inaccessible, as people creating conventional technologies do not regularly incorporate accessible design, and as developers, we know that every stage of an application's development needs to be meticulously idealized and analyzed before being properly implemented."}
             </p>
-            <p>
+            <p className="text-justify">
               {language === "pt-BR"
                 ? "O grande impasse é: somos levados a ignorar muitos contextos importantes que precisam ser desvendados para evitar problemas com aqueles que mais devemos satisfazer, os clientes e inevitavelmente, até mesmo as coisas mais simples passam despercebidas dado certos contextos. É nesse entremeio que a falta de cuidado no desenvolvimento de tecnologias para usuários com condições neurodivergentes fica evidente."
-                : "The great impasse is: we are led to ignore many important contexts that need to be uncovered to avoid problems with those we must satisfy the most - the clients - and inevitably, even the simplest things go unnoticed given certain contexts. It is in this interlude that the lack of care in developing technologies for users with neurodivergent conditions becomes evident."}
+                : "The great impasse is: we are led to ignore many important contexts that need to be unveiled to avoid problems with those we must satisfy the most, the clients, and inevitably, even the simplest things go unnoticed given certain contexts. It is in this interim that the lack of care in developing technologies for users with neurodivergent conditions becomes evident."}
             </p>
-            <p>
+            <p className="text-justify">
               {language === "pt-BR"
                 ? "Mitigar esse problema é o nosso objetivo e o GuideAut, como ferramenta WEB colaborativa, disponibiliza as ferramentas e repositório de informações necessárias para que sua equipe possa facilmente construir um protótipo de qualidade da sua aplicação. Com o ProAut, o processo baseado em Design Thinking (DT) que permeia o funcionamento do GuideAut, é possível realizar o alinhamento de requisitos com foco nos autistas."
-                : "Mitigating this problem is our goal, and GuideAut, as a collaborative WEB tool, provides the tools and information repository necessary for your team to easily build a quality prototype of your application. With ProAut, the Design Thinking (DT) based process that permeates GuideAut's functioning, it is possible to align requirements with a focus on autistic individuals."}
+                : "Mitigating this problem is our goal, and GuideAut, as a collaborative WEB tool, provides the tools and information repository necessary for your team to easily build a quality prototype of your application. With ProAut, the Design Thinking (DT) based process that permeates GuideAut's functioning, it is possible to perform requirements alignment focusing on autistic individuals."}
             </p>
           </div>
 
@@ -538,7 +538,7 @@ export default function ProAutProcess() {
               <p className="text-justify text-blue-800 dark:text-blue-200">
                 {language === "pt-BR"
                   ? "O ProAut é indicado, principalmente, para construção de protótipos de baixa fidelidade."
-                  : "ProAut is mainly recommended for building low-fidelity prototypes."}
+                  : "ProAut is indicated, primarily, for the construction of low-fidelity prototypes."}
               </p>
             </div>
           </div>
@@ -555,10 +555,10 @@ export default function ProAutProcess() {
               <p className="text-justify text-lg">
                 {language === "pt-BR"
                   ? "O ProAut possui 4 fases: Fase de imersão, Análise, Ideação e Prototipação. Nas quais:"
-                  : "ProAut has 4 phases: Immersion phase, Analysis, Ideation and Prototyping. In which:"}
+                  : "ProAut has 4 phases: Immersion, Analysis, Ideation, and Prototyping Phases. In which:"}
               </p>
 
-              <ul className="space-y-3 text-lg list-disc list-inside">
+              <ul className="space-y-3 text-lg list-disc list-inside text-justify">
                 <li>
                   <strong>
                     {language === "pt-BR"
@@ -568,7 +568,7 @@ export default function ProAutProcess() {
                   </strong>{" "}
                   {language === "pt-BR"
                     ? "você conhece aspectos relacionados ao autismo, adaptação da fase de imersão original do DT. Te direciona para uma solução e guia na geração de documentação para definir o problema a ser resolvido;"
-                    : "you learn aspects related to autism, adaptation of the original DT immersion phase. It directs you to a solution and guides in generating documentation to define the problem to be solved;"}
+                    : "you get to know aspects related to autism, an adaptation of the original DT immersion phase. It directs you to a solution and guides you in generating documentation to define the problem to be solved;"}
                 </li>
                 <li>
                   <strong>
@@ -579,17 +579,18 @@ export default function ProAutProcess() {
                   </strong>{" "}
                   {language === "pt-BR"
                     ? "observe padrões e elimine discordâncias na documentação da fase de imersão. Isso possibilita gerar empatia e personas com mais precisão;"
-                    : "observe patterns and eliminate discrepancies in the immersion phase documentation. This enables generating empathy and personas with more accuracy;"}
+                    : "observe patterns and eliminate discrepancies in the immersion phase documentation. This enables generating empathy and personas with more precision;"}
                 </li>
                 <li>
                   <strong>
                     {language === "pt-BR"
                       ? "Fase de ideação"
                       : "Ideation phase"}
+                    :
                   </strong>{" "}
                   {language === "pt-BR"
                     ? "conheça requisitos, reunindo a equipe de desenvolvimento para uma comunicação aberta acerca de melhorias, adições e remoções de ferramentas pensadas para resolver o problema definido;"
-                    : "learn requirements, gathering the development team for open communication about improvements, additions and removals of tools designed to solve the defined problem;"}
+                    : "discover requirements, gathering the development team for open communication regarding improvements, additions, and removals of tools thought to solve the defined problem;"}
                 </li>
                 <li>
                   <strong>
@@ -607,7 +608,7 @@ export default function ProAutProcess() {
               <p className="text-justify text-lg pt-2 flex items-center gap-1 flex-wrap">
                 {language === "pt-BR"
                   ? "Cada fase possui atividades que devem ser realizadas com artefatos disponibilizados na aba"
-                  : "Each phase has activities that must be performed with artifacts provided in the"}
+                  : "Each phase has activities that must be performed with artifacts available in the"}
                 <FileText className="h-5 w-5 mx-1 dark:text-gray-400" />
                 <strong>
                   {language == "pt-BR" ? "Artefatos" : "Artifacts"}
@@ -615,7 +616,7 @@ export default function ProAutProcess() {
                 {""}
                 {language === "pt-BR"
                   ? "da barra lateral esquerda da página atual."
-                  : "tab on the left of the current page."}
+                  : "tab on the left sidebar of the current page."}
               </p>
             </div>
 
@@ -635,7 +636,7 @@ export default function ProAutProcess() {
                   }
                   className="w-full h-auto rounded-md shadow-sm"
                 />
-                <p className="text-justify text-sm text-center mt-2 dark:text-gray-400">
+                <p className="text-sm text-center mt-2 dark:text-gray-400">
                   {language === "pt-BR"
                     ? "Figura 1: Diagrama ilustrativo do processo ProAut"
                     : "Figure 1: Illustrative diagram of the ProAut process"}
@@ -644,13 +645,13 @@ export default function ProAutProcess() {
             </div>
 
             <div className="space-y-4 text-lg dark:text-gray-300">
-              <p>
+              <p className="text-justify">
                 {language === "pt-BR"
                   ? "Cada atividade possui sua particularidade e funcionalidade dado às necessidades do seu desenvolvimento. Elas são baseadas em técnicas já consolidadas de entrevistas, Desk Research, geração de personas e mapa de empatias, por exemplo, montadas para o contexto do TEA."
                   : "Each activity has its particularity and functionality given the needs of your development. They are based on already consolidated techniques such as interviews, Desk Research, persona generation and empathy maps, for example, tailored for the ASD context."}
               </p>
 
-              <p>
+              <p className="text-justify">
                 {language === "pt-BR"
                   ? "Caso já tenha feito uso do ProAut anteriormente e esteja em dúvida acerca de alguma atividade ou artefato, acesse o referido conteúdo através da Tabela de Conteúdos na barra lateral esquerda. Caso nunca tenha usado, recomendamos fortemente que prossiga pelo tutorial até se sentir confortável para explorar os artefatos e iniciar a sua jornada de prototipação!"
                   : "If you have used ProAut before and are in doubt about any activity or artifact, access the mentioned content through the Table of Contents in the left sidebar. If you have never used it, we strongly recommend that you proceed with the tutorial until you feel comfortable exploring the artifacts and starting your prototyping journey!"}
@@ -686,6 +687,32 @@ export default function ProAutProcess() {
               );
             })}
           </section>
+          {/* --- INICIO DO NOVO BOTÃO --- */}
+          <div className="pt-4 pb-8">
+            <button
+              onClick={() => navigate("/imersion-phase")}
+              className="group w-full relative overflow-hidden rounded-xl bg-blue-600 hover:bg-blue-700 text-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center justify-between"
+            >
+              <div className="relative z-10 flex flex-col items-start gap-1">
+                <span className="text-blue-100 text-sm font-medium uppercase tracking-wider">
+                  {language === "pt-BR" ? "Próximo Passo" : "Next Step"}
+                </span>
+                <span className="text-2xl font-bold flex items-center gap-2">
+                  {language === "pt-BR"
+                    ? "Ir para Fase 1: Imersão"
+                    : "Go to Phase 1: Immersion"}
+                </span>
+              </div>
+
+              <div className="relative z-10 bg-white/20 p-3 rounded-full group-hover:bg-white/30 transition-colors">
+                <ArrowRight className="h-6 w-6 text-white" />
+              </div>
+
+              {/* Efeito decorativo de fundo */}
+              <div className="absolute -right-12 -bottom-12 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:w-48 group-hover:h-48 transition-all duration-500" />
+            </button>
+          </div>
+          {/* --- FIM DO NOVO BOTÃO --- */}
         </div>
       </div>
 
@@ -698,7 +725,7 @@ export default function ProAutProcess() {
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500 dark:border-l-blue-600 dark:bg-gray-900 dark:border-gray-700">
           <CardHeader className="pb-3">

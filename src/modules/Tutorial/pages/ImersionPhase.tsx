@@ -12,6 +12,8 @@ import {
   Package,
   Search,
   X,
+  ArrowRight,
+  ArrowLeft,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -205,7 +207,7 @@ export default function ImersionPhase() {
           <p className="text-justify text-lg">
             {language === "pt-BR"
               ? "Mergulhando no contexto para compreender as verdadeiras dores do usuário."
-              : "Diving into context to understand the user's real pain points."}
+              : "Diving into the context to understand the user's real pain points."}
           </p>
         </div>
 
@@ -219,7 +221,7 @@ export default function ImersionPhase() {
             <p>
               {language === "pt-BR"
                 ? "A fase de imersão é a fase caracterizada pela aproximação do problema. É nesta etapa que a equipe busca conhecer conceitos que permeiam o tema da aplicação a ser projetada e alcançar mais domínio sobre o problema a ser resolvido. Esse domínio é estabelecido com comunicação ativa junto às pessoas que são afetadas pelo app, permitindo que a pessoa autista e seus familiares participem do processo de design desta tecnologia."
-                : "The immersion phase is characterized by approaching the problem. It is at this stage that the team seeks to understand concepts that permeate the theme of the application to be designed and gain more mastery over the problem to be solved. This mastery is established with active communication with the people affected by the app, allowing the autistic person and their family members to participate in the design process of this technology."}
+                : "The immersion phase is characterized by approaching the problem. It is at this stage that the team seeks to understand concepts permeating the theme of the application to be designed and gain more mastery over the problem to be solved. This mastery is established through active communication with the people affected by the app, allowing the autistic person and their family members to participate in the design process of this technology."}
             </p>
 
             {diagramImersionOpen && (
@@ -233,14 +235,16 @@ export default function ImersionPhase() {
                   className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                  <CardHeader className="sticky top-0 z-50 bg-white border-b px-6 py-4 rounded-t-xl">
                     <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                       {language === "pt-BR"
                         ? "Sobre o Diagrama"
                         : "About the Diagram"}
+
+                      {/* Este botão é responsável por fechar o pop-up */}
                       <button
                         onClick={() => setDiagramImersionOpen(false)}
-                        className="p-1 rounded-full"
+                        className="p-1 rounded-full hover:bg-gray-100 transition-colors"
                       >
                         <X className="h-5 w-5" />
                       </button>
@@ -379,13 +383,13 @@ export default function ImersionPhase() {
                               <p className="ml-8 mt-1 text-justify">
                                 Understand who will use the application, in
                                 which situations it will be used, and what
-                                needs, difficulties or preferences this user
+                                needs, difficulties, or preferences this user
                                 has. In ProAut, this includes knowing the
                                 autistic audience, understanding their
-                                environment, their routines and how they
-                                interact with interfaces. This understanding is
-                                essential to create a prototype that really
-                                works for the end user.
+                                environment, routines, and how they interact
+                                with interfaces. This understanding is essential
+                                to create a prototype that really works for the
+                                end user.
                               </p>
                             </div>
 
@@ -397,13 +401,13 @@ export default function ImersionPhase() {
                                 Elicit requirements
                               </p>
                               <p className="ml-8 mt-1 text-justify">
-                                Process of discovering, raising and
+                                Process of discovering, gathering, and
                                 understanding everything the system needs to
                                 have or do. This involves talking to users,
-                                observing the context, analyzing needs and
+                                observing the context, analyzing needs, and
                                 transforming this information into clear
                                 requirements. In ProAut, this step ensures that
-                                the prototype is based on the user's real needs,
+                                the prototype is based on real user needs,
                                 especially for the autistic audience.
                               </p>
                             </div>
@@ -416,14 +420,15 @@ export default function ImersionPhase() {
                                 Consolidate data
                               </p>
                               <p className="ml-8 mt-1 text-justify">
-                                Consolidating data means gathering, organizing
-                                and unifying all the information collected
-                                during research or requirements gathering. In
-                                ProAut, this involves bringing together
-                                observations, interviews and context analyses to
-                                form a clear and structured foundation that will
-                                support the next steps, such as creating the TRR
-                                and prototype.
+                                Consolidating data means gathering, organizing,
+                                and unifying all information collected during
+                                research or requirements gathering. In ProAut,
+                                this involves combining observations,
+                                interviews, and context analyses to form a clear
+                                and structured foundation that will support the
+                                next steps, such as creating the RCT
+                                (Requirements/Constraints Table) and the
+                                prototype.
                               </p>
                             </div>
                           </div>
@@ -521,7 +526,7 @@ export default function ImersionPhase() {
                     </strong>{" "}
                     {language === "pt-BR"
                       ? "CCA (Canvas dos Cuidadores de Autistas); CTA (Canvas dos Terapeutas de Autistas); CSS (Canvas do Solicitante do Software); Formulário de Caracterização do Autista; e VGA(Gráfico de Visão Geral do Autista)"
-                      : "ACC (Autistic Caregivers Canvas); ATC (Autistic Therapists Canvas); RSC (Software Requester Canvas); Autistic Characterization Form; and AOG (Autistic Overview Graph)"}
+                      : "ACC (Autistic Caregivers Canvas); ATC (Autistic Therapists Canvas); RSC (Software Requester Canvas); ACF (Autistic Characterization Form); and AOG (Autistic Overview Graph)"}
                   </li>
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
@@ -561,14 +566,16 @@ export default function ImersionPhase() {
                 className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
                 onClick={(e) => e.stopPropagation()}
               >
-                <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                <CardHeader className="sticky top-0 z-50 bg-white border-b px-6 py-4 rounded-t-xl">
                   <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                     {language === "pt-BR"
                       ? "Sobre o Diagrama"
                       : "About the Diagram"}
+
+                    {/* Este botão é responsável por fechar o pop-up */}
                     <button
                       onClick={() => setDiagramAprenderContextoOpen(false)}
-                      className="p-1 rounded-full"
+                      className="p-1 rounded-full hover:bg-gray-100 transition-colors"
                     >
                       <X className="h-5 w-5" />
                     </button>
@@ -613,7 +620,7 @@ export default function ImersionPhase() {
                             <p className="ml-8 mt-1 text-justify">
                               Escolher onde você vai procurar as informações
                               necessárias. No ProAut, isso pode incluir artigos
-                              científicos, entrevistas com usuários, observações
+                              científos, entrevistas com usuários, observações
                               em campo, materiais de referência ou guias como o
                               GuideAut. Escolher boas fontes garante que os
                               dados coletados sejam confiáveis e úteis para as
@@ -658,11 +665,11 @@ export default function ImersionPhase() {
                             <p className="ml-8 mt-1 text-justify">
                               Choose which information you need to search for to
                               better understand the problem or the user. In
-                              ProAut, this can include terms, themes or specific
-                              aspects that guide the research, such as user
-                              behaviors, needs, limitations or interface
+                              ProAut, this can include specific terms, themes,
+                              or aspects that guide the research, such as user
+                              behaviors, needs, limitations, or interface
                               characteristics. These items help direct data
-                              collection in a clear and efficient manner.
+                              collection clearly and efficiently.
                             </p>
                           </div>
 
@@ -674,10 +681,10 @@ export default function ImersionPhase() {
                               Define search sources
                             </p>
                             <p className="ml-8 mt-1 text-justify">
-                              Choose where you will search for the necessary
+                              Choose where you will look for the necessary
                               information. In ProAut, this can include
                               scientific articles, user interviews, field
-                              observations, reference materials or guides like
+                              observations, reference materials, or guides like
                               GuideAut. Choosing good sources ensures that the
                               collected data is reliable and useful for the next
                               stages of development.
@@ -695,9 +702,9 @@ export default function ImersionPhase() {
                               Search for information without going into the
                               field, using only existing materials. This
                               includes consulting articles, reports, websites,
-                              books, documents and any available content to
+                              books, documents, and any available content to
                               study the topic. In ProAut, Desk Research helps to
-                              better understand the audience, context and good
+                              better understand the audience, context, and best
                               practices before starting the practical stages of
                               the project.
                             </p>
@@ -764,7 +771,7 @@ export default function ImersionPhase() {
               <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "É essencial entender o contexto que rodeia o desenvolvimento da sua aplicação antes de iniciar o desenvolvimento da sua aplicação. Para isso, a equipe de desenvolvimento deve definir itens de busca da pesquisa Desk, isto é, termos e/ou palavras chave a serem usados."
-                  : "It is essential to understand the context surrounding the development of your application before starting the development of your application. For this, the development team must define search items for Desk research, that is, terms and/or keywords to be used."}
+                  : "It is essential to understand the context surrounding the development of your application before starting it. For this, the development team must define search items for Desk research, that is, terms and/or keywords to be used."}
               </p>
 
               {/* Card de info */}
@@ -775,7 +782,7 @@ export default function ImersionPhase() {
                     <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                       {language === "pt-BR"
                         ? "INFO: Se você não delimitar esses itens, existem grandes chances de acabar se perdendo no processo."
-                        : "INFO: If you don't delimit these items, there's a high chance you'll get lost in the process."}
+                        : "INFO: If you don't delimit these items, there are high chances of getting lost in the process."}
                     </p>
                   </div>
                 </div>
@@ -784,7 +791,7 @@ export default function ImersionPhase() {
               <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "A pesquisa Desk utiliza dados anteriormente mapeados por outras pessoas que se encaixem na necessidade de desenvolvimento, por isso escolha cuidadosamente os itens de busca."
-                  : "Desk research uses data previously mapped by other people that fit the development need, so carefully choose the search items."}
+                  : "Desk research uses data previously mapped by other people that fit the development need, so choose the search items carefully."}
               </p>
 
               {/* Card de sugestão de procedimento no novo formato */}
@@ -807,7 +814,7 @@ export default function ImersionPhase() {
                     <p className="text-lg text-justify text-blue-700 dark:text-blue-300 mb-3">
                       {language === "pt-BR"
                         ? "Imagine que está desenvolvendo uma aplicação para uma pessoa autista que possui um comportamento de stimming (autoestimulação sensorial) e balança os braços com frequência e queremos desenvolver um jogo de celular acessível para os mesmos."
-                        : "Imagine that you are developing an application for an autistic person who has a stimming behavior (sensory self-stimulation) and frequently swings their arms, and we want to develop an accessible mobile game for them."}
+                        : "Imagine you are developing an application for an autistic person who has stimming behavior (sensory self-stimulation) and frequently flaps their arms, and we want to develop an accessible mobile game for them."}
                     </p>
                     <p className="tex-lg text-blue-700 dark:text-blue-300 font-medium mb-2">
                       {language === "pt-BR"
@@ -818,7 +825,7 @@ export default function ImersionPhase() {
                       <li>
                         {language === "pt-BR"
                           ? "autismo, comportamento repetitivo, stimming (para focar na pesquisa relacionada ao comportamento de balançar os braços)"
-                          : "autism, repetitive behavior, stimming (to focus on research related to arm swinging behavior)"}
+                          : "autism, repetitive behavior, stimming (to focus research related to arm flapping behavior)"}
                       </li>
                       <li>
                         {language === "pt-BR"
@@ -840,12 +847,12 @@ export default function ImersionPhase() {
               <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "A escolha das fontes de busca pode ser feita através de livros, sites, vídeos, revistas, blogs de pais e/ou especialistas em autismo, artigos relacionados, fontes acadêmicas sobre o assunto e o próprio repositório de recomendações do GuideAut. Caso o conteúdo não seja informativo para o contexto definido, abandone a fonte."
-                  : "The choice of search sources can be made through books, websites, videos, magazines, blogs by parents and/or autism specialists, related articles, academic sources on the subject, and the GuideAut recommendation repository itself. If the content is not informative for the defined context, abandon the source."}
+                  : "The choice of search sources can be made through books, websites, videos, magazines, blogs of parents and/or autism specialists, related articles, academic sources on the subject, and the GuideAut recommendation repository itself. If the content is not informative for the defined context, abandon the source."}
               </p>
               <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "Em caso de recorrer a chats de uso geral, sempre peça as fontes e cheque diretamente dos links obtidos. Se eventualmente optar pelo repositório do GuideAut, mantenha-se atento a curadoria que possui recomendações verificadas e de confiança e ao analisar recomendações da comunidade, observe o número de aprovações e desaprovações da recomendação, além de novamente checar se o que foi escrito possui validação nas suas fontes de busca alternativas."
-                  : "If resorting to general use chats, always ask for sources and check directly from the obtained links. If you eventually choose the GuideAut repository, pay attention to the curation that has verified and trustworthy recommendations and when analyzing community recommendations, observe the number of approvals and disapprovals of the recommendation, in addition to checking again if what was written has validation in your alternative search sources."}
+                  : "In case of resorting to general-purpose chats, always ask for sources and check directly from the obtained links. If you eventually choose the GuideAut repository, stay attentive to the curation which has verified and trustworthy recommendations, and when analyzing community recommendations, observe the number of approvals and disapprovals of the recommendation, in addition to checking again if what was written has validation in your alternative search sources."}
               </p>
             </div>
 
@@ -899,12 +906,12 @@ export default function ImersionPhase() {
                           <td className="p-3 border-r border-b">
                             {language === "pt-BR"
                               ? "Intervenções digitais para stimming em autistas"
-                              : "Digital interventions for stimming in autistics"}
+                              : "Digital interventions for stimming in autistic people"}
                           </td>
                           <td className="p-3 border-b">
                             {language === "pt-BR"
                               ? "Estudo sobre eficácia de apps para regulação sensorial"
-                              : "Study about effectiveness of apps for sensory regulation"}
+                              : "Study on the efficacy of apps for sensory regulation"}
                           </td>
                         </tr>
                         <tr>
@@ -917,12 +924,12 @@ export default function ImersionPhase() {
                           <td className="p-3 border-r border-b">
                             {language === "pt-BR"
                               ? "Dia a dia com autismo: entendendo o stimming"
-                              : "Daily life with autism: understanding stimming"}
+                              : "Day to day with autism: understanding stimming"}
                           </td>
                           <td className="p-3 border-b">
                             {language === "pt-BR"
                               ? "Relato pessoal sobre estratégias de regulação sensorial"
-                              : "Personal account about sensory regulation strategies"}
+                              : "Personal account on sensory regulation strategies"}
                           </td>
                         </tr>
                         <tr>
@@ -979,12 +986,12 @@ export default function ImersionPhase() {
           <p className="text-lg text-justify mb-4">
             {language === "pt-BR"
               ? "Após a finalização da pesquisa desk, o time de desenvolvimento deve seguir para a etapa de extração de requisitos a partir do levantamento da documentação da pesquisa desk. Isso é uma atividade comum em equipes de software que permite estabelecer uma estratégia de extração de informações de qualidade com as partes interessadas para incentivar um laço de confiança com os envolvidos do projeto."
-              : "After completing the desk research, the development team must proceed to the requirements extraction stage from the documentation of the desk research. This is a common activity in software teams that allows establishing a quality information extraction strategy with stakeholders to encourage a bond of trust with those involved in the project."}
+              : "After finishing the desk research, the development team must proceed to the requirements extraction stage based on the desk research documentation. This is a common activity in software teams that allows establishing a quality information extraction strategy with stakeholders to encourage a bond of trust with those involved in the project."}
           </p>
           <p className="text-lg text-justify mb-4">
             {language === "pt-BR"
               ? "Para aplicações voltadas para o público autista, a estratégia de elicitação de requisitos recomendada pelo ProAut orienta a equipe para o valor real do projeto."
-              : "For applications aimed at the autistic public, the requirements elicitation strategy recommended by ProAut guides the team to the real value of the project."}
+              : "For applications aimed at the autistic audience, the requirements elicitation strategy recommended by ProAut guides the team towards the real value of the project."}
           </p>
 
           {diagramExtrairRequisitosOpen && (
@@ -998,14 +1005,16 @@ export default function ImersionPhase() {
                 className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
                 onClick={(e) => e.stopPropagation()}
               >
-                <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl">
+                <CardHeader className="sticky top-0 z-50 bg-white border-b px-6 py-4 rounded-t-xl">
                   <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                     {language === "pt-BR"
                       ? "Sobre o Diagrama"
                       : "About the Diagram"}
+
+                    {/* Este botão é responsável por fechar o pop-up */}
                     <button
                       onClick={() => setDiagramExtrairRequisitosOpen(false)}
-                      className="p-1 rounded-full"
+                      className="p-1 rounded-full hover:bg-gray-100 transition-colors"
                     >
                       <X className="h-5 w-5" />
                     </button>
@@ -1051,7 +1060,7 @@ export default function ImersionPhase() {
                               <span className="font-medium text-green-700">
                                 [Sim] →
                               </span>
-                              <div className="text-xs mt-1">
+                              <div className="text-xs mt-1 text-blue-700">
                                 [1.2.2.A.1] e/ou [1.2.2.A.2]
                               </div>
                             </div>
@@ -1194,11 +1203,11 @@ export default function ImersionPhase() {
                             <p className="ml-8 mt-1 text-justify">
                               Talk directly with the person who requested the
                               application development to clearly understand
-                              their needs, expectations and objectives. In
+                              their needs, expectations, and objectives. In
                               ProAut, this interview helps identify important
-                              requirements, clarify doubts and ensure that the
+                              requirements, clarify doubts, and ensure that the
                               prototype is created according to what the
-                              requester really needs.
+                              requester actually needs.
                             </p>
                           </div>
 
@@ -1230,16 +1239,16 @@ export default function ImersionPhase() {
                               <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
                                 [1.2.2.A.1]
                               </span>
-                              Interview caregiver
+                              Conduct interview with caregiver
                             </p>
                             <p className="ml-8 mt-1 text-justify">
-                              Talk with the person who accompanies or assists
-                              the end user in daily life. In ProAut, this
+                              Talk to the person who accompanies or assists the
+                              end user in their daily life. In ProAut, this
                               interview is important because the caregiver knows
-                              routines, difficulties, preferences and behaviors
-                              of the autistic user. This information helps
-                              create a more appropriate, safe interface aligned
-                              with the user's real needs.
+                              the autistic user's routines, difficulties,
+                              preferences, and behaviors. This information helps
+                              create an interface that is more suitable, safe,
+                              and aligned with the user's real needs.
                             </p>
                           </div>
 
@@ -1248,17 +1257,17 @@ export default function ImersionPhase() {
                               <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
                                 [1.2.2.A.2]
                               </span>
-                              Interview therapist
+                              Conduct interview with Therapist
                             </p>
                             <p className="ml-8 mt-1 text-justify">
-                              Talk with the professional responsible for the
+                              Talk to the professional responsible for the
                               clinical or educational follow-up of the autistic
                               user. In ProAut, this interview is fundamental
                               because the therapist offers a technical view on
-                              skills, limitations, appropriate stimuli and
+                              skills, limitations, appropriate stimuli, and
                               specific user needs. This information helps guide
                               interface decisions and ensure the prototype is
-                              truly appropriate for the user profile.
+                              truly appropriate for the user's profile.
                             </p>
                           </div>
 
@@ -1267,10 +1276,10 @@ export default function ImersionPhase() {
                               <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
                                 [1.2.3]
                               </span>
-                              Apply FCA
+                              Apply ACF
                             </p>
                             <p className="ml-8 mt-1 text-justify">
-                              Analyze which information, needs or observations
+                              Analyze which information, needs, or observations
                               appear most frequently during interviews and data
                               collection. In ProAut, this technique helps
                               identify which items are really important for the
@@ -1289,12 +1298,12 @@ export default function ImersionPhase() {
                             </p>
                             <p className="ml-8 mt-1 text-justify">
                               Use the guide as a source of recommendations and
-                              good practices for creating interfaces suitable
+                              best practices for creating interfaces suitable
                               for the autistic audience. In ProAut, GuideAut
                               helps guide decisions about colors, shapes,
-                              layouts, visual stimuli and other important
+                              layouts, visual stimuli, and other important
                               aspects to make the interface more accessible,
-                              clear and comfortable for the user.
+                              clear, and comfortable for the user.
                             </p>
                           </div>
 
@@ -1329,9 +1338,9 @@ export default function ImersionPhase() {
                               Type of investigation used to better understand a
                               problem or topic when little is known about it. In
                               ProAut, it serves to gather initial information
-                              about the user, context and involved needs,
-                              helping to guide what should be studied more
-                              deeply in the following steps.
+                              about the user, the context, and the needs
+                              involved, helping to guide what should be studied
+                              in more depth in the following steps.
                             </p>
                           </div>
                         </div>
@@ -1392,7 +1401,7 @@ export default function ImersionPhase() {
               <h3 className="text-xl font-semibold">
                 {language === "pt-BR"
                   ? "Preenchimento do FCA"
-                  : "FCA completion"}
+                  : "ACF completion"}
               </h3>
 
               {/* Card de info */}
@@ -1412,7 +1421,7 @@ export default function ImersionPhase() {
               <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "O ProAut indica a utilização de entrevistas junto a um Formulário de Caracterização do Autista (FCA) com os clientes, cuidadores e especialistas de autistas. O FCA é uma ferramenta para caracterizar autistas, dividido em quatro seções, representando as 4 principais áreas de limitação de um autista, a saber: Interação, Comunicação, Comportamento e Cognição. Cada seção é composta de um conjunto de características para as quais o entrevistador deve assinalar com o valor 1, para quando a criança apresentar a característica, e 0 caso contrário."
-                  : "ProAut indicates the use of interviews together with an Autistic Characterization Form (FCA) with clients, caregivers and autism specialists. The FCA is a tool to characterize autistics, divided into four sections, representing the 4 main areas of limitation of an autistic person, namely: Interaction, Communication, Behavior and Cognition. Each section consists of a set of characteristics for which the interviewer must mark with value 1, when the child presents the characteristic, and 0 otherwise."}
+                  : "ProAut indicates the use of interviews along with an Autistic Characterization Form (ACF) with clients, caregivers, and autism specialists. The ACF is a tool to characterize autistic people, divided into four sections, representing the 4 main areas of limitation of an autistic person, namely: Interaction, Communication, Behavior, and Cognition. Each section is composed of a set of characteristics for which the interviewer must mark with the value 1, when the child presents the characteristic, and 0 otherwise."}
               </p>
 
               {/* Card de info */}
@@ -1423,7 +1432,7 @@ export default function ImersionPhase() {
                     <p className="text-justify text-blue-800 dark:text-blue-200 font-medium">
                       {language === "pt-BR"
                         ? "Observação do Preenchimento: a característica é considerada como presente, se o autista apresentar mesmo que de forma esporádica. Por outro lado, é considerada ausente se nunca apresentou, ou se apresentou raríssimas vezes ao longo de sua vida."
-                        : "Completion Note: the characteristic is considered present if the autistic person presents it even sporadically. On the other hand, it is considered absent if never presented, or if presented very rarely throughout their life."}
+                        : "Completion Note: the characteristic is considered present if the autistic person presents it even if sporadically. On the other hand, it is considered absent if they never presented it, or if they presented it very rarely throughout their life."}
                     </p>
                   </div>
                 </div>
@@ -1432,7 +1441,7 @@ export default function ImersionPhase() {
               <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "O preenchimento do FCA produz um gráfico denominado Gráfico de Visão Geral do Autista (VGA), o qual permite visualizar o grau de comprometimento em cada uma das áreas citadas anteriormente, de forma que, quanto mais alto o percentual do autista em uma determinada área, maior é o comprometimento nela."
-                  : "Completing the FCA produces a graph called Autistic Overview Graph (VGA), which allows visualizing the degree of impairment in each of the previously mentioned areas, so that the higher the autistic person's percentage in a given area, the greater the impairment in it."}
+                  : "Filling out the ACF produces a graph called Autistic Overview Graph (AOG), which allows visualizing the degree of impairment in each of the areas mentioned above, so that the higher the percentage of the autistic person in a certain area, the greater the impairment in it."}
               </p>
 
               <div className="my-6 p-4">
@@ -1446,7 +1455,7 @@ export default function ImersionPhase() {
                     alt={
                       language === "pt-BR"
                         ? "Figura 4: Gráfico de visão geral do Autista (VGA)"
-                        : "Figure 4: Autistic Overview Graph (VGA)"
+                        : "Figure 4: Autistic Overview Graph (AOG)"
                     }
                     className="rounded-md max-w-full h-auto"
                   />
@@ -1454,14 +1463,14 @@ export default function ImersionPhase() {
                 <p className="text-lg text-center mt-2">
                   {language === "pt-BR"
                     ? "Figura 4: Gráfico de visão geral do Autista (VGA)"
-                    : "Figure 4: Autistic Overview Graph (VGA)"}
+                    : "Figure 4: Autistic Overview Graph (AOG)"}
                 </p>
               </div>
 
               <p className="text-lg text-justify">
                 {language === "pt-BR"
                   ? "A produção do FCA e do VGA junto aos entrevistados pode permitir direcionar melhor as possíveis funcionalidades a serem desenvolvidas para resolução de problemas da interação do usuário com sua tecnologia."
-                  : "The production of the FCA and VGA with the interviewees can allow better directing the possible functionalities to be developed for solving user interaction problems with their technology."}
+                  : "The production of the ACF and the AOG with the interviewees can allow better direction of possible functionalities to be developed to solve user interaction problems with their technology."}
               </p>
 
               {/* Card de sugestão de procedimento no novo formato */}
@@ -1471,7 +1480,7 @@ export default function ImersionPhase() {
                     <Lightbulb className="text-blue-600 dark:text-blue-400 h-5 w-5" />
                     {language === "pt-BR"
                       ? "Sugestão de Procedimento para preenchimento do FCA"
-                      : "Procedure Suggestion for FCA completion"}
+                      : "Procedure Suggestion for ACF completion"}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -1480,22 +1489,22 @@ export default function ImersionPhase() {
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Imprima o FCA (caso não seja possível aplicar por meio eletrônico);"
-                          : "Print the FCA (if it's not possible to apply electronically);"}
+                          : "Print the ACF (if it is not possible to apply electronically);"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Antes de iniciar a entrevista com os clientes/pais/mães/responsáveis, fale sobre a necessidade de preencher o FCA ressaltando o que ele significa e qual a sua importância para o desenvolvimento da tecnologia;"
-                          : "Before starting the interview with clients/parents/guardians, talk about the need to complete the FCA emphasizing what it means and its importance for technology development;"}
+                          : "Before starting the interview with clients/parents/mothers/guardians, talk about the need to fill out the ACF, highlighting what it means and its importance for the technology development;"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Defina se o FCA será aplicado antes ou depois da entrevista;"
-                          : "Define whether the FCA will be applied before or after the interview;"}
+                          : "Define if the ACF will be applied before or after the interview;"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Iniciar a aplicação do FCA marcando para cada item de característica, o valor 1 caso a característica esteja presente na criança ou 0 no caso de ausência;"
-                          : "Start the FCA application by marking for each characteristic item, value 1 if the characteristic is present in the child or 0 in case of absence;"}
+                          : "Start the application of the ACF marking for each characteristic item, the value 1 if the characteristic is present in the child or 0 in case of absence;"}
                       </li>
                     </ol>
                   </div>
@@ -1517,7 +1526,7 @@ export default function ImersionPhase() {
                     <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                       {language === "pt-BR"
                         ? "As entrevistas com solicitante, terapeutas e cuidadores são obrigatórias, uma vez que eles são quem passarão as necessidades do software/Aplicativo/tecnologia. Se não for possível realizar entrevistas com pais ou especialistas, o designer/desenvolvedor poderá fazer uso do GuideAut para encontrar recomendações de interface vindas da curadoria ou da própria comunidade autista."
-                        : "Interviews with the requester, therapists and caregivers are mandatory, since they are the ones who will convey the needs of the software/application/technology. If it's not possible to conduct interviews with parents or specialists, the designer/developer can use GuideAut to find interface recommendations from the curation or from the autistic community itself."}
+                        : "Interviews with the requester, therapists, and caregivers are mandatory, since they are the ones who will convey the needs of the software/App/technology. If it is not possible to conduct interviews with parents or specialists, the designer/developer may use GuideAut to find interface recommendations coming from curation or the autistic community itself."}
                     </p>
                   </div>
                 </div>
@@ -1531,7 +1540,7 @@ export default function ImersionPhase() {
                     <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                       {language === "pt-BR"
                         ? "DICA DE ENTREVISTA: é indicado que se mantenha um roteiro pré-estabelecido junto à sua equipe de desenvolvimento. Esse roteiro deve ser distinto para clientes, cuidadores e terapeutas. O ProAut já disponibiliza um template neste tutorial para Cliente, Cuidador e Terapeuta, que pode ser refinado com novas perguntas para complementar as respostas, assim como também pode deixar de fazer alguma."
-                        : "INTERVIEW TIP: it is recommended to maintain a pre-established script with your development team. This script should be distinct for clients, caregivers and therapists. ProAut already provides a template in this tutorial for Client, Caregiver and Therapist, which can be refined with new questions to complement the answers, as well as omitting some."}
+                        : "INTERVIEW TIP: it is indicated to maintain a pre-established script with your development team. This script must be distinct for clients, caregivers, and therapists. ProAut already provides a template in this tutorial for Client, Caregiver, and Therapist, which can be refined with new questions to complement the answers, just as you can choose not to ask some."}
                     </p>
                   </div>
                 </div>
@@ -1543,8 +1552,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCS-pt-br-lightTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCS-en-us-lightTheme.png"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CCS-pt-br-darkTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CCS-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1575,7 +1584,7 @@ export default function ImersionPhase() {
                   <p className="text-justify text-base">
                     {language === "pt-BR"
                       ? "A primeira entrevista deve ser feita, obrigatoriamente, com o solicitante do aplicativo. O roteiro de perguntas foca em coletar informações sobre o objetivo do aplicativo, quais habilidades que se deseja que sejam trabalhadas pelo aplicativo, bem como os requisitos e funcionalidades almejadas."
-                      : "The first interview must be conducted, mandatorily, with the application requester. The questionnaire focuses on collecting information about the application's objective, which skills are desired to be worked on by the application, as well as the desired requirements and functionalities."}
+                      : "The first interview must be done, mandatorily, with the application requester. The question script focuses on collecting information about the application's objective, which skills are desired to be worked on by the application, as well as the desired requirements and functionalities."}
                   </p>
                 </div>
 
@@ -1584,8 +1593,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCA-pt-br-lightTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCA-en-us-lightTheme.png"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CCA-pt-br-darkTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CCA-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1616,7 +1625,7 @@ export default function ImersionPhase() {
                   <p className="text-justify text-base">
                     {language === "pt-BR"
                       ? "A entrevista com os pais/mães/responsáveis deve ser realizada após a entrevista com o solicitante do aplicativo. Com conhecimentos sobre objetivos e necessidades do aplicativo em mãos, faça perguntas relacionadas ao tema/contexto do aplicativo ao passo que descobre aspectos do autista, atividades que acalmam/estressam, relação com tecnologias, entre outras informações."
-                      : "The interview with parents/guardians should be conducted after the interview with the application requester. With knowledge about application objectives and needs in hand, ask questions related to the application's theme/context while discovering aspects of the autistic person, activities that calm/stress, relationship with technologies, among other information."}
+                      : "The interview with parents/mothers/guardians must be carried out after the interview with the application requester. With knowledge about the application's objectives and needs in hand, ask questions related to the theme/context of the application while discovering aspects of the autistic person, activities that calm/stress, relationship with technologies, among other information."}
                   </p>
                 </div>
 
@@ -1625,8 +1634,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CTA-pt-br-lightTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CTA-en-us-lightTheme.png"
+                          ? "src/modules/Tutorial/assets/imersion-phase/CTA-pt-br-darkTheme.png"
+                          : "src/modules/Tutorial/assets/imersion-phase/CTA-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1657,7 +1666,7 @@ export default function ImersionPhase() {
                   <p className="text-justify text-base">
                     {language === "pt-BR"
                       ? "A entrevista com os especialistas deve ser realizada após entrevista com cuidadores e a seleção de especialistas deve ser feita de acordo com os objetivos e necessidades do aplicativo. A coleta de informações deve focar em conhecer os aspectos sociais do autista, atividades que acalmam/estressam, relação com tecnologias, validações do seu aplicativo junto à opiniões técnicas (menos pessoais do que obtidas com cuidadores), melhorar a compreensão do contexto."
-                      : "The interview with specialists should be conducted after the interview with caregivers and the selection of specialists should be made according to the application's objectives and needs. Information collection should focus on knowing the autistic person's social aspects, activities that calm/stress, relationship with technologies, validations of your application with technical opinions (less personal than those obtained with caregivers), improve understanding of the context."}
+                      : "The interview with specialists must be carried out after the interview with caregivers, and the selection of specialists must be done according to the objectives and needs of the application. Information collection should focus on knowing the social aspects of the autistic person, activities that calm/stress, relationship with technologies, validations of your application with technical opinions (less personal than those obtained with caregivers), improving context understanding."}
                   </p>
                 </div>
               </div>
@@ -1683,37 +1692,37 @@ export default function ImersionPhase() {
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Somente para os especialistas, a seleção do entrevistado deve ser feita de acordo com a área de atuação em relação ao objetivo e necessidades do software;"
-                          : "Only for specialists, the interviewee selection should be made according to the field of work in relation to the software's objective and needs;"}
+                          : "Only for specialists, the selection of the interviewee must be done according to the area of expertise in relation to the objective and needs of the software;"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Defina o meio para registrar a entrevista (gravação de áudio, bloco de anotações, filmagem etc.);"
-                          : "Define the means to record the interview (audio recording, notepad, filming etc.);"}
+                          : "Define the means to record the interview (audio recording, notepad, filming, etc.);"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Providencie o material para o registro da entrevista;"
-                          : "Provide the material for interview recording;"}
+                          : "Provide the material for recording the interview;"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Chegue com antecedência ao local da entrevista;"
-                          : "Arrive early to the interview location;"}
+                          : "Arrive early at the interview location;"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Exceto para o solicitante, explique os objetivos e necessidades do software bem como a finalidade da entrevista, apresente o TCLE (Termo de Consentimento Livre e Esclarecido) e solicite sua assinatura (ou concordância para o caso virtual);"
-                          : "Except for the requester, explain the software's objectives and needs as well as the interview purpose, present the TCLE (Free and Informed Consent Form) and request their signature (or agreement for virtual cases);"}
+                          : "Except for the requester, explain the objectives and needs of the software as well as the purpose of the interview, present the IC (Informed Consent Form) and request their signature (or agreement for the virtual case);"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Também, exceto para o solicitante, explique sobre o preenchimento do FCA. Sendo que para o especialista, ele deverá responder com base na maioria dos atendimentos. Por exemplo, se a pergunta n°8 for (anda na ponta dos pés?) o(a) especialista deverá responder sim (1) caso a maioria dos seus atendidos tenham essa característica;"
-                          : "Also, except for the requester, explain about FCA completion. For the specialist, they should answer based on the majority of their cases. For example, if question n°8 is (walks on tiptoes?) the specialist should answer yes (1) if the majority of their patients have this characteristic;"}
+                          : "Also, except for the requester, explain about filling out the ACF. For the specialist, they must answer based on the majority of attendances. For example, if question n°8 is (walks on tiptoes?) the specialist must answer yes (1) if the majority of their patients have this characteristic;"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
                           ? "Antes de usar o roteiro proposto, pergunte e anote o nome do entrevistado;"
-                          : "Before using the proposed script, ask and note the interviewee's name;"}
+                          : "Before using the proposed script, ask and write down the interviewee's name;"}
                       </li>
                       <li className="text-justify">
                         {language === "pt-BR"
@@ -1733,7 +1742,7 @@ export default function ImersionPhase() {
                     <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                       {language === "pt-BR"
                         ? "INFO: Caso tenha dificuldades para entrevistar pais/mães/responsáveis e/ou especialistas, o designer/desenvolvedor pode fazer uso do GuideAut."
-                        : "INFO: If you have difficulties interviewing parents/guardians and/or specialists, the designer/developer can use GuideAut."}
+                        : "INFO: If you have difficulties interviewing parents/mothers/guardians and/or specialists, the designer/developer can make use of GuideAut."}
                     </p>
                   </div>
                 </div>
@@ -1748,7 +1757,7 @@ export default function ImersionPhase() {
                 <p className="text-lg text-justify">
                   {language === "pt-BR"
                     ? "É uma atividade opcional e é feita por meio de observação em um ambiente real (escola, consultório, casa) que envolve um autista em relação ao tema do projeto. Não deve haver intervenção durante a atividade de observação e como resultado, é esperado que o projetista/equipe possa conhecer melhor o perfil dos autistas."
-                    : "It is an optional activity and is done through observation in a real environment (school, office, home) that involves an autistic person in relation to the project theme. There should be no intervention during the observation activity and as a result, it is expected that the designer/team can better understand the profile of autistics."}
+                    : "It is an optional activity and is done through observation in a real environment (school, office, home) involving an autistic person regarding the project theme. There should be no intervention during the observation activity, and as a result, it is expected that the designer/team can better understand the profile of autistic people."}
                 </p>
 
                 {/* Card de sugestão de procedimento */}
@@ -1767,22 +1776,22 @@ export default function ImersionPhase() {
                         <li className="text-justify">
                           {language === "pt-BR"
                             ? "Agende o procedimento com uma família/especialista/professor/escola, ou seja, o responsável pelo local onde será realizada a pesquisa exploratória;"
-                            : "Schedule the procedure with a family/specialist/teacher/school, that is, the person responsible for the location where the exploratory research will be conducted;"}
+                            : "Schedule the procedure with a family/specialist/teacher/school, that is, the person responsible for the location where the exploratory research will be carried out;"}
                         </li>
                         <li className="text-justify">
                           {language === "pt-BR"
                             ? "Defina o meio para registrar a observação (gravação de áudio, bloco de anotações, filmagem etc.);"
-                            : "Define the means to record the observation (audio recording, notepad, filming etc.);"}
+                            : "Define the means to record the observation (audio recording, notepad, filming, etc.);"}
                         </li>
                         <li className="text-justify">
                           {language === "pt-BR"
                             ? "Providencie o material para o registro da observação;"
-                            : "Provide the material for observation recording;"}
+                            : "Provide the material for recording the observation;"}
                         </li>
                         <li className="text-justify">
                           {language === "pt-BR"
                             ? "Chegue com antecedência ao local;"
-                            : "Arrive early to the location;"}
+                            : "Arrive early at the location;"}
                         </li>
                         <li className="text-justify">
                           {language === "pt-BR"
@@ -1812,7 +1821,7 @@ export default function ImersionPhase() {
           <p className="text-lg text-justify mb-4">
             {language === "pt-BR"
               ? "Após a pesquisa desk e finalização da elicitação de requisitos, a equipe de desenvolvimento parte para a consolidação de dados. Na consolidação de dados, é feita a análise do material gerado pelas entrevistas e o mapeamento para um canvas, sendo que cada entrevista previamente feita possui seu canvas correspondente, disponível na aba de Artefatos."
-              : "After the desk research and completion of requirements elicitation, the development team proceeds to data consolidation. In data consolidation, the material generated by the interviews is analyzed and mapped to a canvas, with each previously conducted interview having its corresponding canvas, available in the Artifacts tab."}
+              : "After the desk research and completion of requirements elicitation, the development team moves on to data consolidation. In data consolidation, the analysis of the material generated by the interviews and the mapping to a canvas is performed, with each previously conducted interview having its corresponding canvas, available in the Artifacts tab."}
           </p>
 
           {/* Card de info*/}
@@ -1834,26 +1843,26 @@ export default function ImersionPhase() {
               <strong className="text-blue-600">CSS:</strong>{" "}
               {language === "pt-BR"
                 ? "Canvas dos Solicitantes;"
-                : "Software Requester Canvas;"}
+                : "Requester Canvas;"}
             </li>
             <li>
               <strong className="text-blue-600">CCA:</strong>{" "}
               {language === "pt-BR"
                 ? "Canvas dos Cuidadores;"
-                : "Caregivers Canvas;"}
+                : "Caregiver Canvas;"}
             </li>
             <li>
               <strong className="text-blue-600">CTA:</strong>{" "}
               {language === "pt-BR"
                 ? "Canvas dos Terapeutas;"
-                : "Therapists Canvas;"}
+                : "Therapist Canvas;"}
             </li>
           </ul>
 
           <p className="text-lg text-justify">
             {language === "pt-BR"
               ? "A ordem de entrevistas é definida da seguinte forma. (Cliente → Cuidador → Especialista)."
-              : "The interview order is defined as follows. (Client → Caregiver → Specialist)."}
+              : "The order of interviews is defined as follows: (Client → Caregiver → Specialist)."}
           </p>
 
           {/* Card de info*/}
@@ -1864,7 +1873,7 @@ export default function ImersionPhase() {
                 <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
                   {language === "pt-BR"
                     ? "INFO: o Canvas é um painel feito para descrever as principais áreas dos elementos que envolvem um modelo de negócios e foi criado pelo especialista em estratégia e inovação suíço Alexander Osterwalder em meados dos anos 2000. O objetivo do método é criar um mapa que permita uma visualização direta de cada etapa do crescimento de uma iniciativa."
-                    : "INFO: the Canvas is a panel made to describe the main areas of elements that involve a business model and was created by Swiss strategy and innovation expert Alexander Osterwalder in the mid-2000s. The method's objective is to create a map that allows direct visualization of each stage of an initiative's growth."}
+                    : "INFO: the Canvas is a panel made to describe the main areas of the elements involving a business model and was created by Swiss strategy and innovation expert Alexander Osterwalder in the mid-2000s. The method's objective is to create a map that allows direct visualization of each stage of an initiative's growth."}
                 </p>
               </div>
             </div>
@@ -1873,13 +1882,13 @@ export default function ImersionPhase() {
           <p className="text-lg text-justify">
             {language === "pt-BR"
               ? "Cada canvas possui 7 ou 8 campos, cada um representado tópicos como Perfil, Objetivos, entre outros. Perguntas dos roteiros são mapeadas para cada campo por seu ID. É interessante que você memorize onde inserir as informações obtidas nas perguntas dentro dos campos especificados ou mantenha esse tutorial aberto durante a utilização do artefato."
-              : "Each canvas has 7 or 8 fields, each represented by topics such as Profile, Objectives, among others. Questions from the scripts are mapped to each field by their ID. It's interesting that you memorize where to insert the information obtained in the questions within the specified fields or keep this tutorial open during the use of the artifact."}
+              : "Each canvas has 7 or 8 fields, each representing topics such as Profile, Objectives, among others. Questions from the scripts are mapped to each field by their ID. It is interesting that you memorize where to insert the information obtained in the questions within the specified fields or keep this tutorial open during the use of the artifact."}
           </p>
 
           <p className="text-lg text-justify">
             {language === "pt-BR"
               ? "Ao inserir as informações nos campos especificados, apresente-as por tópicos (Canvas Tipo 1 disponibilizado pelo ProAut) ou textualmente (Canvas Tipo 2 disponibilizado pelo ProAut)."
-              : "When inserting information in the specified fields, present them by topics (Canvas Type 1 provided by ProAut) or textually (Canvas Type 2 provided by ProAut)."}
+              : "When inserting information into the specified fields, present them by topics (Canvas Type 1 provided by ProAut) or textually (Canvas Type 2 provided by ProAut)."}
           </p>
 
           <p className="text-lg text-justify">
@@ -1918,7 +1927,7 @@ export default function ImersionPhase() {
                       <td className="p-3 border-r border-b text-xs">
                         {language === "pt-BR"
                           ? '"Comunicação com os professores responsáveis pelo atendimento do autista, disponibilização de informações do autista de forma acessível como se fosse um perfil que o professor pode acessar."'
-                          : '"Communication with teachers responsible for autistic care, providing autistic information in an accessible way like a profile that the teacher can access."'}
+                          : '"Communication with the teachers responsible for the autistic person\'s care, availability of information about the autistic person in an accessible way as if it were a profile that the teacher can access."'}
                       </td>
                       <td className="p-3 border-b text-lg">
                         {language === "pt-BR"
@@ -1930,7 +1939,7 @@ export default function ImersionPhase() {
                       <td className="p-3 border-r border-b text-xs">
                         {language === "pt-BR"
                           ? '"Quero que haja perfil para mentor, professor, autista e até especialista se possível. Cada perfil teria acesso a funções específicas do sistema."'
-                          : '"I want there to be profiles for mentor, teacher, autistic and even specialist if possible. Each profile would have access to specific system functions."'}
+                          : '"I want there to be a profile for mentor, teacher, autistic person, and even specialist if possible. Each profile would have access to specific functions of the system."'}
                       </td>
                       <td className="p-3 border-b text-lg">
                         {language === "pt-BR"
@@ -1942,12 +1951,12 @@ export default function ImersionPhase() {
                       <td className="p-3 border-r border-b text-xs">
                         {language === "pt-BR"
                           ? '"Botões de alerta para autistas se sentirem muito ameaçados ou desconfortáveis e quiserem reportar isso com mais clareza para serem atendidos virtualmente ou presencialmente."'
-                          : '"Alert buttons for autistics who feel very threatened or uncomfortable and want to report this more clearly to be served virtually or in person."'}
+                          : '"Alert buttons for autistic people if they feel very threatened or uncomfortable and want to report this more clearly to be attended virtually or in person."'}
                       </td>
                       <td className="p-3 border-b text-lg">
                         {language === "pt-BR"
                           ? "Sistema de alerta para situações de desconforto"
-                          : "Alert system for uncomfortable situations"}
+                          : "Alert system for situations of discomfort"}
                       </td>
                     </tr>
                   </tbody>
@@ -2054,7 +2063,7 @@ export default function ImersionPhase() {
                     </strong>{" "}
                     {language === "pt-BR"
                       ? "Com o princípio de concisão do Canvas em mente, preencha o CSS."
-                      : "With the principle of Canvas conciseness in mind, fill out the CSS."}
+                      : "With the principle of conciseness of the Canvas in mind, fill out the CSS."}
                   </li>
                   <li className="text-justify">
                     <strong className="text-blue-700 dark:text-blue-300">
@@ -2064,7 +2073,7 @@ export default function ImersionPhase() {
                     </strong>{" "}
                     {language === "pt-BR"
                       ? "Em seguida, aplique essa mesma mentalidade de filtragem ao analisar o material gerado na entrevista com o cuidador e terapeuta, preenchendo o CCA e o CTA."
-                      : "Then, apply this same filtering mindset when analyzing the material generated in the interview with the caregiver and therapist, filling out the CCA and CTA."}
+                      : "Next, apply this same filtering mindset when analyzing the material generated in the interview with the caregiver and therapist, filling out the CCA and CTA."}
                   </li>
                   <li className="text-justify">
                     <strong className="text-blue-700 dark:text-blue-300">
@@ -2074,7 +2083,7 @@ export default function ImersionPhase() {
                     </strong>{" "}
                     {language === "pt-BR"
                       ? "Por fim, elimine os conflitos entre o CCA e o CTA. O conflito entre os canvas ocorre quando em uma determinada entrevista, caso seja obtida uma resposta que conflite com a de outra entrevista, deve-se usar aquela que tiver mais incidência (quantidade de semelhantes)."
-                      : "Finally, eliminate conflicts between the CCA and CTA. The conflict between canvases occurs when in a given interview, if a response is obtained that conflicts with another interview, the one with higher incidence (number of similar ones) should be used."}
+                      : "Finally, eliminate conflicts between the CCA and CTA. The conflict between canvases occurs when in a certain interview, if an answer is obtained that conflicts with that of another interview, the one with the highest incidence (quantity of similar ones) should be used."}
                   </li>
                 </ol>
               </div>
@@ -2107,6 +2116,52 @@ export default function ImersionPhase() {
             ))}
           </div>
         </div>
+        {/* --- INICIO DOS BOTÕES DE NAVEGAÇÃO --- */}
+        <div className="flex flex-col md:flex-row gap-4 pt-8 pb-8">
+          {/* Botão Voltar: Processo ProAut */}
+          <button
+            onClick={() => navigate("/proaut-process")}
+            className="group w-full md:w-1/2 relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-blue-300 dark:hover:border-blue-500 flex items-center justify-between"
+          >
+            <div className="relative z-10 bg-gray-100 dark:bg-gray-700 p-3 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30 transition-colors">
+              <ArrowLeft className="h-6 w-6 text-gray-600 dark:text-gray-300 group-hover:text-blue-500" />
+            </div>
+
+            <div className="relative z-10 flex flex-col items-end gap-1">
+              <span className="text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wider">
+                {language === "pt-BR" ? "Voltar" : "Back"}
+              </span>
+              <span className="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {language === "pt-BR" ? "Fases do Processo" : "Process Phases"}
+              </span>
+            </div>
+          </button>
+
+          {/* Botão Avançar: Fase de Análise (Amarelo para combinar com a fase) */}
+          <button
+            onClick={() => navigate("/analysis-phase")}
+            className="group w-full md:w-1/2 relative overflow-hidden rounded-xl bg-yellow-500 hover:bg-yellow-600 text-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center justify-between"
+          >
+            <div className="relative z-10 flex flex-col items-start gap-1">
+              <span className="text-yellow-100 text-sm font-medium uppercase tracking-wider">
+                {language === "pt-BR" ? "Próximo Passo" : "Next Step"}
+              </span>
+              <span className="text-xl font-bold flex items-center gap-2">
+                {language === "pt-BR"
+                  ? "Ir para Fase 2: Análise"
+                  : "Go to Phase 2: Analysis"}
+              </span>
+            </div>
+
+            <div className="relative z-10 bg-white/20 p-3 rounded-full group-hover:bg-white/30 transition-colors">
+              <ArrowRight className="h-6 w-6 text-white" />
+            </div>
+
+            {/* Efeito decorativo de fundo */}
+            <div className="absolute -right-12 -bottom-12 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:w-48 group-hover:h-48 transition-all duration-500" />
+          </button>
+        </div>
+        {/* --- FIM DOS BOTÕES DE NAVEGAÇÃO --- */}
       </div>
 
       {tocOpen && (
@@ -2118,7 +2173,7 @@ export default function ImersionPhase() {
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">

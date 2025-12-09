@@ -13,6 +13,9 @@ import {
   TrendingUp,
   Users,
   X,
+  CheckCircle,
+  ArrowLeft,
+  ArrowRight,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +31,7 @@ export default function AnalysisPhase() {
       type_pt: "Entrada",
       type_en: "Input",
       name_pt: "Canvas (Solicitante, Cuidadores, Terapeutas)",
-      name_en: "Canvas (Requester, Caregivers, Therapists)",
+      name_en: "Canvases (Requester, Caregivers, Therapists)",
     },
     {
       id: "fca",
@@ -107,6 +110,11 @@ export default function AnalysisPhase() {
       {
         id: "mapa-empatia",
         title: language === "pt-BR" ? "Mapa de Empatia" : "Empathy Map",
+        type: "scroll",
+      },
+      {
+        id: "conclusao-fase",
+        title: language === "pt-BR" ? "Encerramento da Fase" : "Phase Closing",
         type: "scroll",
       },
       {
@@ -195,7 +203,7 @@ export default function AnalysisPhase() {
           <h1 className="text-3xl font-bold tracking-tight">
             {language === "pt-BR" ? "Fase de Análise" : "Analysis Phase"}
           </h1>
-          <p className="text-lg">
+          <p className="text-lg text-justify">
             {language === "pt-BR"
               ? "Transformando dados em empatia e requisitos em soluções."
               : "Transforming data into empathy and requirements into solutions."}
@@ -210,15 +218,20 @@ export default function AnalysisPhase() {
           </div>
 
           <div className="space-y-4 text-lg leading-relaxed">
-            <p className="text-lg text-justify">
+            <p className="text-justify">
               {language === "pt-BR"
-                ? "A fase de Análise é o momento de aproximação do problema. Agora que a equipe coletou diversos dados na imersão, é preciso mergulhar nessas informações e avaliar as implicações do desafio sob o ponto de vista de todos os envolvidos (stakeholders)."
-                : "The Analysis phase is the moment to approach the problem. Now that the team has collected various data during immersion, it is necessary to dive into this information and evaluate the implications of the challenge from the point of view of all stakeholders involved."}
+                ? "A Fase de Análise é responsável por transformar as informações brutas coletadas na Fase de Imersão em conhecimento estruturado, capaz de orientar o design e o desenvolvimento da solução. Nesta etapa, a equipe interpreta, cruza e organiza os dados fornecidos pelos diversos stakeholders — cuidadores, terapeutas e cliente solicitante — para compreender profundamente o contexto do autista e suas necessidades."
+                : "The Analysis Phase is responsible for transforming the raw information collected in the Immersion Phase into structured knowledge, capable of guiding the solution's design and development. In this stage, the team interprets, cross-references, and organizes data provided by various stakeholders — caregivers, therapists, and the requesting client — to deeply understand the autistic person's context and needs."}
             </p>
-            <p className="text-lg text-justify">
+            <p className="text-justify">
               {language === "pt-BR"
-                ? "A fase de Análise tem como objetivo aprofundar as informações obtidas na fase de Imersão e iniciar as principais propostas de solução."
-                : "The Analysis phase aims to delve deeper into the information obtained in the Immersion phase and initiate the main proposed solutions."}
+                ? "Além de identificar requisitos e restrições, esta fase também envolve a construção de artefatos que aumentam a empatia do time com o usuário autista, como o PersonAut e o EmpathyAut. O resultado central é a TRR Inicial, que posteriormente se tornará a base para a fase de Ideação e para o protótipo."
+                : "In addition to identifying requirements and constraints, this phase also involves building artifacts that increase the team's empathy with the autistic user, such as PersonAut and EmpathyAut. The central result is the Initial RCT (Requirements/Constraints Table), which will later become the basis for the Ideation phase and the prototype."}
+            </p>
+            <p className="text-justify">
+              {language === "pt-BR"
+                ? "O resultado final desta fase é a elaboração de uma TRR (Tabela de Requisitos Refinada) completa, que reúne requisitos, justificativas, dependências, sugestões iniciais de design e recomendações baseadas no GuideAut. Esse documento se torna, posteriormente, o principal artefato de entrada para a Fase de Prototipação."
+                : "The final result of this phase is the elaboration of a complete RCT (Refined Requirements Table), which gathers requirements, justifications, dependencies, initial design suggestions, and recommendations based on GuideAut. This document subsequently becomes the main input artifact for the Prototyping Phase."}
             </p>
 
             {diagramAnalysisOpen && (
@@ -233,7 +246,7 @@ export default function AnalysisPhase() {
                   className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl z-50">
+                  <CardHeader className="sticky top-0 z-50 bg-white border-b px-6 py-4 rounded-t-xl">
                     <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                       {language === "pt-BR"
                         ? "Sobre o Diagrama"
@@ -344,17 +357,17 @@ export default function AnalysisPhase() {
                                 <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded mr-2">
                                   [2.1]
                                 </span>
-                                Triangular Dados
+                                Triangulate Data
                               </p>
                               <p className="ml-8 mt-1 text-justify">
-                                Cross-reference information from different
-                                sources — such as interviews, observations,
-                                documents, and research — to verify if they
-                                confirm each other. In ProAut, triangulation
-                                helps increase the reliability of information,
-                                ensuring that the raised requirements truly
-                                reflect the user's needs and do not depend on
-                                just one perspective.
+                                Cross-reference information coming from
+                                different sources — such as interviews,
+                                observations, documents, and research — to
+                                verify if they confirm each other. In ProAut,
+                                triangulation helps increase information
+                                reliability, ensuring that the elicited
+                                requirements truly reflect the user's needs and
+                                do not depend on just one perspective.
                               </p>
                             </div>
 
@@ -369,7 +382,7 @@ export default function AnalysisPhase() {
                                 Create a visual representation that helps
                                 understand the user deeply. It organizes
                                 information about what the user sees, thinks,
-                                feels, says, does and hears, as well as their
+                                feels, says, does, and hears, as well as their
                                 pains and needs. In ProAut, this map helps the
                                 team better understand the autistic user,
                                 ensuring that design and prototype decisions are
@@ -390,8 +403,8 @@ export default function AnalysisPhase() {
                                 real data, of the types of users who will use
                                 the application. In ProAut, personas help the
                                 team visualize who the autistic user is, their
-                                caregiver or therapist, including their needs,
-                                difficulties, goals and behaviors. This
+                                caregiver, or therapist, including their needs,
+                                difficulties, goals, and behaviors. This
                                 facilitates design decisions and ensures that
                                 the prototype is truly centered on the end
                                 user's characteristics.
@@ -459,30 +472,37 @@ export default function AnalysisPhase() {
               <CardHeader className="pb-3">
                 <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
                   <Info className="text-blue-600 dark:text-blue-400 h-5 w-5" />
-                  {language === "pt-BR" ? "Resumo da Fase" : "Phase Summary"}
+                  {language === "pt-BR"
+                    ? "Visão Geral desta fase"
+                    : "Phase Overview"}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-lg text-blue-800 dark:text-blue-200 space-y-3">
+                <p className="mb-2 font-semibold">
+                  {language === "pt-BR"
+                    ? "Resumidamente, a fase de Análise é constituída do seguinte:"
+                    : "Briefly, the Analysis phase consists of the following:"}
+                </p>
                 <ul className="space-y-3 list-disc list-inside mb-4 ml-4">
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
                       {language === "pt-BR"
-                        ? "Entrada da fase:"
-                        : "Phase input:"}
+                        ? "Entradas da fase:"
+                        : "Phase Inputs:"}
                     </strong>{" "}
                     {language === "pt-BR"
-                      ? "Canvas preenchidos (Solicitante, Cuidadores, Terapeutas), FCA respondido e Gráfico VGA."
-                      : "Filled Canvases (Requester, Caregivers, Therapists), answered FCA and VGA Graph."}
+                      ? "Os Canvas do cuidador (CCA), do terapeuta (CTA) e do solicitante do software (CSS); o(s) Formulário(s) de Caracterização do Autista (FCA) preenchido(s) e seu(s) respectivo(s) Gráfico(s) de Visão Geral do Autista (VGA)"
+                      : "Caregiver (CCA), Therapist (CTA), and Requester (CSS) Canvases; filled Autistic Characterization Form(s) (FCA) and respective Autistic Overview Graph(s) (VGA)."}
                   </li>
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
                       {language === "pt-BR"
-                        ? "Saída da fase:"
-                        : "Phase output:"}
+                        ? "Saídas da fase:"
+                        : "Phase Outputs:"}
                     </strong>{" "}
                     {language === "pt-BR"
-                      ? "Lista Inicial de Requisitos/Restrições, Personas e Mapa de Empatia."
-                      : "Initial Requirements/Constraints List, Personas and Empathy Map."}
+                      ? "A Tabela de Requisitos/Restrições (TRR) Inicial, o PersonAut e o EmpathyAut."
+                      : "The Initial Requirements/Constraints Table (RCT), PersonAut, and EmpathyAut."}
                   </li>
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
@@ -524,23 +544,66 @@ export default function AnalysisPhase() {
           <div className="space-y-4">
             <p className="text-justify text-lg">
               {language === "pt-BR"
-                ? "Nesta atividade, você deve usar as múltiplas fontes de dados (os diferentes Canvas) geradas na fase anterior para criar uma Lista Inicial de Requisitos e Restrições."
-                : "In this activity, you must use the multiple data sources (the different Canvases) generated in the previous phase to create an Initial List of Requirements and Constraints."}
+                ? "A Triangulação de Dados é o núcleo da Fase de Análise. Nela, a equipe cruza as informações dos três Canvas (CCA, CTA e CSS), correlacionando pontos semelhantes, complementares ou contraditórios. O objetivo é extrair requisitos e restrições, garantindo que a visão do cliente esteja alinhada às necessidades do autista e às percepções de quem convive ou trabalha com ele."
+                : "Data Triangulation is the core of the Analysis Phase. Here, the team cross-references information from the three Canvases (CCA, CTA, and CSS), correlating similar, complementary, or contradictory points. The goal is to extract requirements and constraints, ensuring the client's vision aligns with the autistic person's needs and the perceptions of those who live or work with them."}
             </p>
 
-            {/* Card de info */}
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-              <div className="flex items-start space-x-3">
-                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
-                    {language === "pt-BR"
-                      ? "INFO: O termo 'Lista Inicial' é usado porque, nesta etapa, você vai definir apenas a identificação e a descrição do requisito. O detalhamento visual ocorrerá na próxima fase."
-                      : "INFO: The term 'Initial List' is used because, at this stage, you will define only the identification and description of the requirement. Visual detailing will occur in the next phase."}
-                  </p>
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <Lightbulb className="text-blue-600 dark:text-blue-400 h-5 w-5" />
+                  {language === "pt-BR"
+                    ? "Como funciona a triangulação"
+                    : "How triangulation works"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <ul className="text-lg text-justify text-blue-700 dark:text-blue-300 list-disc list-inside space-y-3 ml-4">
+                    <li>
+                      <strong>
+                        {language === "pt-BR"
+                          ? "Extrair informações relevantes:"
+                          : "Extract relevant information:"}
+                      </strong>{" "}
+                      {language === "pt-BR"
+                        ? "A equipe identifica, nos Canvas e FCAs, necessidades, dores, comportamentos, rotinas, dificuldades, preferências e limitações."
+                        : "The team identifies needs, pains, behaviors, routines, difficulties, preferences, and limitations in the Canvases and ACFs."}
+                    </li>
+                    <li>
+                      <strong>
+                        {language === "pt-BR"
+                          ? "Cruzar informações:"
+                          : "Cross-reference information:"}
+                      </strong>{" "}
+                      {language === "pt-BR"
+                        ? "Verifica-se o que é reforçado pelo cuidador, terapeuta e solicitante, e o que diverge entre eles."
+                        : "Verify what is reinforced by the caregiver, therapist, and requester, and what diverges among them."}
+                    </li>
+                    <li>
+                      <strong>
+                        {language === "pt-BR"
+                          ? "(Re)Definir requisitos e restrições:"
+                          : "(Re)Define requirements and constraints:"}
+                      </strong>{" "}
+                      {language === "pt-BR"
+                        ? "A partir dos dados cruzados, são propostas definições iniciais de requisitos funcionais, requisitos não funcionais e restrições sensoriais, ambientais ou operacionais."
+                        : "Based on cross-referenced data, initial definitions of functional requirements, non-functional requirements, and sensory, environmental, or operational constraints are proposed."}
+                    </li>
+                    <li>
+                      <strong>
+                        {language === "pt-BR"
+                          ? "Validar com o cliente:"
+                          : "Validate with client:"}
+                      </strong>{" "}
+                      {language === "pt-BR"
+                        ? "Todo requisito extraído deve ser confirmado com o cliente, garantindo que esteja correto e condizente com o objetivo do software."
+                        : "Every extracted requirement must be confirmed with the client, ensuring it is correct and consistent with the software's objective."}
+                    </li>
+                  </ul>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
             {diagramTriangularOpen && (
               <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -554,7 +617,7 @@ export default function AnalysisPhase() {
                   className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <CardHeader className="sticky top-0 border-b px-6 py-4 rounded-t-xl z-50">
+                  <CardHeader className="sticky top-0 z-50 bg-white border-b px-6 py-4 rounded-t-xl">
                     <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                       {language === "pt-BR"
                         ? "Sobre o Diagrama"
@@ -655,15 +718,14 @@ export default function AnalysisPhase() {
                               </p>
                               <p className="ml-8 mt-1 text-justify">
                                 Review, adjust and complement everything the
-                                system needs to have (requirements) and
-                                everything it cannot do or must obey
-                                (constraints). In ProAut, this step occurs after
-                                analyzing the collected data, ensuring that
-                                requirements are aligned with the real context
-                                of the autistic user. It is the moment to
-                                correct, update or reorganize information so
-                                that the RCT accurately reflects the identified
-                                needs.
+                                system must have (requirements) and everything
+                                it cannot do or must adhere to (constraints). In
+                                ProAut, this step occurs after analyzing the
+                                collected data, ensuring that requirements are
+                                aligned with the real context of the autistic
+                                user. It is the moment to correct, update or
+                                reorganize information so that the RCT
+                                accurately reflects the identified needs.
                               </p>
                             </div>
 
@@ -738,7 +800,11 @@ export default function AnalysisPhase() {
                   </Card>
                 </div>
                 <img
-                  src="CAMINHO_DA_IMAGEM_DIAGRAMA_TRIANGULAR"
+                  src={
+                    language === "pt-BR"
+                      ? "src/modules/Tutorial/assets/analysis-phase/TriangularDado-PTBR.png"
+                      : "src/modules/Tutorial/assets/analysis-phase/TriangularDado-InglesUS.png"
+                  }
                   alt={
                     language === "pt-BR"
                       ? "Figura 2: Fluxo sugerido para triangular dados"
@@ -748,71 +814,41 @@ export default function AnalysisPhase() {
                 />
                 <p className="text-lg text-center mt-2">
                   {language === "pt-BR"
-                    ? "Figura 2: Fluxo sugerido para triangular dados"
-                    : "Figure 2: Suggested workflow for data triangulation"}
+                    ? "Figura 2: Representação da subatividade de Triangular Dados"
+                    : "Figure 2: Representation of the Triangulate Data subactivity"}
                 </p>
               </div>
             </div>
 
-            <p className="text-lg text-justify">
-              {language === "pt-BR"
-                ? "Você deve cruzar as informações. O que vai para a lista não é apenas o que o solicitante pediu, mas o resultado da combinação com o que os pais e especialistas informaram."
-                : "You must cross-reference the information. What goes on the list is not just what the requester asked for, but the result of the combination with what parents and specialists reported."}
-            </p>
-
             <div className="space-y-4">
               <h3 className="text-xl font-semibold">
                 {language === "pt-BR"
-                  ? "Como fazer a Triangulação:"
-                  : "How to Triangulate:"}
+                  ? "Tabela de Requisitos/Restrições (TRR)"
+                  : "Requirements/Constraints Table (RCT)"}
               </h3>
-
-              <Card className="border-l-4 border-l-blue-500">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
-                    <Lightbulb className="text-blue-600 dark:text-blue-400 h-5 w-5" />
-                    {language === "pt-BR"
-                      ? "Sugestão de Procedimento"
-                      : "Procedure Suggestion"}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                    <ol className="text-lg text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
-                      <li className="text-justify">
-                        {language === "pt-BR"
-                          ? "Reúna todos os Canvas preenchidos (CSS, CCA, CTA) e o FCA;"
-                          : "Gather all completed Canvases (RSC, ACC, ATC) and the ACF;"}
-                      </li>
-                      <li className="text-justify">
-                        {language === "pt-BR"
-                          ? "Crie uma tabela ou planilha para organizar os requisitos identificados;"
-                          : "Create a table or spreadsheet to organize identified requirements;"}
-                      </li>
-                      <li className="text-justify">
-                        {language === "pt-BR"
-                          ? "Compare informações semelhantes entre os diferentes Canvas;"
-                          : "Compare similar information between the different Canvases;"}
-                      </li>
-                      <li className="text-justify">
-                        {language === "pt-BR"
-                          ? "Identifique conflitos e decida qual informação prevalecerá;"
-                          : "Identify conflicts and decide which information will prevail;"}
-                      </li>
-                      <li className="text-justify">
-                        {language === "pt-BR"
-                          ? "Classifique cada item como Requisito Funcional, Requisito Não-Funcional ou Restrição;"
-                          : "Classify each item as Functional Requirement, Non-Functional Requirement or Constraint;"}
-                      </li>
-                      <li className="text-justify">
-                        {language === "pt-BR"
-                          ? "Numere e descreva cada item de forma clara e concisa."
-                          : "Number and describe each item clearly and concisely."}
-                      </li>
-                    </ol>
-                  </div>
-                </CardContent>
-              </Card>
+              <p className="text-lg text-justify">
+                {language === "pt-BR"
+                  ? "O principal artefato gerado é a TRR Inicial, com as três primeiras colunas preenchidas:"
+                  : "The main artifact generated is the Initial RCT, with the first three columns filled:"}
+              </p>
+              <ul className="text-lg text-justify list-disc list-inside ml-4 space-y-2">
+                <li>
+                  {language === "pt-BR"
+                    ? "Identificação do requisito"
+                    : "Requirement Identification"}
+                </li>
+                <li>{language === "pt-BR" ? "Descrição" : "Description"}</li>
+                <li>
+                  {language === "pt-BR"
+                    ? "Justificativa ou origem"
+                    : "Justification or origin"}
+                </li>
+              </ul>
+              <p className="text-lg text-justify">
+                {language === "pt-BR"
+                  ? "As demais colunas (prioridade, sugestão de baixa fidelidade, recomendações do GuideAut etc.) serão completadas somente na Fase de Ideação."
+                  : "The remaining columns (priority, low-fidelity suggestion, GuideAut recommendations, etc.) will be completed only in the Ideation Phase."}
+              </p>
             </div>
 
             {/* Imagem do exemplo de TRR Inicial */}
@@ -870,75 +906,71 @@ export default function AnalysisPhase() {
           <div className="space-y-6">
             <p className="text-lg text-justify">
               {language === "pt-BR"
-                ? "A atividade de gerar Personas serve para criar objetos de empatia. Cada persona deve corresponder a um FCA preenchido."
-                : "The activity of generating Personas serves to create empathy objects. Each persona must correspond to a completed FCA."}
+                ? "Para aprofundar a empatia com o usuário autista, a equipe utiliza o artefato PersonAut, específico do ProAut. Ele sintetiza informações do FCA e do VGA, criando uma representação clara, humana e compreensível do autista usuário do sistema."
+                : "To deepen empathy with the autistic user, the team uses the PersonAut artifact, specific to ProAut. It synthesizes information from the FCA and VGA, creating a clear, human, and understandable representation of the autistic system user."}
             </p>
 
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">
                 {language === "pt-BR"
-                  ? "Dados para construção das Personas:"
-                  : "Data for Personas construction:"}
+                  ? "Quantidade de Personas:"
+                  : "Number of Personas:"}
               </h3>
-
-              <ul className="text-lg text-justify space-y-2 list-disc list-inside ml-4">
-                <li>
-                  {language === "pt-BR"
-                    ? "Analise as seções do Canvas do Cuidador (CCA)."
-                    : "Analyze the Caregiver Canvas (CCA) sections."}
-                </li>
-                <li>
-                  {language === "pt-BR"
-                    ? "Analise as recomendações do Canvas do Terapeuta (CTA)."
-                    : "Analyze the recommendations from the Therapist Canvas (CTA)."}
-                </li>
-                <li>
-                  {language === "pt-BR"
-                    ? "Analise os requisitos do Canvas do Solicitante (CSS)."
-                    : "Analyze the requirements from the Requester Canvas (CSS)."}
-                </li>
-              </ul>
+              <p className="text-lg text-justify">
+                {language === "pt-BR"
+                  ? "Se houver mais de um autista envolvido, é possível gerar mais de um PersonAut. Cada Persona deve ser criada com base em um FCA individual para garantir precisão."
+                  : "If more than one autistic person is involved, it is possible to generate more than one PersonAut. Each Persona must be created based on an individual FCA to ensure accuracy."}
+              </p>
             </div>
 
-            <Card className="border-l-4 border-l-blue-500">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
-                  <Lightbulb className="text-blue-600 dark:text-blue-400 h-5 w-5" />
-                  {language === "pt-BR" ? "Passo a Passo" : "Step by Step"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">
+                {language === "pt-BR"
+                  ? "Modelos do PersonAut:"
+                  : "PersonAut Models:"}
+              </h3>
+
+              <div className="space-y-4">
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                  <ol className="text-lg text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? " Transcreva atividades que acalmam/estressam dos Canvas."
-                        : " Transcribe calming/stressing activities from Canvases."}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? " Do Canvas dos Pais (Aspectos familiares)."
-                        : " From Parents Canvas (Family aspects)."}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? " Se houver contradição, analise e decida qual prevalece."
-                        : " If there is contradiction, analyze and decide which prevails."}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? " Defina nome fictício, gênero e idade."
-                        : " Define fictional name, gender and age."}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? " Insira o gráfico VGA e uma foto/desenho."
-                        : " Insert VGA graph and a photo/drawing."}
-                    </li>
-                  </ol>
+                  <h4 className="font-bold text-blue-800 dark:text-blue-200">
+                    {language === "pt-BR"
+                      ? "Modelo 1 – PersonAut por tópicos"
+                      : "Model 1 – Topic-based PersonAut"}
+                  </h4>
+                  <p className="text-lg text-justify text-blue-700 dark:text-blue-300">
+                    {language === "pt-BR"
+                      ? "Apresenta o autista através de listas organizadas (perfil, comportamentos, preferências, dificuldades etc.)."
+                      : "Presents the autistic person through organized lists (profile, behaviors, preferences, difficulties, etc.)."}
+                  </p>
                 </div>
-              </CardContent>
-            </Card>
+
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <h4 className="font-bold text-blue-800 dark:text-blue-200">
+                    {language === "pt-BR"
+                      ? "Modelo 2 – PersonAut narrativo"
+                      : "Model 2 – Narrative PersonAut"}
+                  </h4>
+                  <p className="text-lg text-justify text-blue-700 dark:text-blue-300">
+                    {language === "pt-BR"
+                      ? "Descreve a rotina e as características do autista por meio de um texto fluido, abordando: relações familiares, rotina escolar, sensibilidade a estímulos, relação com tecnologia, comportamentos específicos."
+                      : "Describes the routine and characteristics of the autistic person through fluid text, covering: family relationships, school routine, sensitivity to stimuli, relationship with technology, and specific behaviors."}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+              <div className="flex items-start space-x-3">
+                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="text-lg text-justify text-blue-800 dark:text-blue-200 font-medium">
+                    {language === "pt-BR"
+                      ? "Objetivo: Proporcionar à equipe informações pertinentes à condição geral do autista. A intenção é que a equipe se sinta o mais próxima possível da realidade do autista, com base nas características apresentadas, juntamente com o VGA gerado."
+                      : "Objective: To provide the team with relevant information regarding the autistic person's general condition. The intention is for the team to feel as close as possible to the autistic person's reality, based on the presented characteristics, along with the generated VGA."}
+                  </p>
+                </div>
+              </div>
+            </div>
 
             {/* Imagem dos exemplo de modelos do PersonAut */}
             <div className="grid gap-8 md:grid-cols-2 mt-8">
@@ -963,8 +995,8 @@ export default function AnalysisPhase() {
                 </div>
                 <h5 className="text-lg mb-3 text-center">
                   {language === "pt-BR"
-                    ? "Figura 4: Modelo 1 - PersonAut"
-                    : "Figure 4: Model 1 - PersonAut"}
+                    ? "Modelo 1: Preenchimento por meio de tópicos."
+                    : "Model 1: Completion via topics."}
                 </h5>
               </div>
 
@@ -989,8 +1021,8 @@ export default function AnalysisPhase() {
                 </div>
                 <h5 className="text-lg mb-3 text-center">
                   {language === "pt-BR"
-                    ? "Figura 5: Modelo 2 - PersonAut"
-                    : "Figure 5: Model 2 - PersonAut"}
+                    ? "Modelo 2: Preenchimento com texto descritivo."
+                    : "Model 2: Completion with descriptive text."}
                 </h5>
               </div>
             </div>
@@ -1013,8 +1045,8 @@ export default function AnalysisPhase() {
           <div className="space-y-6">
             <p className="text-lg text-justify">
               {language === "pt-BR"
-                ? "O ProAut oferece um recurso adicional para geração de empatia: um Mapa de Empatia denominado EmpathyAut."
-                : "ProAut offers an additional resource for generating empathy: an Empathy Map named EmpathyAut."}
+                ? "O ProAut também utiliza um modelo próprio de mapa de empatia: o EmpathyAut, que complementa o PersonAut ao aprofundar aspectos específicos do Transtorno do Espectro Autista."
+                : "ProAut also uses its own empathy map model: EmpathyAut, which complements PersonAut by deepening specific aspects of Autism Spectrum Disorder."}
             </p>
 
             <div className="space-y-4">
@@ -1048,69 +1080,17 @@ export default function AnalysisPhase() {
                 <li>
                   <strong>EmpathyAut:</strong>{" "}
                   {language === "pt-BR"
-                    ? "Foca no comprometimento em relação às áreas afetadas pelo TEA."
-                    : "Focuses on impairment regarding areas affected by ASD."}
+                    ? "Aborda aspectos mais relacionados ao comprometimento do autista em relação às áreas afetadas pelo TEA."
+                    : "Addresses aspects more related to the autistic person's impairment regarding areas affected by ASD."}
                 </li>
                 <li>
                   <strong>PersonAut:</strong>{" "}
                   {language === "pt-BR"
-                    ? "Foca no relacionamento com a família, escola e tecnologia."
-                    : "Focuses on relationships with family, school, and technology."}
+                    ? "Aborda informações sobre aspectos de relacionamento com a família, com a escola e com a tecnologia."
+                    : "Addresses information about relationship aspects with family, school, and technology."}
                 </li>
               </ul>
             </div>
-
-            <Card className="border-l-4 border-l-blue-500">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
-                  <Lightbulb className="text-blue-600 dark:text-blue-400 h-5 w-5" />
-                  {language === "pt-BR"
-                    ? "Sugestão de Procedimento"
-                    : "Procedure Suggestion"}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                  <ol className="text-lg text-justify text-blue-700 dark:text-blue-300 list-decimal list-inside space-y-3 ml-4">
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? "Use os dados do FCA para preencher as áreas de limitação;"
-                        : "Use ACF data to fill the limitation areas;"}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? "Analise cada uma das 4 áreas (Interação, Comunicação, Comportamento, Cognição);"
-                        : "Analyze each of the 4 areas (Interaction, Communication, Behavior, Cognition);"}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? "Identifique os principais desafios em cada área;"
-                        : "Identify main challenges in each area;"}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? "Documente como esses desafios afetam o dia a dia;"
-                        : "Document how these challenges affect daily life;"}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? "Relacione com os objetivos do aplicativo definidos no CSS;"
-                        : "Relate to the application objectives defined in the RSC;"}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? "Considere as estratégias de enfrentamento mencionadas pelos cuidadores;"
-                        : "Consider coping strategies mentioned by caregivers;"}
-                    </li>
-                    <li className="text-justify">
-                      {language === "pt-BR"
-                        ? "Valide o mapa com especialistas quando possível."
-                        : "Validate the map with specialists when possible."}
-                    </li>
-                  </ol>
-                </div>
-              </CardContent>
-            </Card>
 
             {/* Card de info */}
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
@@ -1145,10 +1125,69 @@ export default function AnalysisPhase() {
               </div>
               <p className="text-lg text-center mt-2">
                 {language === "pt-BR"
-                  ? "Figura 6: Exemplo de Mapa de Empatia (EmpathyAut)"
-                  : "Figure 6: Example of Empathy Map (EmpathyAut)"}
+                  ? "Figura 6: Canvas do EmpathyAut"
+                  : "Figure 6: EmpathyAut Canvas"}
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* --- ENCERRAMENTO DA FASE --- */}
+        <section
+          id="conclusao-fase"
+          className="scroll-m-20 space-y-6 mt-12 pt-8 border-t"
+        >
+          <div className="flex items-center gap-3">
+            <div className="bg-green-100 p-2 rounded-full">
+              <CheckCircle className="h-6 w-6 text-green-600" />
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              {language === "pt-BR"
+                ? "Encerramento da Fase"
+                : "Phase Conclusion"}
+            </h2>
+          </div>
+
+          <div className="space-y-4 text-lg leading-relaxed">
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <CheckCircle className="text-blue-600 dark:text-blue-400 h-5 w-5" />
+                  {language === "pt-BR" ? "Conclusão" : "Conclusion"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <p className="text-justify text-blue-700 dark:text-blue-300 mb-4">
+                    {language === "pt-BR"
+                      ? "Ao concluir as três atividades — Triangulação de Dados, PersonAut e EmpathyAut — a equipe obtém uma visão sólida, estruturada e humanizada do problema. Com o material validado pelos stakeholders, encerra-se a fase com:"
+                      : "Upon concluding the three activities — Data Triangulation, PersonAut, and EmpathyAut — the team obtains a solid, structured, and humanized view of the problem. With the material validated by stakeholders, the phase ends with:"}
+                  </p>
+                  <ul className="text-justify text-blue-700 dark:text-blue-300 list-disc list-inside ml-4 space-y-1 mb-4">
+                    <li>
+                      {language === "pt-BR" ? "TRR Inicial" : "Initial RCT"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Persona(s) criada(s)"
+                        : "Created Persona(s)"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "EmpathyAut preenchido"
+                        : "Completed EmpathyAut"}
+                    </li>
+                  </ul>
+                  <div className="mt-4 pt-4 border-t border-blue-200">
+                    <p className="font-bold text-blue-700 dark:text-blue-300 text-center">
+                      {language === "pt-BR"
+                        ? "Esses artefatos orientam diretamente a Fase de Ideação e garantem que as decisões futuras respeitem o contexto real da pessoa autista."
+                        : "These artifacts directly guide the Ideation Phase and ensure that future decisions respect the autistic person's real context."}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -1176,6 +1215,53 @@ export default function AnalysisPhase() {
             ))}
           </ul>
         </div>
+
+        {/* --- INICIO DOS BOTÕES DE NAVEGAÇÃO --- */}
+        <div className="flex flex-col md:flex-row gap-4 pt-8 pb-8">
+          {/* Botão Voltar: Fase 1 - Imersão */}
+          <button
+            onClick={() => navigate("/imersion-phase")}
+            className="group w-full md:w-1/2 relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-blue-300 dark:hover:border-blue-500 flex items-center justify-between"
+          >
+            <div className="relative z-10 bg-gray-100 dark:bg-gray-700 p-3 rounded-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30 transition-colors">
+              <ArrowLeft className="h-6 w-6 text-gray-600 dark:text-gray-300 group-hover:text-blue-500" />
+            </div>
+
+            <div className="relative z-10 flex flex-col items-end gap-1">
+              <span className="text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wider">
+                {language === "pt-BR" ? "Voltar" : "Back"}
+              </span>
+              <span className="text-xl font-bold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {language === "pt-BR" ? "1. Imersão" : "1. Immersion"}
+              </span>
+            </div>
+          </button>
+
+          {/* Botão Avançar: Fase 3 - Ideação (Verde) */}
+          <button
+            onClick={() => navigate("/ideation-phase")}
+            className="group w-full md:w-1/2 relative overflow-hidden rounded-xl bg-green-600 hover:bg-green-700 text-white p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex items-center justify-between"
+          >
+            <div className="relative z-10 flex flex-col items-start gap-1">
+              <span className="text-green-100 text-sm font-medium uppercase tracking-wider">
+                {language === "pt-BR" ? "Próximo Passo" : "Next Step"}
+              </span>
+              <span className="text-xl font-bold flex items-center gap-2">
+                {language === "pt-BR"
+                  ? "Ir para Fase 3: Ideação"
+                  : "Go to Phase 3: Ideation"}
+              </span>
+            </div>
+
+            <div className="relative z-10 bg-white/20 p-3 rounded-full group-hover:bg-white/30 transition-colors">
+              <ArrowRight className="h-6 w-6 text-white" />
+            </div>
+
+            {/* Efeito decorativo de fundo */}
+            <div className="absolute -right-12 -bottom-12 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:w-48 group-hover:h-48 transition-all duration-500" />
+          </button>
+        </div>
+        {/* --- FIM DOS BOTÕES DE NAVEGAÇÃO --- */}
       </div>
 
       {tocOpen && (
@@ -1187,7 +1273,7 @@ export default function AnalysisPhase() {
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-20 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
