@@ -1,8 +1,8 @@
 const clientSections = [
   {
     id: "1",
-    pt: "Perfil da criança",
-    en: "Child's Profile",
+    pt: "Perfil da pessoa",
+    en: "Person's Profile",
   },
   {
     id: "2",
