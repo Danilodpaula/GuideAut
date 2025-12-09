@@ -1,26 +1,26 @@
+import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
 import BackToArtifactsPageButton from "../components/BackToArtifactsPageButton";
-import useAuthGuard from "../hooks/useAuthGuard";
-import useDefault from "../hooks/useDefault";
-import usePersonaApi from "../hooks/usePersonaApi";
-import PersonaCreateWelcome from "../components/PersonaCreateWelcome";
-import PersonaChooseModel from "../components/PersonaChooseModel";
 import Behavior from "../components/Behavior";
 import Cognition from "../components/Cognition";
 import Communication from "../components/Communication";
 import Interaction from "../components/Interaction";
-import PersonalData from "../components/PersonalData";
-import PersonaGeneralCharacteristics from "../components/PersonaGeneralCharacteristics";
-import { PersonaInput, usePersonaForm } from "../hooks/usePersonaForm";
-import PersonaStressfulActivities from "../components/PersonaStressfulActivities";
+import PersonaAbout from "../components/PersonaAbout";
 import PersonaCalmingActivities from "../components/PersonaCalmingActivities";
-import PersonaStereotypesHabits from "../components/PersonaStereotypesHabits";
+import PersonaChooseModel from "../components/PersonaChooseModel";
+import PersonaConfirmation from "../components/PersonaConfirmation";
+import PersonaCreateWelcome from "../components/PersonaCreateWelcome";
+import PersonaGeneralCharacteristics from "../components/PersonaGeneralCharacteristics";
+import PersonalData from "../components/PersonalData";
 import PersonaSocialAspects from "../components/PersonaSocialAspects";
 import PersonaSoftwareAspects from "../components/PersonaSoftwareAspects";
-import PersonaAbout from "../components/PersonaAbout";
-import PersonaConfirmation from "../components/PersonaConfirmation";
-import { Button } from "@/components/ui/button";
+import PersonaStereotypesHabits from "../components/PersonaStereotypesHabits";
+import PersonaStressfulActivities from "../components/PersonaStressfulActivities";
 import SubmitButton from "../components/SubmitButton";
+import useAuthGuard from "../hooks/useAuthGuard";
+import useDefault from "../hooks/useDefault";
+import usePersonaApi from "../hooks/usePersonaApi";
+import { PersonaInput, usePersonaForm } from "../hooks/usePersonaForm";
 
 const PersonaEditForm = () => {
   useAuthGuard();
@@ -32,14 +32,13 @@ const PersonaEditForm = () => {
 
   const baseSteps = useMemo(
     () => [
-      <PersonaCreateWelcome />,
-      <PersonaChooseModel control={control} />,
+      <PersonalData<PersonaInput> control={control} />,
+      <PersonaGeneralCharacteristics control={control} />,
       <Behavior<PersonaInput> control={control} />,
       <Cognition<PersonaInput> control={control} />,
       <Communication<PersonaInput> control={control} />,
       <Interaction<PersonaInput> control={control} />,
-      <PersonalData<PersonaInput> control={control} />,
-      <PersonaGeneralCharacteristics control={control} />,
+      <PersonaChooseModel control={control} />,
     ],
     [control],
   );

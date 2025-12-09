@@ -31,17 +31,17 @@ const PersonaCreateForm = () => {
   const baseSteps = useMemo(
     () => [
       <PersonaCreateWelcome />,
+      <PersonalData<PersonaInput> control={control} />,
+      <PersonaGeneralCharacteristics control={control} />,
+      <Behavior<PersonaInput> control={control} />,
+      <Cognition<PersonaInput> control={control} />,
+      <Communication<PersonaInput> control={control} />,
+      <Interaction<PersonaInput> control={control} />,
       <PersonaChooseModel
         model={model}
         control={control}
         setModel={setModel}
       />,
-      <Behavior<PersonaInput> control={control} />,
-      <Cognition<PersonaInput> control={control} />,
-      <Communication<PersonaInput> control={control} />,
-      <Interaction<PersonaInput> control={control} />,
-      <PersonalData<PersonaInput> control={control} />,
-      <PersonaGeneralCharacteristics control={control} />,
     ],
     [model, control],
   );
@@ -83,7 +83,7 @@ const PersonaCreateForm = () => {
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
   return (
-    <div className="mx-auto p-4 max-w-[1000px]">
+    <div className="mx-auto p-4 max-w-6xl max-h-6xl">
       <BackToArtifactsPageButton value="1" />
       <form onSubmit={create} className="mx-auto p-4">
         <h2 className="font-bold text-[30px] text-[#20B4F8] pb-[25px]">
@@ -99,7 +99,7 @@ const PersonaCreateForm = () => {
           {step !== steps.length - 1 && (
             <Button
               onClick={next}
-              disabled={step === 1 && model === ""}
+              disabled={step === 7 && model === ""}
               type="button"
             >
               {exibirTexto("Próximo", "Next")}
