@@ -1,23 +1,4 @@
-enum DesignPatternType {
-  LG,
-  EN,
-  US,
-  LI,
-}
-
-interface I18NProps {
-  pt: string;
-  en: string;
-}
-
-interface DesignPattern {
-  id: string;
-  type: DesignPatternType;
-  title: I18NProps;
-  problem: I18NProps;
-  solution: I18NProps;
-  how: I18NProps;
-}
+import { DesignPattern, DesignPatternType } from "../types/dto/design-pattern";
 
 export const designPatterns: DesignPattern[] = [
   {
