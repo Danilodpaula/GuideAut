@@ -301,7 +301,7 @@ export const designPatterns: DesignPattern[] = [
     },
   },
   {
-    id: "US_03",
+    id: "US_04",
     type: DesignPatternType.US,
     title: {
       pt: "Adaptar Interação",
@@ -321,7 +321,7 @@ export const designPatterns: DesignPattern[] = [
     },
   },
   {
-    id: "US_04",
+    id: "US_06",
     type: DesignPatternType.US,
     title: {
       pt: "Perfil e Armazenamento",
@@ -361,7 +361,7 @@ export const designPatterns: DesignPattern[] = [
     },
   },
   {
-    id: "LI_02",
+    id: "LI_03",
     type: DesignPatternType.LI,
     title: {
       pt: "Alternativas em Questionários",
