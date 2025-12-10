@@ -1,14 +1,28 @@
-enum designPatternType {
+enum DesignPatternType {
   LG,
   EN,
   US,
   LI,
 }
 
-export const designPatterns = [
+interface I18NProps {
+  pt: string;
+  en: string;
+}
+
+interface DesignPattern {
+  id: string;
+  type: DesignPatternType;
+  title: I18NProps;
+  problem: I18NProps;
+  solution: I18NProps;
+  how: I18NProps;
+}
+
+export const designPatterns: DesignPattern[] = [
   {
     id: "LG_01",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Design e Estrutura Simples",
       en: "Simple Design and Structure",
@@ -28,7 +42,7 @@ export const designPatterns = [
   },
   {
     id: "LG_02",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Acessibilidade de Informação",
       en: "Information Accessibility",
@@ -48,7 +62,7 @@ export const designPatterns = [
   },
   {
     id: "LG_03",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Textos e Imagens Legíveis",
       en: "Legible Texts and Images",
@@ -68,7 +82,7 @@ export const designPatterns = [
   },
   {
     id: "LG_04",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Elementos de Distração",
       en: "Distraction Elements",
@@ -88,7 +102,7 @@ export const designPatterns = [
   },
   {
     id: "LG_05",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Simplicidade de Figuras",
       en: "Simplicity of Figures",
@@ -108,7 +122,7 @@ export const designPatterns = [
   },
   {
     id: "LG_06",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Limitação de Informação",
       en: "Information Limitation",
@@ -128,7 +142,7 @@ export const designPatterns = [
   },
   {
     id: "LG_07",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Previsibilidade e Feedback",
       en: "Predictability and Feedback",
@@ -148,7 +162,7 @@ export const designPatterns = [
   },
   {
     id: "LG_08",
-    type: designPatternType.LG,
+    type: DesignPatternType.LG,
     title: {
       pt: "Responsividade",
       en: "Responsiveness",
@@ -168,7 +182,7 @@ export const designPatterns = [
   },
   {
     id: "EN_01",
-    type: designPatternType.EN,
+    type: DesignPatternType.EN,
     title: {
       pt: "Consistência e Padronização",
       en: "Consistency and Standardization",
@@ -188,7 +202,7 @@ export const designPatterns = [
   },
   {
     id: "EN_02",
-    type: designPatternType.EN,
+    type: DesignPatternType.EN,
     title: {
       pt: "Simplicidade de Navegação",
       en: "Navigation Simplicity",
@@ -208,7 +222,7 @@ export const designPatterns = [
   },
   {
     id: "EN_03",
-    type: designPatternType.EN,
+    type: DesignPatternType.EN,
     title: {
       pt: "Suporte à Navegação",
       en: "Navigation Support",
@@ -228,7 +242,7 @@ export const designPatterns = [
   },
   {
     id: "EN_04",
-    type: designPatternType.EN,
+    type: DesignPatternType.EN,
     title: {
       pt: "Rótulos Redundantes",
       en: "Redundant Labels",
@@ -248,7 +262,7 @@ export const designPatterns = [
   },
   {
     id: "US_01",
-    type: designPatternType.US,
+    type: DesignPatternType.US,
     title: {
       pt: "Customização",
       en: "Customization",
@@ -268,7 +282,7 @@ export const designPatterns = [
   },
   {
     id: "US_02",
-    type: designPatternType.US,
+    type: DesignPatternType.US,
     title: {
       pt: "Engajamento",
       en: "Engagement",
@@ -288,7 +302,7 @@ export const designPatterns = [
   },
   {
     id: "US_03",
-    type: designPatternType.US,
+    type: DesignPatternType.US,
     title: {
       pt: "Adaptar Interação",
       en: "Adapt Interaction",
@@ -308,7 +322,7 @@ export const designPatterns = [
   },
   {
     id: "US_04",
-    type: designPatternType.US,
+    type: DesignPatternType.US,
     title: {
       pt: "Perfil e Armazenamento",
       en: "Profile and Storage",
@@ -328,7 +342,7 @@ export const designPatterns = [
   },
   {
     id: "LI_01",
-    type: designPatternType.LI,
+    type: DesignPatternType.LI,
     title: {
       pt: "Simplicidade de Linguagem",
       en: "Language Simplicity",
@@ -348,7 +362,7 @@ export const designPatterns = [
   },
   {
     id: "LI_02",
-    type: designPatternType.LI,
+    type: DesignPatternType.LI,
     title: {
       pt: "Alternativas em Questionários",
       en: "Alternatives in Questionnaires",
@@ -367,5 +381,3 @@ export const designPatterns = [
     },
   },
 ];
-
-export const designPatternsMapper = [];
