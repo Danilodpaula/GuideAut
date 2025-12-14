@@ -105,9 +105,7 @@ const PersonaSoftwareAspects = ({
                     {values.map((value) => {
                       return (
                         <div key={value} className="flex justify-between">
-                          <button className="break-normal max-w-[150px]">
-                            {value}
-                          </button>
+                          <button className="text-left">{value}</button>
                           <RemoveOptionAlertDialog
                             onClick={() => {
                               const filtered = values.filter(

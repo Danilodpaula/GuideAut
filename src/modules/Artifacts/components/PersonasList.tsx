@@ -1,8 +1,7 @@
-import CardItem from "./CardItem";
-import { toast } from "sonner";
+import { useEffect } from "react";
 import useDefault from "../hooks/useDefault";
 import usePersonaApi from "../hooks/usePersonaApi";
-import { useEffect } from "react";
+import CardItem from "./CardItem";
 
 const PersonasList = () => {
   const { navigate, exibirTexto } = useDefault();
