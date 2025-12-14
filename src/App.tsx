@@ -52,6 +52,7 @@ import PersonaEditForm from "./modules/Artifacts/pages/PersonaEditForm";
 import Developers from "./modules/Adm+Base/pages/Developers";
 import Reports from "./modules/Adm+Base/pages/Reports";
 import ForgotPassword from "./modules/Adm+Base/pages/ForgotPassword";
+import EmpathyDesignPatterns from "./modules/Artifacts/pages/EmpathyDesignPatterns";
 
 const queryClient = new QueryClient();
 
@@ -75,7 +76,6 @@ const AppLayout = () => (
             <Route path="ideation-phase" element={<IdeationPhase />} />
             <Route path="prototyping-phase" element={<PrototypingPhase />} />
             <Route path="artifacts" element={<Artifacts />} />
-            <Route path="design-patterns" element={<DesignPatterns />} />
             <Route path="recommendations" element={<Recommendations />} />
             <Route path="developers" element={<Developers />} />
             <Route path="search" element={<Search />} />
@@ -88,6 +88,10 @@ const AppLayout = () => (
                 <Route index element={<Empathy />} />
                 <Route path="update" element={<EmpathyEditForm />} />
               </Route>
+            </Route>
+            <Route path="design-patterns">
+              <Route index element={<DesignPatterns />} />
+              <Route path=":id" element={<EmpathyDesignPatterns />} />
             </Route>
             <Route path="persona">
               <Route path="create" element={<PersonaCreateForm />} />

@@ -70,14 +70,14 @@ const PersonaStereotypesHabits = ({
                         "Stereotypes/Quirks from GuideAut",
                       )}
                   </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px] h-[280px]">
+                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
                     {defaultStereotypes.map((stereotype) => {
                       return (
                         <div
                           key={stereotype.en}
                           className="flex justify-between"
                         >
-                          <button>
+                          <button className="text-left">
                             {exibirTexto(stereotype.pt, stereotype.en)}
                           </button>
                           <AddOptionAlertDialog
@@ -114,9 +114,7 @@ const PersonaStereotypesHabits = ({
                     {values.map((value) => {
                       return (
                         <div key={value} className="flex justify-between">
-                          <button className="break-normal max-w-[150px]">
-                            {value}
-                          </button>
+                          <button className="text-left">{value}</button>
                           <RemoveOptionAlertDialog
                             onClick={() => {
                               const filtered = values.filter(

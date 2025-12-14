@@ -67,11 +67,13 @@ const PersonaSocialAspects = ({
                         "Social and familiar aspects from GuideAut",
                       )}
                   </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px] h-[280px]">
+                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
                     {defaultSocialAspects.map((aspect) => {
                       return (
                         <div key={aspect.en} className="flex justify-between">
-                          <button>{exibirTexto(aspect.pt, aspect.en)}</button>
+                          <button className="text-left">
+                            {exibirTexto(aspect.pt, aspect.en)}
+                          </button>
                           <AddOptionAlertDialog
                             onClick={() => {
                               if (
@@ -103,9 +105,7 @@ const PersonaSocialAspects = ({
                     {values.map((value) => {
                       return (
                         <div key={value} className="flex justify-between">
-                          <button className="break-normal max-w-[150px]">
-                            {value}
-                          </button>
+                          <button className="text-left">{value}</button>
                           <RemoveOptionAlertDialog
                             onClick={() => {
                               const filtered = values.filter(

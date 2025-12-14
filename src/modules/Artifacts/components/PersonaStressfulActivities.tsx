@@ -67,11 +67,11 @@ const PersonaStressfulActivities = ({
                         "Activities from GuideAut",
                       )}
                   </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px] h-[280px]">
+                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
                     {defaultStressfulActivities.map((activity) => {
                       return (
                         <div key={activity.en} className="flex justify-between">
-                          <button>
+                          <button className="text-left">
                             {exibirTexto(activity.pt, activity.en)}
                           </button>
                           <AddOptionAlertDialog
@@ -108,9 +108,7 @@ const PersonaStressfulActivities = ({
                     {values.map((value) => {
                       return (
                         <div key={value} className="flex justify-between">
-                          <button className="break-normal max-w-[150px]">
-                            {value}
-                          </button>
+                          <button className="text-left">{value}</button>
                           <RemoveOptionAlertDialog
                             onClick={() => {
                               const filtered = values.filter(
