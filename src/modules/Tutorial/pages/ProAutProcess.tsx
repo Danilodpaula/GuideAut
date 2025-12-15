@@ -626,8 +626,8 @@ export default function ProAutProcess() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/imersion-phase/FluxoProAut-pt-br.png"
-                      : "src/modules/Tutorial/assets/imersion-phase/FluxoProAut-en-us.png"
+                      ? "/assets/imersion-phase/FluxoProAut-pt-br.png"
+                      : "/assets/imersion-phase/FluxoProAut-en-us.png"
                   }
                   alt={
                     language === "pt-BR"

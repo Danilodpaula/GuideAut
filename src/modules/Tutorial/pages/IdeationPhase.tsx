@@ -419,8 +419,8 @@ export default function IdeationPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/ideation-phase/FluxoIdeacao-pt-br.png"
-                      : "src/modules/Tutorial/assets/ideation-phase/FluxoIdeacao-en-us.png"
+                      ? "/assets/ideation-phase/FluxoIdeacao-pt-br.png"
+                      : "/assets/ideation-phase/FluxoIdeacao-en-us.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -589,7 +589,7 @@ export default function IdeationPhase() {
             <div className="my-6 p-4">
               <div className="max-w-4xl lg:max-w-6xl mx-auto">
                 <img
-                  src="src/modules/Tutorial/assets/ideation-phase/ExemploBrainstorm.jpg"
+                  src="/assets/ideation-phase/ExemploBrainstorm.jpg"
                   alt={
                     language === "pt-BR"
                       ? "Figura 2: Template de Board no Miro para sessão de brainstorming"
@@ -886,8 +886,8 @@ export default function IdeationPhase() {
                   <img
                     src={
                       language === "pt-BR"
-                        ? "src/modules/Tutorial/assets/ideation-phase/finalTRR-pt-br-lightTheme.png"
-                        : "src/modules/Tutorial/assets/ideation-phase/finalTRR-en-us-lightTheme.png"
+                        ? "/assets/ideation-phase/finalTRR-pt-br-lightTheme.png"
+                        : "/assets/ideation-phase/finalTRR-en-us-lightTheme.png"
                     }
                     alt={
                       language === "pt-BR"
@@ -899,8 +899,8 @@ export default function IdeationPhase() {
                   <img
                     src={
                       language === "pt-BR"
-                        ? "src/modules/Tutorial/assets/ideation-phase/finalTRR-pt-br-darkTheme.png"
-                        : "src/modules/Tutorial/assets/ideation-phase/finalTRR-en-us-darkTheme.png"
+                        ? "/assets/ideation-phase/finalTRR-pt-br-darkTheme.png"
+                        : "/assets/ideation-phase/finalTRR-en-us-darkTheme.png"
                     }
                     alt={
                       language === "pt-BR"

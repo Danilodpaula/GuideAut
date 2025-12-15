@@ -449,8 +449,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/FluxoAnalise-pt-br.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/FluxoAnalise-en-us.png"
+                      ? "/assets/analysis-phase/FluxoAnalise-pt-br.png"
+                      : "/assets/analysis-phase/FluxoAnalise-en-us.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -802,8 +802,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/TriangularDado-PTBR.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/TriangularDado-InglesUS.png"
+                      ? "/assets/analysis-phase/TriangularDado-PTBR.png"
+                      : "/assets/analysis-phase/TriangularDado-InglesUS.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -857,8 +857,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/initialTRR-pt-br-lightTheme.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/initialTRR-en-us-lightTheme.png"
+                      ? "/assets/analysis-phase/initialTRR-pt-br-lightTheme.png"
+                      : "/assets/analysis-phase/initialTRR-en-us-lightTheme.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -870,8 +870,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/initialTRR-pt-br-darkTheme.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/initialTRR-en-us-darkTheme.png"
+                      ? "/assets/analysis-phase/initialTRR-pt-br-darkTheme.png"
+                      : "/assets/analysis-phase/initialTRR-en-us-darkTheme.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -981,8 +981,8 @@ export default function AnalysisPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/analysis-phase/personAut1-pt-br.png"
-                          : "src/modules/Tutorial/assets/analysis-phase/personAut1-en-us.png"
+                          ? "/assets/analysis-phase/personAut1-pt-br.png"
+                          : "/assets/analysis-phase/personAut1-en-us.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1007,8 +1007,8 @@ export default function AnalysisPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/analysis-phase/personAut2-pt-br.png"
-                          : "src/modules/Tutorial/assets/analysis-phase/personAut2-en-us.png"
+                          ? "/assets/analysis-phase/personAut2-pt-br.png"
+                          : "/assets/analysis-phase/personAut2-en-us.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1112,8 +1112,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/empathyAut-pt-br.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/empathyAut-en-us.png"
+                      ? "/assets/analysis-phase/empathyAut-pt-br.png"
+                      : "/assets/analysis-phase/empathyAut-en-us.png"
                   }
                   alt={
                     language === "pt-BR"
