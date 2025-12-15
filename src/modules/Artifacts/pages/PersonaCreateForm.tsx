@@ -1,47 +1,47 @@
-import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
-import useAuthGuard from "../hooks/useAuthGuard";
-import { PersonaInput, usePersonaForm } from "../hooks/usePersonaForm";
-import useDefault from "../hooks/useDefault";
-import SubmitButton from "../components/SubmitButton";
-import PersonaCreateWelcome from "../components/PersonaCreateWelcome";
-import PersonaChooseModel from "../components/PersonaChooseModel";
+import { useEffect, useMemo, useState } from "react";
+import BackToArtifactsPageButton from "../components/BackToArtifactsPageButton";
 import Behavior from "../components/Behavior";
 import Cognition from "../components/Cognition";
 import Communication from "../components/Communication";
 import Interaction from "../components/Interaction";
-import PersonalData from "../components/PersonalData";
-import PersonaGeneralCharacteristics from "../components/PersonaGeneralCharacteristics";
 import PersonaAbout from "../components/PersonaAbout";
-import PersonaStressfulActivities from "../components/PersonaStressfulActivities";
 import PersonaCalmingActivities from "../components/PersonaCalmingActivities";
-import PersonaStereotypesHabits from "../components/PersonaStereotypesHabits";
+import PersonaChooseModel from "../components/PersonaChooseModel";
+import PersonaConfirmation from "../components/PersonaConfirmation";
+import PersonaCreateWelcome from "../components/PersonaCreateWelcome";
+import PersonaGeneralCharacteristics from "../components/PersonaGeneralCharacteristics";
+import PersonalData from "../components/PersonalData";
 import PersonaSocialAspects from "../components/PersonaSocialAspects";
 import PersonaSoftwareAspects from "../components/PersonaSoftwareAspects";
-import PersonaConfirmation from "../components/PersonaConfirmation";
-import BackToArtifactsPageButton from "../components/BackToArtifactsPageButton";
+import PersonaStereotypesHabits from "../components/PersonaStereotypesHabits";
+import PersonaStressfulActivities from "../components/PersonaStressfulActivities";
+import SubmitButton from "../components/SubmitButton";
+import useAuthGuard from "../hooks/useAuthGuard";
+import useDefault from "../hooks/useDefault";
+import { PersonaInput, usePersonaForm } from "../hooks/usePersonaForm";
 
 const PersonaCreateForm = () => {
   useAuthGuard();
   const [step, setStep] = useState(0);
   const [model, setModel] = useState("");
   const { exibirTexto } = useDefault();
-  const { control, watch, create } = usePersonaForm({});
+  const { control, watch, create, errors } = usePersonaForm({});
 
   const baseSteps = useMemo(
     () => [
       <PersonaCreateWelcome />,
+      <PersonalData<PersonaInput> control={control} />,
+      <PersonaGeneralCharacteristics control={control} />,
+      <Behavior<PersonaInput> control={control} />,
+      <Cognition<PersonaInput> control={control} />,
+      <Communication<PersonaInput> control={control} />,
+      <Interaction<PersonaInput> control={control} />,
       <PersonaChooseModel
         model={model}
         control={control}
         setModel={setModel}
       />,
-      <Behavior<PersonaInput> control={control} />,
-      <Cognition<PersonaInput> control={control} />,
-      <Communication<PersonaInput> control={control} />,
-      <Interaction<PersonaInput> control={control} />,
-      <PersonalData<PersonaInput> control={control} />,
-      <PersonaGeneralCharacteristics control={control} />,
     ],
     [model, control],
   );
@@ -83,7 +83,7 @@ const PersonaCreateForm = () => {
   const back = () => setStep((s) => Math.max(s - 1, 0));
 
   return (
-    <div className="mx-auto p-4 max-w-[1000px]">
+    <div className="mx-auto p-4 max-w-6xl max-h-6xl">
       <BackToArtifactsPageButton value="1" />
       <form onSubmit={create} className="mx-auto p-4">
         <h2 className="font-bold text-[30px] text-[#20B4F8] pb-[25px]">
@@ -99,7 +99,7 @@ const PersonaCreateForm = () => {
           {step !== steps.length - 1 && (
             <Button
               onClick={next}
-              disabled={step === 1 && model === ""}
+              disabled={step === 7 && model === ""}
               type="button"
             >
               {exibirTexto("Próximo", "Next")}
@@ -108,6 +108,9 @@ const PersonaCreateForm = () => {
           {step === steps.length - 1 && <SubmitButton />}
         </div>
       </form>
+      {errors.length > 0 && (
+        <p className="font-bold text-red-600">{errors[0]}</p>
+      )}
     </div>
   );
 };

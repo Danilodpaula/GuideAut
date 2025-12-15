@@ -1,19 +1,27 @@
 export const welcome = [
   {
     id: "1",
-    pt: `Para a criação da persona, primeiramente você escolherá qual o modelo
-        de persona para preencher os dados. Após a escolha, marcará algumas opções
-        referentes a interação social, comunicação, comportamento e cognição da
-        persona, sendo esses dados necessários para a criação do gráfico VGA
-        (Visão Geral do Autista). Após isso, você poderá adicionar informações
-        mais detalhadas sobre a persona dependendo do modelo de persona que
-        escolher.`,
-    en: `For creating the persona, you will first choose which persona model to use 
-        for filling in the data. After making your choice, you will select some 
-        options related to social interaction, communication, behavior, and cognition 
-        of the persona, as this information is necessary for creating the VGA chart 
-        (Overview of the Autistic). After that, you can add more detailed information 
-        about the persona depending on the persona model you have chosen.`,
+    pt: `Para a criação da persona, você escolherá qual o modelo
+        de persona para preencher os dados.
+        O Modelo 1 do PersonAut apresenta a persona usando tópicos. Os tópicos 
+        incluem: Atividades que acalmam (situações ou ações que trazem calma), 
+        Atividades que estressam (situações ou ações que geram estresse), Aspectos 
+        sociais e familiares (relações com familiares, terapeutas e colegas), Aspectos 
+        tecnológicos (afinidade e relação com tecnologias) e Esteriotipias e manias 
+        (hábitos e comportamentos repetitivos).
+        O Modelo 2 do PersonAut apresenta a persona de forma resumida, usando: Sobre 
+        (informações da persona de forma mais flexível, em formato de história).
+        `,
+    en: `For creating the persona, you will choose which persona model to use to fill 
+          in the data. 
+          Model 1 of PersonAut presents the persona using bullet points. The topics 
+          include: Calming activities (situations or actions that provide calm), 
+          Stressful activities (situations or actions that cause stress), Social 
+          and family aspects (relationships with family, therapists, and peers), 
+          Technological aspects (affinity and relationship with technologies), and 
+          Stereotypies and habits (repetitive behaviors and personal habits). 
+          Model 2 of PersonAut presents the persona in a summarized form, using 
+          About (persona information presented flexibly, in a story-like format).`,
   },
   {
     id: "2",
@@ -23,96 +31,44 @@ export const welcome = [
 ];
 
 export const defaultCalmingActivities = [
-  {
-    pt: "Ler um livro",
-    en: "Read a book",
-  },
-  {
-    pt: "Ouvir música",
-    en: "Listen to music",
-  },
-  {
-    pt: "Ficar sozinho",
-    en: "Be alone",
-  },
-  {
-    pt: "Ficar em silêncio",
-    en: "Stay in silence",
-  },
+  { pt: "Ler um livro", en: "Read a book" },
+  { pt: "Ouvir música tranquila", en: "Listen to calm music" },
+  { pt: "Fazer caminhada sozinho", en: "Take a walk alone" },
+  { pt: "Praticar respiração profunda", en: "Practice deep breathing" },
+  { pt: "Desenhar ou colorir", en: "Draw or color" },
 ];
 
 export const defaultStereotypes = [
-  {
-    pt: "Sensível a luz",
-    en: "Sensitive to light",
-  },
-  {
-    pt: "Sensível a barulho",
-    en: "Sensitive to noise",
-  },
-  {
-    pt: "Sensível a toque",
-    en: "Sensitive to touch",
-  },
-  {
-    pt: "Sensível a cheiro",
-    en: "Sensitive to smell",
-  },
+  { pt: "Sensível à luz", en: "Sensitive to light" },
+  { pt: "Sensível ao som", en: "Sensitive to noise" },
+  { pt: "Sensível ao toque", en: "Sensitive to touch" },
+  { pt: "Sensível a cheiros fortes", en: "Sensitive to strong smells" },
+  { pt: "Sensível a texturas", en: "Sensitive to textures" },
 ];
 
 export const defaultSocialAspects = [
-  {
-    pt: "Gosta de festas",
-    en: "Likes parties",
-  },
-  {
-    pt: "Gosta de sair",
-    en: "Likes going out",
-  },
-  {
-    pt: "Gosta de conversar",
-    en: "Likes to talk",
-  },
-  {
-    pt: "Gosta de ajudar",
-    en: "Likes to help",
-  },
+  { pt: "Gosta de festas", en: "Enjoys parties" },
+  { pt: "Prefere sair com amigos", en: "Likes going out with friends" },
+  { pt: "Gosta de conversar", en: "Likes to chat" },
+  { pt: "Gosta de ajudar os outros", en: "Likes helping others" },
+  { pt: "Prefere pequenos grupos", en: "Prefers small groups" },
 ];
 
 export const defaultSoftwareAspects = [
+  { pt: "Gosta de jogos digitais", en: "Likes digital games" },
   {
-    pt: "Gosta de jogos",
-    en: "Likes games",
+    pt: "Usa redes sociais com frequência",
+    en: "Frequently uses social media",
   },
-  {
-    pt: "Gosta de redes sociais",
-    en: "Likes social media",
-  },
-  {
-    pt: "Gosta de aplicativos de música",
-    en: "Likes music apps",
-  },
-  {
-    pt: "Gosta de aplicativos de leitura",
-    en: "Likes reading apps",
-  },
+  { pt: "Usa apps de música", en: "Uses music apps" },
+  { pt: "Usa apps de leitura", en: "Uses reading apps" },
+  { pt: "Gosta de apps educativos", en: "Enjoys educational apps" },
 ];
 
 export const defaultStressfulActivities = [
-  {
-    pt: "Luzes altas",
-    en: "Bright lights",
-  },
-  {
-    pt: "Muito barulho",
-    en: "Lots of noise",
-  },
-  {
-    pt: "Muitas pessoas",
-    en: "Lots of people",
-  },
-  {
-    pt: "Ficar parado",
-    en: "To stand still",
-  },
+  { pt: "Luzes muito fortes", en: "Very bright lights" },
+  { pt: "Muito barulho", en: "Loud noise" },
+  { pt: "Muita gente ao redor", en: "Crowded places" },
+  { pt: "Ficar parado por muito tempo", en: "Standing still for long periods" },
+  { pt: "Ambientes desorganizados", en: "Disorganized environments" },
 ];

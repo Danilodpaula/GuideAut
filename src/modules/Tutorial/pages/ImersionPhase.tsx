@@ -470,8 +470,8 @@ export default function ImersionPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/imersion-phase/FluxoImersao-pt-br.png"
-                      : "src/modules/Tutorial/assets/imersion-phase/FluxoImersao-en-us.png"
+                      ? "/assets/imersion-phase/FluxoImersao-pt-br.png"
+                      : "/assets/imersion-phase/FluxoImersao-en-us.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -743,8 +743,8 @@ export default function ImersionPhase() {
               <img
                 src={
                   language === "pt-BR"
-                    ? "src/modules/Tutorial/assets/imersion-phase/FluxoAprenderContexto-pt-br.png"
-                    : "src/modules/Tutorial/assets/imersion-phase/FluxoAprenderContexto-en-us.png"
+                    ? "/assets/imersion-phase/FluxoAprenderContexto-pt-br.png"
+                    : "/assets/imersion-phase/FluxoAprenderContexto-en-us.png"
                 }
                 alt={
                   language === "pt-BR"
@@ -1377,8 +1377,8 @@ export default function ImersionPhase() {
               <img
                 src={
                   language === "pt-BR"
-                    ? "src/modules/Tutorial/assets/imersion-phase/FluxoExtrairRequisitos-pt-br.png"
-                    : "src/modules/Tutorial/assets/imersion-phase/FluxoExtrairRequisitos-en-us.png"
+                    ? "/assets/imersion-phase/FluxoExtrairRequisitos-pt-br.png"
+                    : "/assets/imersion-phase/FluxoExtrairRequisitos-en-us.png"
                 }
                 alt={
                   language === "pt-BR"
@@ -1449,8 +1449,8 @@ export default function ImersionPhase() {
                   <img
                     src={
                       language === "pt-BR"
-                        ? "src/modules/Tutorial/assets/imersion-phase/VGA-pt-br.png"
-                        : "src/modules/Tutorial/assets/imersion-phase/VGA-en-us.png"
+                        ? "/assets/imersion-phase/VGA-pt-br.png"
+                        : "/assets/imersion-phase/VGA-en-us.png"
                     }
                     alt={
                       language === "pt-BR"
@@ -1552,8 +1552,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCS-pt-br-darkTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCS-en-us-darkTheme.png"
+                          ? "/assets/imersion-phase/CCS-pt-br-darkTheme.png"
+                          : "/assets/imersion-phase/CCS-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1565,8 +1565,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCS-pt-br-darkTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCS-en-us-darkTheme.png"
+                          ? "/assets/imersion-phase/CCS-pt-br-darkTheme.png"
+                          : "/assets/imersion-phase/CCS-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1593,8 +1593,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCA-pt-br-darkTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCA-en-us-darkTheme.png"
+                          ? "/assets/imersion-phase/CCA-pt-br-darkTheme.png"
+                          : "/assets/imersion-phase/CCA-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1606,8 +1606,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CCA-pt-br-darkTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CCA-en-us-darkTheme.png"
+                          ? "/assets/imersion-phase/CCA-pt-br-darkTheme.png"
+                          : "/assets/imersion-phase/CCA-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1634,8 +1634,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CTA-pt-br-darkTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CTA-en-us-darkTheme.png"
+                          ? "/assets/imersion-phase/CTA-pt-br-darkTheme.png"
+                          : "/assets/imersion-phase/CTA-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1647,8 +1647,8 @@ export default function ImersionPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/imersion-phase/CTA-pt-br-darkTheme.png"
-                          : "src/modules/Tutorial/assets/imersion-phase/CTA-en-us-darkTheme.png"
+                          ? "/assets/imersion-phase/CTA-pt-br-darkTheme.png"
+                          : "/assets/imersion-phase/CTA-en-us-darkTheme.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1977,8 +1977,8 @@ export default function ImersionPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/imersion-phase/CCSCanvas-pt-br.jpg"
-                      : "src/modules/Tutorial/assets/imersion-phase/CCSCanvas-en-us.jpg"
+                      ? "/assets/imersion-phase/CCSCanvas-pt-br.jpg"
+                      : "/assets/imersion-phase/CCSCanvas-en-us.jpg"
                   }
                   alt={
                     language === "pt-BR"
@@ -2000,8 +2000,8 @@ export default function ImersionPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/imersion-phase/CCACanvas-pt-br.jpg"
-                      : "src/modules/Tutorial/assets/imersion-phase/CCACanvas-en-us.jpg"
+                      ? "/assets/imersion-phase/CCACanvas-pt-br.jpg"
+                      : "/assets/imersion-phase/CCACanvas-en-us.jpg"
                   }
                   alt={
                     language === "pt-BR"
@@ -2023,8 +2023,8 @@ export default function ImersionPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/imersion-phase/CTACanvas-pt-br.jpg"
-                      : "src/modules/Tutorial/assets/imersion-phase/CTACanvas-en-us.jpg"
+                      ? "/assets/imersion-phase/CTACanvas-pt-br.jpg"
+                      : "/assets/imersion-phase/CTACanvas-en-us.jpg"
                   }
                   alt={
                     language === "pt-BR"

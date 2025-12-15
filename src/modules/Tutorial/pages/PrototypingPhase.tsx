@@ -419,8 +419,8 @@ export default function PrototypingPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/prototyping-phase/FluxoPrototipacao-pt-br.png"
-                      : "src/modules/Tutorial/assets/prototyping-phase/FluxoPrototipacao-en-us.png"
+                      ? "/assets/prototyping-phase/FluxoPrototipacao-pt-br.png"
+                      : "/assets/prototyping-phase/FluxoPrototipacao-en-us.png"
                   }
                   alt={
                     language === "pt-BR"

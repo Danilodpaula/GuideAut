@@ -9,6 +9,7 @@ import { defaultCalmingActivities } from "../i18n/persona";
 import useDefault from "../hooks/useDefault";
 import { PersonaInput } from "../hooks/usePersonaForm";
 import { useI18n } from "@/core/i18n/I18nContext";
+import { toast } from "sonner";
 
 const PersonaCalmingActivities = ({
   control,
@@ -48,9 +49,18 @@ const PersonaCalmingActivities = ({
                 />
                 <Button
                   onClick={() => {
-                    if (!values.includes(newActivity) && newActivity !== "") {
+                    const valid =
+                      !values.includes(newActivity.trim()) &&
+                      newActivity.trim() !== "" &&
+                      newActivity.trim().length >= 3 &&
+                      newActivity.trim().length <= 200;
+                    if (valid) {
                       onChange([...values, newActivity]);
                       setNewActivity("");
+                    } else {
+                      toast.error(
+                        "Mínimo: 3 caracteres / Máximo: 200 caracteres",
+                      );
                     }
                   }}
                   type="button"
@@ -67,11 +77,11 @@ const PersonaCalmingActivities = ({
                         "Activities from GuideAut",
                       )}
                   </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px] h-[280px]">
+                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
                     {defaultCalmingActivities.map((activity) => {
                       return (
                         <div key={activity.en} className="flex justify-between">
-                          <button>
+                          <button className="text-left">
                             {exibirTexto(activity.pt, activity.en)}
                           </button>
                           <AddOptionAlertDialog
@@ -108,9 +118,7 @@ const PersonaCalmingActivities = ({
                     {values.map((value) => {
                       return (
                         <div key={value} className="flex justify-between">
-                          <button className="break-normal max-w-[150px]">
-                            {value}
-                          </button>
+                          <button className="text-left">{value}</button>
                           <RemoveOptionAlertDialog
                             onClick={() => {
                               const filtered = values.filter(

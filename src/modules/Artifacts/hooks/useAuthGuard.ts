@@ -7,10 +7,12 @@ import { Language } from "../i18n/language";
 
 const useAuthGuard = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
   const { language } = useI18n();
 
   useEffect(() => {
+    if (isLoading) return;
+
     if (!isAuthenticated) {
       toast.error(
         language === Language.Portuguese
@@ -19,7 +21,7 @@ const useAuthGuard = () => {
       );
       navigate("/login");
     }
-  }, [isAuthenticated, navigate, language]);
+  }, [isAuthenticated, navigate, language, isLoading]);
 };
 
 export default useAuthGuard;
