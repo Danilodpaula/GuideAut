@@ -43,7 +43,7 @@ const PersonalData = <T extends FormBase>({
         name={"age" as FieldPath<T>}
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Input id="age" type="text" value={value} onChange={onChange} />
+          <Input id="age" type="number" value={value} onChange={onChange} />
         )}
       />
       <Label htmlFor="gender">

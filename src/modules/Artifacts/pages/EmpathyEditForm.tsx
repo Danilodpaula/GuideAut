@@ -20,7 +20,7 @@ const EmpathyEditForm = () => {
   const { findOneEmpathy } = useEmpathyApi({ id: id });
   const { data, refetch, isError, isFetching } = findOneEmpathy;
   const [step, setStep] = useState(0);
-  const { control, watch, update, reset } = useEmpathyForm({ id: id });
+  const { control, watch, update, reset, errors } = useEmpathyForm({ id: id });
 
   const steps = [
     <PersonalData<EmpathyInput> control={control} />,
@@ -86,6 +86,9 @@ const EmpathyEditForm = () => {
           {step === steps.length - 1 && <SubmitButton />}
         </div>
       </form>
+      {errors.length > 0 && (
+        <p className="font-bold text-red-600">{errors[0]}</p>
+      )}
     </div>
   );
 };

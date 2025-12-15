@@ -16,7 +16,7 @@ import { ScriptCreateDto } from "../types/dto/script-create";
 import { ScriptUpdateDto } from "../types/dto/script-update";
 import { titles } from "../i18n/scripts";
 import { NewQuestion } from "../types/script";
-
+import { z } from "zod";
 const questions = (formType: string) => {
   switch (formType) {
     case "1":
@@ -77,20 +77,41 @@ const useScriptForm = ({
   const { createScript, updateScript } = useScriptApi({ id: id });
 
   const addQuestion = () => {
-    const newQuestion: NewQuestion = {
-      id: crypto.randomUUID(),
-      question: newQuestionText,
-      isFixed: false,
-      section: newQuestionSection,
-    };
-    setNewQuestions([...newQuestions, newQuestion]);
-    setShowAddQuestionDialog(false);
-    toast.success(
-      exibirTexto(
-        "Pergunta adicionada com sucesso!  😄",
-        "Question added successfully!  😄",
-      ),
-    );
+    const Question = z
+      .string()
+      .min(5, {
+        message: exibirTexto(
+          "A pergunta deve ter no mínimo 5 caracteres.",
+          "The question must be at least 5 characters long.",
+        ),
+      })
+      .max(200, {
+        message: exibirTexto(
+          "Texto muito longo! (pergunta)",
+          "Text is too long! (question)",
+        ),
+      });
+    const result = Question.safeParse(newQuestionText);
+
+    if (result.success) {
+      const newQuestion: NewQuestion = {
+        id: crypto.randomUUID(),
+        question: newQuestionText,
+        isFixed: false,
+        section: newQuestionSection,
+      };
+      setNewQuestions([...newQuestions, newQuestion]);
+      setShowAddQuestionDialog(false);
+      toast.success(
+        exibirTexto(
+          "Pergunta adicionada com sucesso!  😄",
+          "Question added successfully!  😄",
+        ),
+      );
+    } else {
+      const errors = result.error.errors.map((e) => e.message);
+      toast.error(errors[0]);
+    }
   };
 
   const removeQuestion = (id: string) => {
@@ -104,35 +125,79 @@ const useScriptForm = ({
   };
 
   const createSubmit = async () => {
-    const newScript: ScriptCreateDto = {
-      name: roteiroName,
-      type: formType,
-      items: newQuestions.map((q) => {
-        return {
-          section: q.section,
-          isFixed: q.isFixed,
-          question: q.question,
-        };
-      }),
-    };
-    setShowSaveDialog(false);
-    await createScript.mutateAsync(newScript);
+    const Title = z
+      .string()
+      .min(5, {
+        message: exibirTexto(
+          "O título deve ter no mínimo 5 caracteres.",
+          "The title must be at least 5 characters long.",
+        ),
+      })
+      .max(200, {
+        message: exibirTexto(
+          "Texto muito longo! (título)",
+          "Text is too long! (title)",
+        ),
+      });
+
+    const result = await Title.safeParseAsync(roteiroName);
+
+    if (result.success) {
+      const newScript: ScriptCreateDto = {
+        name: roteiroName,
+        type: formType,
+        items: newQuestions.map((q) => {
+          return {
+            section: q.section,
+            isFixed: q.isFixed,
+            question: q.question,
+          };
+        }),
+      };
+      setShowSaveDialog(false);
+      await createScript.mutateAsync(newScript);
+    } else {
+      const errors = result.error.errors.map((e) => e.message);
+      toast.error(errors[0]);
+    }
   };
 
   const updateSubmit = async () => {
-    const newScript: ScriptUpdateDto = {
-      name: roteiroName,
-      type: formType,
-      items: newQuestions.map((q) => {
-        return {
-          section: q.section,
-          isFixed: q.isFixed,
-          question: q.question,
-        };
-      }),
-    };
-    setShowSaveDialog(false);
-    await updateScript.mutateAsync(newScript);
+    const Title = z
+      .string()
+      .min(5, {
+        message: exibirTexto(
+          "O título deve ter no mínimo 5 caracteres.",
+          "The title must be at least 5 characters long.",
+        ),
+      })
+      .max(200, {
+        message: exibirTexto(
+          "Texto muito longo! (título)",
+          "Text is too long! (title)",
+        ),
+      });
+
+    const result = await Title.safeParseAsync(roteiroName);
+
+    if (result.success) {
+      const newScript: ScriptUpdateDto = {
+        name: roteiroName,
+        type: formType,
+        items: newQuestions.map((q) => {
+          return {
+            section: q.section,
+            isFixed: q.isFixed,
+            question: q.question,
+          };
+        }),
+      };
+      setShowSaveDialog(false);
+      await updateScript.mutateAsync(newScript);
+    } else {
+      const errors = result.error.errors.map((e) => e.message);
+      toast.error(errors[0]);
+    }
   };
 
   return {

@@ -26,7 +26,7 @@ const PersonaCreateForm = () => {
   const [step, setStep] = useState(0);
   const [model, setModel] = useState("");
   const { exibirTexto } = useDefault();
-  const { control, watch, create } = usePersonaForm({});
+  const { control, watch, create, errors } = usePersonaForm({});
 
   const baseSteps = useMemo(
     () => [
@@ -108,6 +108,9 @@ const PersonaCreateForm = () => {
           {step === steps.length - 1 && <SubmitButton />}
         </div>
       </form>
+      {errors.length > 0 && (
+        <p className="font-bold text-red-600">{errors[0]}</p>
+      )}
     </div>
   );
 };

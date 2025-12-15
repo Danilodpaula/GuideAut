@@ -9,6 +9,7 @@ import useDefault from "../hooks/useDefault";
 import { PersonaInput } from "../hooks/usePersonaForm";
 import { Language } from "../i18n/language";
 import { useI18n } from "@/core/i18n/I18nContext";
+import { toast } from "sonner";
 
 const PersonaStereotypesHabits = ({
   control,
@@ -48,12 +49,18 @@ const PersonaStereotypesHabits = ({
                 />
                 <Button
                   onClick={() => {
-                    if (
-                      !values.includes(newStereotype) &&
-                      newStereotype !== ""
-                    ) {
+                    const valid =
+                      !values.includes(newStereotype.trim()) &&
+                      newStereotype.trim() !== "" &&
+                      newStereotype.trim().length >= 3 &&
+                      newStereotype.trim().length <= 200;
+                    if (valid) {
                       onChange([...values, newStereotype]);
                       setNewStereotype("");
+                    } else {
+                      toast.error(
+                        "Mínimo: 3 caracteres / Máximo: 200 caracteres",
+                      );
                     }
                   }}
                   type="button"

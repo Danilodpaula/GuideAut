@@ -28,7 +28,7 @@ const PersonaEditForm = () => {
   const { findOnePersona } = usePersonaApi({ id: id });
   const { isFetching, data, isError, refetch } = findOnePersona;
   const [step, setStep] = useState(0);
-  const { control, watch, update, reset } = usePersonaForm({ id: id });
+  const { control, watch, update, reset, errors } = usePersonaForm({ id: id });
 
   const baseSteps = useMemo(
     () => [
@@ -126,6 +126,9 @@ const PersonaEditForm = () => {
             {step === steps.length - 1 && <SubmitButton />}
           </div>
         </form>
+        {errors.length > 0 && (
+          <p className="font-bold text-red-600">{errors[0]}</p>
+        )}
       </div>
     );
   }
