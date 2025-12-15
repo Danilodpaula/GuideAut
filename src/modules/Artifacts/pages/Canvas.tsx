@@ -57,7 +57,7 @@ const Canvas = () => {
                   <h2 className="font-bold m-[15px]">
                     {exibirTexto(s.pt, s.en)}
                   </h2>
-                  <div className="flex flex-col gap-[20px] mb-[20px]">
+                  <div className="flex flex-col gap-[20px] mb-[20px] p-5">
                     {fixedQuestions.map((q) => {
                       if (q.section === s.id) {
                         return (

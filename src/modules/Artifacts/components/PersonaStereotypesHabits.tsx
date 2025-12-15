@@ -9,6 +9,7 @@ import useDefault from "../hooks/useDefault";
 import { PersonaInput } from "../hooks/usePersonaForm";
 import { Language } from "../i18n/language";
 import { useI18n } from "@/core/i18n/I18nContext";
+import { toast } from "sonner";
 
 const PersonaStereotypesHabits = ({
   control,
@@ -48,12 +49,18 @@ const PersonaStereotypesHabits = ({
                 />
                 <Button
                   onClick={() => {
-                    if (
-                      !values.includes(newStereotype) &&
-                      newStereotype !== ""
-                    ) {
+                    const valid =
+                      !values.includes(newStereotype.trim()) &&
+                      newStereotype.trim() !== "" &&
+                      newStereotype.trim().length >= 3 &&
+                      newStereotype.trim().length <= 200;
+                    if (valid) {
                       onChange([...values, newStereotype]);
                       setNewStereotype("");
+                    } else {
+                      toast.error(
+                        "Mínimo: 3 caracteres / Máximo: 200 caracteres",
+                      );
                     }
                   }}
                   type="button"
@@ -70,14 +77,14 @@ const PersonaStereotypesHabits = ({
                         "Stereotypes/Quirks from GuideAut",
                       )}
                   </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px] h-[280px]">
+                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
                     {defaultStereotypes.map((stereotype) => {
                       return (
                         <div
                           key={stereotype.en}
                           className="flex justify-between"
                         >
-                          <button>
+                          <button className="text-left">
                             {exibirTexto(stereotype.pt, stereotype.en)}
                           </button>
                           <AddOptionAlertDialog
@@ -114,9 +121,7 @@ const PersonaStereotypesHabits = ({
                     {values.map((value) => {
                       return (
                         <div key={value} className="flex justify-between">
-                          <button className="break-normal max-w-[150px]">
-                            {value}
-                          </button>
+                          <button className="text-left">{value}</button>
                           <RemoveOptionAlertDialog
                             onClick={() => {
                               const filtered = values.filter(

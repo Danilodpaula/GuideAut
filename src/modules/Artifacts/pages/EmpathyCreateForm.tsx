@@ -17,7 +17,7 @@ const EmpathyCreateForm = () => {
   useAuthGuard();
   const [step, setStep] = useState(0);
   const { exibirTexto } = useDefault();
-  const { control, watch, create } = useEmpathyForm({});
+  const { control, watch, create, errors } = useEmpathyForm({});
 
   const steps = [
     <PersonalData<EmpathyInput> control={control} />,
@@ -54,6 +54,9 @@ const EmpathyCreateForm = () => {
           {step === steps.length - 1 && <SubmitButton />}
         </div>
       </form>
+      {errors.length > 0 && (
+        <p className="font-bold text-red-600">{errors[0]}</p>
+      )}
     </div>
   );
 };

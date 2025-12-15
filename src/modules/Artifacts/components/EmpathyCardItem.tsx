@@ -1,25 +1,27 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Eye, Pencil, User } from "lucide-react";
+import { Eye, Pencil, Shapes, User } from "lucide-react";
 import useDefault from "../hooks/useDefault";
 import { genders } from "../i18n/genders";
 import DeleteButton from "./DeleteButton";
 
 interface ActionsProps {
+  dpautAction: () => void;
   viewAction: () => void;
   editAction: () => void;
   deleteAction: () => Promise<void>;
 }
 
-const CardItem = ({
+const EmpathyCardItem = ({
   name,
   gender,
   age,
   viewAction,
   editAction,
   deleteAction,
+  dpautAction,
 }: { name: string; gender: string; age: number } & ActionsProps) => {
-  const { navigate, exibirTexto } = useDefault();
+  const { exibirTexto } = useDefault();
   const genderName = genders.find((g) => g.id === gender);
   return (
     <Card className="hover:shadow-md transition-shadow">
@@ -38,6 +40,14 @@ const CardItem = ({
             </div>
           </div>
           <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={dpautAction}
+              title={exibirTexto("Padrões de Design", "Design Patterns")}
+            >
+              <Shapes className="w-4 h-4" />
+            </Button>
             <Button
               variant="outline"
               size="icon"
@@ -62,4 +72,4 @@ const CardItem = ({
   );
 };
 
-export default CardItem;
+export default EmpathyCardItem;

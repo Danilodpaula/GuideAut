@@ -9,6 +9,7 @@ import { defaultSocialAspects } from "../i18n/persona";
 import useDefault from "../hooks/useDefault";
 import { PersonaInput } from "../hooks/usePersonaForm";
 import { useI18n } from "@/core/i18n/I18nContext";
+import { toast } from "sonner";
 
 const PersonaSocialAspects = ({
   control,
@@ -48,9 +49,18 @@ const PersonaSocialAspects = ({
                 />
                 <Button
                   onClick={() => {
-                    if (!values.includes(newAspect) && newAspect !== "") {
+                    const valid =
+                      !values.includes(newAspect.trim()) &&
+                      newAspect.trim() !== "" &&
+                      newAspect.trim().length >= 3 &&
+                      newAspect.trim().length <= 200;
+                    if (valid) {
                       onChange([...values, newAspect]);
                       setNewAspect("");
+                    } else {
+                      toast.error(
+                        "Mínimo: 3 caracteres / Máximo: 200 caracteres",
+                      );
                     }
                   }}
                   type="button"
@@ -67,11 +77,13 @@ const PersonaSocialAspects = ({
                         "Social and familiar aspects from GuideAut",
                       )}
                   </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px] h-[280px]">
+                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
                     {defaultSocialAspects.map((aspect) => {
                       return (
                         <div key={aspect.en} className="flex justify-between">
-                          <button>{exibirTexto(aspect.pt, aspect.en)}</button>
+                          <button className="text-left">
+                            {exibirTexto(aspect.pt, aspect.en)}
+                          </button>
                           <AddOptionAlertDialog
                             onClick={() => {
                               if (
@@ -103,9 +115,7 @@ const PersonaSocialAspects = ({
                     {values.map((value) => {
                       return (
                         <div key={value} className="flex justify-between">
-                          <button className="break-normal max-w-[150px]">
-                            {value}
-                          </button>
+                          <button className="text-left">{value}</button>
                           <RemoveOptionAlertDialog
                             onClick={() => {
                               const filtered = values.filter(
