@@ -225,7 +225,7 @@ export default function ImersionPhase() {
             </p>
 
             {diagramImersionOpen && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+              <div className="fixed inset-0 z-[1200] flex items-center justify-center p-4">
                 <div
                   className="fixed inset-0 bg-black/50 backdrop-blur-sm"
                   onClick={() => setDiagramImersionOpen(false)}
@@ -559,7 +559,7 @@ export default function ImersionPhase() {
           </div>
 
           {diagramAprenderContextoOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="fixed inset-0 z-[1200] flex items-center justify-center p-4">
               <div
                 className="fixed inset-0 bg-black/50 backdrop-blur-sm"
                 onClick={() => setDiagramAprenderContextoOpen(false)}
@@ -1001,7 +1001,7 @@ export default function ImersionPhase() {
           </p>
 
           {diagramExtrairRequisitosOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="fixed inset-0 z-[1200] flex items-center justify-center p-4">
               <div
                 className="fixed inset-0 bg-black/50 backdrop-blur-sm"
                 onClick={() => setDiagramExtrairRequisitosOpen(false)}
