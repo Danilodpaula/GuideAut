@@ -9,6 +9,7 @@ import { defaultSocialAspects } from "../i18n/persona";
 import useDefault from "../hooks/useDefault";
 import { PersonaInput } from "../hooks/usePersonaForm";
 import { useI18n } from "@/core/i18n/I18nContext";
+import { toast } from "sonner";
 
 const PersonaSocialAspects = ({
   control,
@@ -48,9 +49,18 @@ const PersonaSocialAspects = ({
                 />
                 <Button
                   onClick={() => {
-                    if (!values.includes(newAspect) && newAspect !== "") {
+                    const valid =
+                      !values.includes(newAspect.trim()) &&
+                      newAspect.trim() !== "" &&
+                      newAspect.trim().length >= 3 &&
+                      newAspect.trim().length <= 200;
+                    if (valid) {
                       onChange([...values, newAspect]);
                       setNewAspect("");
+                    } else {
+                      toast.error(
+                        "Mínimo: 3 caracteres / Máximo: 200 caracteres",
+                      );
                     }
                   }}
                   type="button"
