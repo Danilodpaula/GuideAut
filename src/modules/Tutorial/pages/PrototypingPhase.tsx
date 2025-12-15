@@ -5,6 +5,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useI18n } from "@/core/i18n/I18nContext";
 import {
+  ArrowLeft,
   CheckCircle,
   ChevronRight,
   FileText,
@@ -14,7 +15,6 @@ import {
   Repeat,
   Users,
   X,
-  ArrowLeft,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -207,11 +207,11 @@ export default function PrototypingPhase() {
 
                 {/* Conteúdo do pop-up vem aqui.*/}
                 <Card
-                  className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                  className="relative mx-auto my-auto w-full max-w-md lg:max-w-3xl max-h-[80vh] animate-fade-in z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
                   {/* Header + Botão de Fechar*/}
-                  <CardHeader className="sticky top-0 z-10 bg-white border-b px-6 py-4 rounded-t-xl">
+                  <CardHeader className="sticky top-0 z-10 border-b px-6 py-4 rounded-t-xl">
                     <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                       {language === "pt-BR"
                         ? "Sobre o Diagrama"
@@ -224,8 +224,11 @@ export default function PrototypingPhase() {
                       </button>
                     </CardTitle>
                   </CardHeader>
-                  {/* Texto do pop-up atualizado */}
-                  <CardContent className="p-6">
+                  {/* Texto do pop-up */}
+                  <CardContent
+                    className="p-6 overflow-y-auto"
+                    style={{ maxHeight: "calc(80vh - 72px)" }}
+                  >
                     <div className="space-y-4 text-lg">
                       {language === "pt-BR" ? (
                         <>
