@@ -453,6 +453,16 @@ export default function IdeationPhase() {
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
                       {language === "pt-BR"
+                        ? "Atividades da Fase:"
+                        : "Phase Activities:"}
+                    </strong>{" "}
+                    {language === "pt-BR"
+                      ? "Definir Itens de Requisitos/Restrições, Especificar Itens Requisitos e Gerar/Refinar Ideias de Interface."
+                      : "Define Requirements/Constraints Items, Specify Requirements Items, and Generate/Refine Interface Ideas."}
+                  </li>
+                  <li>
+                    <strong className="text-blue-700 dark:text-blue-300">
+                      {language === "pt-BR"
                         ? "Entrada da fase:"
                         : "Phase input:"}
                     </strong>{" "}
@@ -477,16 +487,6 @@ export default function IdeationPhase() {
                     {language === "pt-BR"
                       ? "Pais, especialistas, solicitantes de software, designers/desenvolvedores."
                       : "Parents, specialists, software requesters, designers/developers."}
-                  </li>
-                  <li>
-                    <strong className="text-blue-700 dark:text-blue-300">
-                      {language === "pt-BR"
-                        ? "Atividades da Fase:"
-                        : "Phase Activities:"}
-                    </strong>{" "}
-                    {language === "pt-BR"
-                      ? "Definir Itens de Requisitos/Restrições, Especificar Itens Requisitos e Gerar/Refinar Ideias de Interface."
-                      : "Define Requirements/Constraints Items, Specify Requirements Items, and Generate/Refine Interface Ideas."}
                   </li>
                 </ul>
               </CardContent>
@@ -1004,7 +1004,7 @@ export default function IdeationPhase() {
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:z-0 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">

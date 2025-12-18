@@ -725,9 +725,9 @@ export default function ProAutProcess() {
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:z-0 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
-        <Card className="border-l-4 border-l-blue-500 dark:border-l-blue-600 dark:bg-gray-900 dark:border-gray-700">
+        <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center gap-2 dark:text-white">
               <FileText className="h-5 w-5 text-blue-500 dark:text-blue-400" />
