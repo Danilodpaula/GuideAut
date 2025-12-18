@@ -7,6 +7,7 @@ import { useI18n } from "@/core/i18n/I18nContext";
 import {
   ArrowLeft,
   ArrowRight,
+  CheckCircle,
   ChevronRight,
   FileText,
   Info,
@@ -110,6 +111,11 @@ export default function ImersionPhase() {
       {
         id: "consolidar-dados",
         title: language === "pt-BR" ? "Consolidar dados" : "Consolidate data",
+        type: "scroll",
+      },
+      {
+        id: "conclusao-fase",
+        title: language === "pt-BR" ? "Encerramento da Fase" : "Phase Closing",
         type: "scroll",
       },
       {
@@ -2098,6 +2104,76 @@ export default function ImersionPhase() {
               </div>
             </CardContent>
           </Card>
+        </section>
+
+        <section
+          id="conclusao-fase"
+          className="scroll-m-20 space-y-6 mt-12 pt-8 border-t"
+        >
+          <div className="flex items-center gap-3">
+            <div className="bg-green-100 p-2 rounded-full">
+              <CheckCircle className="h-6 w-6 text-green-600" />
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              {language === "pt-BR"
+                ? "Encerramento da Fase"
+                : "Phase Conclusion"}
+            </h2>
+          </div>
+
+          <div className="space-y-4 text-lg leading-relaxed">
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <CheckCircle className="text-blue-600 dark:text-blue-400 h-5 w-5" />
+                  {language === "pt-BR" ? "Conclusão" : "Conclusion"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <p className="text-justify text-blue-700 dark:text-blue-300 mb-4">
+                    {language === "pt-BR"
+                      ? "Ao concluir as três atividades — Aprender sobre o contexto, Extrair Requisitos e Consolidar Dados — a equipe de desenvolvimento já deve possuir consciência das implicações do desafio e conhecer o ponto de vista de seus clientes, assim como também de seus futuros usuários. Com o material reunido na Pesquisa Desk, encerra-se a fase com:"
+                      : "Upon completing the three activities—Learning about the context, Extracting Requirements, and Consolidating Data—the development team should already be aware of the implications of the challenge and understand the perspectives of their clients, as well as their future users. With the material gathered in the Desk Research, the phase concludes with:"}
+                  </p>
+                  <ul className="text-justify text-blue-700 dark:text-blue-300 list-disc list-inside ml-4 space-y-1 mb-4">
+                    <li>
+                      {language === "pt-BR"
+                        ? "Canvas dos Cuidadores de Autistas (CCA)"
+                        : "Autistic Caregivers Canvas (ACC)"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Canvas dos Terapeutas de Autistas (CTA)"
+                        : "Autistic Therapists Canvas (ATC)"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Canvas do Solicitante do Software (CSS)"
+                        : "Software Requester Canvas (RSC)"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Formulário de Caracterização do Autista (FCA)"
+                        : "Autistic Characterization Form (ACF)"}
+                    </li>
+                    <li>
+                      {language === "pt-BR"
+                        ? "Gráfico de Visão Geral do Autista (VGA)"
+                        : "Autistic Overview Graph (AOG)"}
+                    </li>
+                  </ul>
+                  <div className="mt-4 pt-4 border-t border-blue-200">
+                    <p className="font-bold text-blue-700 dark:text-blue-300 text-center">
+                      {language === "pt-BR"
+                        ? "Esse artefato orientam diretamente a Fase de Análise e garantem que o time de desenvolvimento está apto a iniciar o levantamento de necessidades e oportunidades de desenvolvimento de tecnologias acessíveis."
+                        : "This artifact directly guides the Analysis Phase and ensures that the development team is ready to begin identifying needs and opportunities for developing accessible technologies."}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </section>
 
         {/* Card de Artefatos da Fase */}
