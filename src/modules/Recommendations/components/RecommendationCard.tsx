@@ -16,6 +16,7 @@ import { StarRatingInput } from "./StarRatingInput";
 import { RecommendationUi } from "../hooks/useRecommendations";
 import { CommentSection } from "./CommentSection";
 import { CreateReportDialog } from "@/components/reports/CreateReportDialog";
+import { useAuth } from "@/core/auth/AuthContext";
 
 interface RecommendationCardProps {
   rec: RecommendationUi;
@@ -38,8 +39,16 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
   getCategoryIcon,
   getCategoryLabel,
 }) => {
+  const { user, can } = useAuth();
   const media =
     rec.totalAvaliacoes > 0 ? rec.somaNotas / rec.totalAvaliacoes : 0;
+
+  const canDelete =
+    isAuthenticated &&
+    (can("ADMIN") || (user?.id && rec.usuarioId === user.id));
+  const canEdit =
+    isAuthenticated &&
+    (can("ADMIN") || (user?.id && rec.usuarioId === user.id));
 
   return (
     <Card key={rec.id} className="flex flex-col">
@@ -65,33 +74,36 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             <CardTitle className="text-xl pt-2">{rec.titulo}</CardTitle>
           </div>
 
-          {/* Botões de Admin/Edição/Denúncia (apenas se autenticado) */}
           {isAuthenticated && (
             <div className="flex flex-col sm:flex-row gap-1">
-              {/* Botão de Denúncia */}
               <CreateReportDialog
                 targetId={rec.id}
                 targetType="RECOMMENDATION"
               />
 
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-muted-foreground hover:text-primary"
-                onClick={() => onEdit(rec)}
-              >
-                <Pencil className="h-4 w-4" />
-                <span className="sr-only">Editar</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                onClick={() => onDelete(rec.id)}
-              >
-                <Trash2 className="h-4 w-4" />
-                <span className="sr-only">Deletar</span>
-              </Button>
+              {canEdit && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onEdit(rec)}
+                >
+                  <Pencil className="h-4 w-4" />
+                  <span className="sr-only">Editar</span>
+                </Button>
+              )}
+
+              {canDelete && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                  onClick={() => onDelete(rec.id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  <span className="sr-only">Deletar</span>
+                </Button>
+              )}
             </div>
           )}
         </div>
@@ -110,7 +122,6 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
       </CardContent>
 
       <CardFooter className="flex flex-col items-start gap-4 w-full border-t pt-4">
-        {/* Área de Avaliação (só aparece se logado) */}
         {isAuthenticated && (
           <div className="w-full flex justify-between items-center">
             <StarRatingInput
@@ -120,7 +131,6 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           </div>
         )}
 
-        {/* Seção de Comentários Integrada */}
         <CommentSection
           recomendacaoId={rec.id}
           isAuthenticated={isAuthenticated}

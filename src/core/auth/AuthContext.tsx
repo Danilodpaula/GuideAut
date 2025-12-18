@@ -14,10 +14,10 @@ import { loginApi, getProfileApi, signupApi } from "@/api/authService"; // IMPOR
 import { AuthRequest } from "@/api/types/authTypes"; // IMPORTADO
 
 // ------------------------------------------------------------
-// 🧩 Tipagens (Simplificado para o backend Spring)
+// 🧩 Tipagens
 // ------------------------------------------------------------
 interface User {
-  id: string; // Usaremos o email por enquanto
+  id: string; // AGORA SERÁ O UUID REAL
   email: string;
   name: string;
   roles: string[];
@@ -28,7 +28,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: AuthRequest) => Promise<void>;
-  signup: (data: any) => Promise<void>; // Signup não está no backend, será mockado
+  signup: (data: any) => Promise<void>;
   logout: () => void;
   can: (role: string) => boolean;
 }
@@ -40,7 +40,7 @@ const TOKEN_KEY = "guideaut_access_token";
 const REFRESH_KEY = "guideaut_refresh_token";
 
 // ------------------------------------------------------------
-// 🧭 Provedor de Autenticação (Modificado)
+// 🧭 Provedor de Autenticação
 // ------------------------------------------------------------
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -65,13 +65,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // O interceptor do Axios em 'api/client.ts' já injeta o token
       const { data } = await getProfileApi(); // Chama GET /me
 
-      // O backend /me só retorna o email (e roles, se o JWTAuthFilter for ajustado)
-      // Vamos simular os dados do usuário
+      // CORREÇÃO AQUI: Usar data.id e data.roles reais
       setUser({
-        id: data.email,
+        id: data.id, // <-- USA O UUID VINDO DO BACKEND
         email: data.email,
-        name: data.email.split("@")[0], // Simples
-        roles: data.roles, // TODO: O backend precisa popular isso
+        name: data.name || data.email.split("@")[0],
+        roles: data.roles || [], // <-- USA AS ROLES VINDAS DO BACKEND
       });
     } catch (error) {
       console.error("❌ Erro ao carregar dados do usuário:", error);
@@ -83,7 +82,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // ------------------------------------------------------------
-  // 🔑 Login (agora usa o backend Spring)
+  // 🔑 Login
   // ------------------------------------------------------------
   const login = async (credentials: AuthRequest) => {
     const { data } = await loginApi(credentials); // Chama POST /auth/login
@@ -108,9 +107,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // ------------------------------------------------------------
   const signup = async (data: any) => {
     try {
-      // O backend espera "nome", "email" e "password".
-      // O formulário do frontend envia "name", "email" e "password".
-      // Realizamos o mapeamento aqui:
       const payload = {
         nome: data.name,
         email: data.email,
@@ -118,24 +114,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       };
 
       await signupApi(payload);
-
-      // Opcional: Você pode realizar o login automático aqui se desejar,
-      // chamando a função login({ email: data.email, password: data.password })
     } catch (error) {
       console.error("Erro no cadastro:", error);
-      throw error; // Repassa o erro para o componente exibir o Toast
+      throw error;
     }
   };
 
   // ------------------------------------------------------------
-  // 🛡️ Verificação de permissões (simplificada)
+  // 🛡️ Verificação de permissões
   // ------------------------------------------------------------
   const can = (role: string): boolean => {
     if (!user) return false;
-    console.log("user", user);
-    console.log("user.roles", user.roles);
-    console.log("user.roles.includes(role)", user.roles.includes(role));
-    // O backend precisa popular 'roles' no JWT para isso funcionar 100%
+    // Verifica se o array de roles do usuário contem a role desejada
     return user.roles.includes(role);
   };
 
@@ -157,7 +147,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 };
 
 // ------------------------------------------------------------
-// ⚙️ Hook de uso do contexto (sem alteração)
+// ⚙️ Hook de uso do contexto
 // ------------------------------------------------------------
 export const useAuth = () => {
   const ctx = useContext(AuthContext);

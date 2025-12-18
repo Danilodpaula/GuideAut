@@ -16,6 +16,7 @@ export interface Recomendacao {
   criadoEm: string;
   somaNotas: number;
   totalAvaliacoes: number;
+  usuarioId?: string;
 }
 
 export interface AvaliacaoRequest {
@@ -28,4 +29,5 @@ export interface Comentario {
   autorNome: string;
   autorAvatar: string | null;
   criadoEm: string;
+  autorId: string;
 }

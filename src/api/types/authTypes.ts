@@ -9,7 +9,11 @@ export interface AuthResponse {
 }
 
 export interface UserProfile {
+  id: string; // <-- ADICIONADO: UUID
+  name: string; // <-- ADICIONADO
   email: string;
-  // O backend /me também retorna 'roles' (papeis),
-  // podemos adicionar aqui quando necessário.
+  roles: string[]; // <-- ADICIONADO: Lista de papeis
+  avatarUrl?: string; // <-- ADICIONADO
+  displayName?: string; // <-- ADICIONADO
+  bio?: string; // <-- ADICIONADO
 }
