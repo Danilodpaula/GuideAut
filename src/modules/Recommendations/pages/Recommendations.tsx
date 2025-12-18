@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/core/auth/AuthContext";
 import { useI18n } from "@/core/i18n/I18nContext";
@@ -45,8 +45,21 @@ const getCategoryLabel = (category: string) => {
 
 export default function Recommendations() {
   const { t } = useI18n();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user, can } = useAuth();
   const navigate = useNavigate();
+
+  // Verifica se o usuário é admin
+  const isAdmin = useMemo(() => can("ROLE_ADMIN"), [can]);
+
+  // Função para verificar se o usuário pode editar/excluir uma recomendação
+  const canEditOrDelete = useCallback(
+    (rec: { autorEmail?: string }) => {
+      if (!isAuthenticated || !user) return false;
+      if (isAdmin) return true; // Admin pode editar/excluir qualquer recomendação
+      return rec.autorEmail === user.email; // Usuário comum só pode editar/excluir suas próprias
+    },
+    [isAuthenticated, user, isAdmin],
+  );
 
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("ALL");
@@ -127,6 +140,8 @@ export default function Recommendations() {
               key={rec.id}
               rec={rec}
               isAuthenticated={isAuthenticated}
+              canEdit={canEditOrDelete(rec)}
+              canDelete={canEditOrDelete(rec)}
               ratingLoadingId={ratingLoadingId}
               onEdit={openEditDialog}
               onDelete={openDeleteDialog}

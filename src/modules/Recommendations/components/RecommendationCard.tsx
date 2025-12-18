@@ -20,6 +20,8 @@ import { CreateReportDialog } from "@/components/reports/CreateReportDialog";
 interface RecommendationCardProps {
   rec: RecommendationUi;
   isAuthenticated: boolean;
+  canEdit: boolean; // Se o usuário pode editar esta recomendação
+  canDelete: boolean; // Se o usuário pode excluir esta recomendação
   ratingLoadingId: string | null;
   onEdit: (rec: Recomendacao) => void;
   onDelete: (id: string) => void;
@@ -31,6 +33,8 @@ interface RecommendationCardProps {
 export const RecommendationCard: React.FC<RecommendationCardProps> = ({
   rec,
   isAuthenticated,
+  canEdit,
+  canDelete,
   ratingLoadingId,
   onEdit,
   onDelete,
@@ -74,24 +78,31 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                 targetType="RECOMMENDATION"
               />
 
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-muted-foreground hover:text-primary"
-                onClick={() => onEdit(rec)}
-              >
-                <Pencil className="h-4 w-4" />
-                <span className="sr-only">Editar</span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                onClick={() => onDelete(rec.id)}
-              >
-                <Trash2 className="h-4 w-4" />
-                <span className="sr-only">Deletar</span>
-              </Button>
+              {/* Botão de Editar - apenas para autor ou admin */}
+              {canEdit && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-muted-foreground hover:text-primary"
+                  onClick={() => onEdit(rec)}
+                >
+                  <Pencil className="h-4 w-4" />
+                  <span className="sr-only">Editar</span>
+                </Button>
+              )}
+
+              {/* Botão de Excluir - apenas para autor ou admin */}
+              {canDelete && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                  onClick={() => onDelete(rec.id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  <span className="sr-only">Deletar</span>
+                </Button>
+              )}
             </div>
           )}
         </div>

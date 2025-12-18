@@ -16,6 +16,7 @@ export interface Recomendacao {
   criadoEm: string;
   somaNotas: number;
   totalAvaliacoes: number;
+  autorEmail?: string; // Email do autor da recomendação
 }
 
 export interface AvaliacaoRequest {
