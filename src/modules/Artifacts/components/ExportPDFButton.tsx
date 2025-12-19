@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import html2pdf from "html2pdf.js";
-import { MutableRefObject } from "react";
 import { Download } from "lucide-react";
+import { MutableRefObject } from "react";
 import useDefault from "../hooks/useDefault";
 
 interface Props {
