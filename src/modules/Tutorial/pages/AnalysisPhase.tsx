@@ -5,6 +5,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useI18n } from "@/core/i18n/I18nContext";
 import {
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle,
   ChevronRight,
   FileText,
   Heart,
@@ -13,9 +16,6 @@ import {
   TrendingUp,
   Users,
   X,
-  CheckCircle,
-  ArrowLeft,
-  ArrowRight,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -243,10 +243,10 @@ export default function AnalysisPhase() {
 
                 {/* Conteúdo do pop-up do diagrama de análise */}
                 <Card
-                  className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                  className="relative mx-auto my-auto w-full max-w-md lg:max-w-3xl max-h-[80vh] overflow-y-auto animate-fade-in z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <CardHeader className="sticky top-0 z-50 bg-white border-b px-6 py-4 rounded-t-xl">
+                  <CardHeader className="sticky top-0 z-50 border-b px-6 py-4 rounded-t-xl">
                     <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                       {language === "pt-BR"
                         ? "Sobre o Diagrama"
@@ -259,7 +259,10 @@ export default function AnalysisPhase() {
                       </button>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="p-6">
+                  <CardContent
+                    className="p-6 overflow-y-auto"
+                    style={{ maxHeight: "calc(80vh - 72px)" }}
+                  >
                     <div className="space-y-4">
                       {language === "pt-BR" ? (
                         <>
@@ -449,8 +452,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/FluxoAnalise-pt-br.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/FluxoAnalise-en-us.png"
+                      ? "/assets/analysis-phase/FluxoAnalise-pt-br.png"
+                      : "/assets/analysis-phase/FluxoAnalise-en-us.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -614,10 +617,10 @@ export default function AnalysisPhase() {
 
                 {/* Conteúdo do pop-up do diagrama de triangular dados */}
                 <Card
-                  className="relative mx-auto my-auto max-w-md w-full max-h-[80vh] overflow-y-auto animate-fade-in z-50"
+                  className="relative mx-auto my-auto w-full max-w-md lg:max-w-3xl max-h-[80vh] animate-fade-in z-50"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <CardHeader className="sticky top-0 z-50 bg-white border-b px-6 py-4 rounded-t-xl">
+                  <CardHeader className="sticky top-0 z-50 border-b px-6 py-4 rounded-t-xl">
                     <CardTitle className="text-xl text-blue-500 font-bold flex items-center justify-between">
                       {language === "pt-BR"
                         ? "Sobre o Diagrama"
@@ -630,7 +633,10 @@ export default function AnalysisPhase() {
                       </button>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="p-6">
+                  <CardContent
+                    className="p-6 overflow-y-auto"
+                    style={{ maxHeight: "calc(80vh - 72px)" }}
+                  >
                     <div className="space-y-4">
                       {language === "pt-BR" ? (
                         <>
@@ -802,8 +808,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/TriangularDado-PTBR.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/TriangularDado-InglesUS.png"
+                      ? "/assets/analysis-phase/TriangularDado-PTBR.png"
+                      : "/assets/analysis-phase/TriangularDado-InglesUS.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -857,8 +863,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/initialTRR-pt-br-lightTheme.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/initialTRR-en-us-lightTheme.png"
+                      ? "/assets/analysis-phase/initialTRR-pt-br-lightTheme.png"
+                      : "/assets/analysis-phase/initialTRR-en-us-lightTheme.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -870,8 +876,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/initialTRR-pt-br-darkTheme.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/initialTRR-en-us-darkTheme.png"
+                      ? "/assets/analysis-phase/initialTRR-pt-br-darkTheme.png"
+                      : "/assets/analysis-phase/initialTRR-en-us-darkTheme.png"
                   }
                   alt={
                     language === "pt-BR"
@@ -981,8 +987,8 @@ export default function AnalysisPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/analysis-phase/personAut1-pt-br.png"
-                          : "src/modules/Tutorial/assets/analysis-phase/personAut1-en-us.png"
+                          ? "/assets/analysis-phase/personAut1-pt-br.png"
+                          : "/assets/analysis-phase/personAut1-en-us.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1007,8 +1013,8 @@ export default function AnalysisPhase() {
                     <img
                       src={
                         language === "pt-BR"
-                          ? "src/modules/Tutorial/assets/analysis-phase/personAut2-pt-br.png"
-                          : "src/modules/Tutorial/assets/analysis-phase/personAut2-en-us.png"
+                          ? "/assets/analysis-phase/personAut2-pt-br.png"
+                          : "/assets/analysis-phase/personAut2-en-us.png"
                       }
                       alt={
                         language === "pt-BR"
@@ -1112,8 +1118,8 @@ export default function AnalysisPhase() {
                 <img
                   src={
                     language === "pt-BR"
-                      ? "src/modules/Tutorial/assets/analysis-phase/empathyAut-pt-br.png"
-                      : "src/modules/Tutorial/assets/analysis-phase/empathyAut-en-us.png"
+                      ? "/assets/analysis-phase/empathyAut-pt-br.png"
+                      : "/assets/analysis-phase/empathyAut-en-us.png"
                   }
                   alt={
                     language === "pt-BR"
