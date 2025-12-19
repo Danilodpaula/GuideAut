@@ -1,5 +1,4 @@
 import useDefault from "../hooks/useDefault";
-import { EmpathyWatch } from "../hooks/useEmpathyForm";
 import { genders } from "../i18n/genders";
 import { interactionOptions } from "../i18n/interaction-options";
 import { cognitionOptions } from "../i18n/cognition-options";
@@ -7,9 +6,12 @@ import { communicationOptions } from "../i18n/communication-options";
 import { behaviorOptions } from "../i18n/behavior-options";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import ExportPDFButton from "./ExportPDFButton";
+import { useFormContext } from "react-hook-form";
 
-const EmpathyConfirmation = ({ watch }: { watch: EmpathyWatch }) => {
+const EmpathyConfirmation = () => {
   const { exibirTexto, contentRef } = useDefault();
+  const { watch } = useFormContext();
+
   const gender = genders.find((gender) => gender.id === watch("gender"));
   const interactionList = interactionOptions.filter((option) =>
     watch("interaction")?.includes(option.id),

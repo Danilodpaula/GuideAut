@@ -1,6 +1,5 @@
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Control, Controller, FieldPath } from "react-hook-form";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -8,16 +7,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { FormBase } from "../types/form-base";
-import { genders } from "../i18n/genders";
+import { Controller, useFormContext } from "react-hook-form";
 import useDefault from "../hooks/useDefault";
+import { genders } from "../i18n/genders";
 
-const PersonalData = <T extends FormBase>({
-  control,
-}: {
-  control: Control<T, any, T>;
-}) => {
+const PersonalData = () => {
   const { exibirTexto } = useDefault();
+  const { control } = useFormContext();
   return (
     <div className="flex flex-col gap-[10px]">
       <h2 className="flex-1 mb-[10px] font-bold">
@@ -30,7 +26,7 @@ const PersonalData = <T extends FormBase>({
         )}
       </Label>
       <Controller
-        name={"name" as FieldPath<T>}
+        name={"name"}
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input id="name" type="text" value={value} onChange={onChange} />
@@ -40,7 +36,7 @@ const PersonalData = <T extends FormBase>({
         {exibirTexto("E qual é a idade?", "And what is their age?")}
       </Label>
       <Controller
-        name={"age" as FieldPath<T>}
+        name={"age"}
         control={control}
         render={({ field: { onChange, value } }) => (
           <Input id="age" type="number" value={value} onChange={onChange} />
@@ -50,10 +46,10 @@ const PersonalData = <T extends FormBase>({
         {exibirTexto("E qual é o gênero?", "And what is their gender?")}
       </Label>
       <Controller
-        name={"gender" as FieldPath<T>}
+        name={"gender"}
         control={control}
         render={({ field: { onChange, value } }) => (
-          <Select onValueChange={onChange} value={value as string}>
+          <Select onValueChange={onChange} value={value}>
             <SelectTrigger>
               <SelectValue placeholder="" />
             </SelectTrigger>

@@ -20,7 +20,7 @@ import SubmitButton from "../components/SubmitButton";
 import useAuthGuard from "../hooks/useAuthGuard";
 import useDefault from "../hooks/useDefault";
 import usePersonaApi from "../hooks/usePersonaApi";
-import { PersonaInput, usePersonaForm } from "../hooks/usePersonaForm";
+import usePersonaForm from "../hooks/usePersonaForm";
 
 const PersonaEditForm = () => {
   useAuthGuard();
@@ -28,41 +28,35 @@ const PersonaEditForm = () => {
   const { findOnePersona } = usePersonaApi({ id: id });
   const { isFetching, data, isError, refetch } = findOnePersona;
   const [step, setStep] = useState(0);
-  const { onUpdateSubmit, formMethods, errors } = usePersonaForm({ id: id });
+  const { onUpdateSubmit, errors, formMethods } = usePersonaForm({ id: id });
 
   const baseSteps = useMemo(
     () => [
-      <PersonalData<PersonaInput> control={formMethods.control} />,
-      <PersonaGeneralCharacteristics control={formMethods.control} />,
-      <Behavior<PersonaInput> control={formMethods.control} />,
-      <Cognition<PersonaInput> control={formMethods.control} />,
-      <Communication<PersonaInput> control={formMethods.control} />,
-      <Interaction<PersonaInput> control={formMethods.control} />,
-      <PersonaChooseModel control={formMethods.control} />,
+      <PersonalData />,
+      <PersonaGeneralCharacteristics />,
+      <Behavior />,
+      <Cognition />,
+      <Communication />,
+      <Interaction />,
+      <PersonaChooseModel />,
     ],
-    [formMethods.control],
+    [],
   );
 
   const model1Steps = useMemo(
     () => [
-      <PersonaStressfulActivities control={formMethods.control} />,
-      <PersonaCalmingActivities control={formMethods.control} />,
-      <PersonaStereotypesHabits control={formMethods.control} />,
-      <PersonaSocialAspects control={formMethods.control} />,
-      <PersonaSoftwareAspects control={formMethods.control} />,
+      <PersonaStressfulActivities />,
+      <PersonaCalmingActivities />,
+      <PersonaStereotypesHabits />,
+      <PersonaSocialAspects />,
+      <PersonaSoftwareAspects />,
     ],
-    [formMethods.control],
+    [],
   );
 
-  const model2Steps = useMemo(
-    () => [<PersonaAbout control={formMethods.control} />],
-    [formMethods.control],
-  );
+  const model2Steps = useMemo(() => [<PersonaAbout />], []);
 
-  const confirmationSteps = useMemo(
-    () => [<PersonaConfirmation watch={formMethods.watch} />],
-    [formMethods.watch],
-  );
+  const confirmationSteps = useMemo(() => [<PersonaConfirmation />], []);
 
   const [steps, setSteps] = useState([...baseSteps, ...confirmationSteps]);
 
@@ -70,27 +64,24 @@ const PersonaEditForm = () => {
     refetch();
   }, [refetch]);
 
+  const reset = formMethods.reset;
+  const model = formMethods.watch("model");
+
   useEffect(() => {
     if (data) {
-      formMethods.reset(data);
+      reset(data);
     }
   }, [data]);
 
   useEffect(() => {
-    if (formMethods.watch("model") === "1") {
+    if (model === "1") {
       setSteps([...baseSteps, ...model1Steps, ...confirmationSteps]);
-    } else if (formMethods.watch("model") === "2") {
+    } else if (model === "2") {
       setSteps([...baseSteps, ...model2Steps, ...confirmationSteps]);
     } else {
       setSteps([...baseSteps, ...confirmationSteps]);
     }
-  }, [
-    formMethods.watch("model"),
-    baseSteps,
-    confirmationSteps,
-    model1Steps,
-    model2Steps,
-  ]);
+  }, [model, baseSteps, confirmationSteps, model1Steps, model2Steps]);
 
   if (isFetching) {
     return <p>{exibirTexto("Carregando...", "Loading...")}</p>;

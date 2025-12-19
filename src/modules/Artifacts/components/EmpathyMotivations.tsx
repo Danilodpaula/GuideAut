@@ -1,15 +1,12 @@
-import { Control, Controller } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Controller, useFormContext } from "react-hook-form";
 import useDefault from "../hooks/useDefault";
-import { EmpathyInput } from "../hooks/useEmpathyForm";
 
-const EmpathyMotivations = ({
-  control,
-}: {
-  control: Control<EmpathyInput, any, EmpathyInput>;
-}) => {
+const EmpathyMotivations = () => {
   const { exibirTexto } = useDefault();
+  const { control } = useFormContext();
+
   return (
     <div>
       <Label htmlFor="reasons">

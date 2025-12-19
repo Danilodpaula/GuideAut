@@ -1,14 +1,16 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CircleUserRound } from "lucide-react";
+import { useFormContext } from "react-hook-form";
 import useDefault from "../hooks/useDefault";
-import { PersonaWatch } from "../hooks/usePersonaForm";
 import { languages } from "../i18n/autistic-languages";
 import { genders } from "../i18n/genders";
 import ExportPDFButton from "./ExportPDFButton";
 import VGA from "./VGA";
-import { CircleUserRound } from "lucide-react";
 
-const FirstModel = ({ watch }: { watch: PersonaWatch }) => {
+const FirstModel = () => {
   const { exibirTexto } = useDefault();
+  const { watch } = useFormContext();
+
   const gender = genders.find((gender) => gender.id === watch("gender"));
   const lang = languages.find((l) => l.id === watch("language"));
 
@@ -111,8 +113,10 @@ const FirstModel = ({ watch }: { watch: PersonaWatch }) => {
   );
 };
 
-const SecondModel = ({ watch }: { watch: PersonaWatch }) => {
+const SecondModel = () => {
   const { exibirTexto } = useDefault();
+  const { watch } = useFormContext();
+
   const gender = genders.find((gender) => gender.id === watch("gender"));
   const lang = languages.find((l) => l.id === watch("language"));
 
@@ -159,16 +163,17 @@ const SecondModel = ({ watch }: { watch: PersonaWatch }) => {
   );
 };
 
-const PersonaConfirmation = ({ watch }: { watch: PersonaWatch }) => {
+const PersonaConfirmation = () => {
   const { contentRef } = useDefault();
+  const { watch } = useFormContext();
 
   return (
     <div className="mx-auto mt-[30px]">
       <Card className="flex flex-col" ref={contentRef}>
         <CardHeader></CardHeader>
         <CardContent>
-          {watch("model") === "1" && <FirstModel watch={watch} />}
-          {watch("model") === "2" && <SecondModel watch={watch} />}
+          {watch("model") === "1" && <FirstModel />}
+          {watch("model") === "2" && <SecondModel />}
         </CardContent>
       </Card>
       <div className="mt-[25px]">

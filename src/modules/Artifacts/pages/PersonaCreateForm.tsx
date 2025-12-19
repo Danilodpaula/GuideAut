@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
+import { FormProvider } from "react-hook-form";
 import BackToArtifactsPageButton from "../components/BackToArtifactsPageButton";
 import Behavior from "../components/Behavior";
 import Cognition from "../components/Cognition";
@@ -19,53 +20,46 @@ import PersonaStressfulActivities from "../components/PersonaStressfulActivities
 import SubmitButton from "../components/SubmitButton";
 import useAuthGuard from "../hooks/useAuthGuard";
 import useDefault from "../hooks/useDefault";
-import { PersonaInput, usePersonaForm } from "../hooks/usePersonaForm";
-import { FormProvider } from "react-hook-form";
+import usePersonaForm from "../hooks/usePersonaForm";
 
 const PersonaCreateForm = () => {
   useAuthGuard();
   const [step, setStep] = useState(0);
-  const [model, setModel] = useState("");
   const { exibirTexto } = useDefault();
-  const { formMethods, errors, onCreateSubmit } = usePersonaForm({});
+  const { errors, onCreateSubmit, formMethods } = usePersonaForm({});
 
   const baseSteps = useMemo(
     () => [
       <PersonaCreateWelcome />,
-      <PersonalData<PersonaInput> control={formMethods.control} />,
-      <PersonaGeneralCharacteristics control={formMethods.control} />,
-      <Behavior<PersonaInput> control={formMethods.control} />,
-      <Cognition<PersonaInput> control={formMethods.control} />,
-      <Communication<PersonaInput> control={formMethods.control} />,
-      <Interaction<PersonaInput> control={formMethods.control} />,
-      <PersonaChooseModel
-        model={model}
-        control={formMethods.control}
-        setModel={setModel}
-      />,
+      <PersonalData />,
+      <PersonaGeneralCharacteristics />,
+      <Behavior />,
+      <Cognition />,
+      <Communication />,
+      <Interaction />,
+      <PersonaChooseModel />,
     ],
-    [model, formMethods.control],
+    [],
   );
 
   const model1Steps = useMemo(
     () => [
-      <PersonaStressfulActivities control={formMethods.control} />,
-      <PersonaCalmingActivities control={formMethods.control} />,
-      <PersonaStereotypesHabits control={formMethods.control} />,
-      <PersonaSocialAspects control={formMethods.control} />,
-      <PersonaSoftwareAspects control={formMethods.control} />,
+      <PersonaStressfulActivities />,
+      <PersonaCalmingActivities />,
+      <PersonaStereotypesHabits />,
+      <PersonaSocialAspects />,
+      <PersonaSoftwareAspects />,
     ],
-    [formMethods.control],
+    [],
   );
 
   const model2Steps = useMemo(() => [<PersonaAbout />], []);
 
-  const confirmationSteps = useMemo(
-    () => [<PersonaConfirmation watch={formMethods.watch} />],
-    [formMethods.watch],
-  );
+  const confirmationSteps = useMemo(() => [<PersonaConfirmation />], []);
 
   const [steps, setSteps] = useState([...baseSteps, ...confirmationSteps]);
+
+  const model = formMethods.watch("model");
 
   useEffect(() => {
     if (model === "1") {

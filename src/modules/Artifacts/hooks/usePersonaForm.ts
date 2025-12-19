@@ -1,9 +1,9 @@
-import { SubmitHandler, useForm, UseFormWatch } from "react-hook-form";
-import { FormBase } from "../types/form-base";
-import usePersonaApi from "./usePersonaApi";
 import { useState } from "react";
-import useDefault from "./useDefault";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import { FormBase } from "../types/form-base";
+import useDefault from "./useDefault";
+import usePersonaApi from "./usePersonaApi";
 
 interface Inputs extends FormBase {
   language: string;
@@ -20,8 +20,6 @@ interface Inputs extends FormBase {
 interface Props {
   id?: string;
 }
-
-type PersonaWatch = UseFormWatch<Inputs>;
 
 const usePersonaForm = ({ id }: Props) => {
   const [errors, setErrors] = useState<string[]>([]);
@@ -348,6 +346,4 @@ const usePersonaForm = ({ id }: Props) => {
   };
 };
 
-export { usePersonaForm };
-
-export type { Inputs as PersonaInput, PersonaWatch };
+export default usePersonaForm;

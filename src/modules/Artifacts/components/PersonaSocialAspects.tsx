@@ -1,15 +1,11 @@
-import { Control, Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import useDefault from "../hooks/useDefault";
-import { PersonaInput } from "../hooks/usePersonaForm";
 import { defaultSocialAspects } from "../i18n/persona";
 import PersonaAddOption from "./PersonaAddOption";
 
-const PersonaSocialAspects = ({
-  control,
-}: {
-  control: Control<PersonaInput, any, PersonaInput>;
-}) => {
+const PersonaSocialAspects = () => {
   const { exibirTexto } = useDefault();
+  const { control } = useFormContext();
 
   return (
     <div className="flex flex-col gap-[10px]">

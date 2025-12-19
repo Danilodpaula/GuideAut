@@ -1,14 +1,4 @@
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Control, Controller } from "react-hook-form";
-import useDefault from "../hooks/useDefault";
-import { PersonaInput } from "../hooks/usePersonaForm";
-import {
   Dialog,
   DialogClose,
   DialogContent,
@@ -19,12 +9,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-type Props = {
-  control: Control<PersonaInput, any, PersonaInput>;
-  setModel?: (value: string) => void;
-  model?: string;
-};
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Controller, useFormContext } from "react-hook-form";
+import useDefault from "../hooks/useDefault";
 
 const modelsText = {
   1: {
@@ -101,8 +94,9 @@ const ModelsDialog = () => {
   );
 };
 
-const PersonaChooseModel = ({ control, setModel, model }: Props) => {
+const PersonaChooseModel = () => {
   const { exibirTexto } = useDefault();
+  const { control } = useFormContext();
 
   return (
     <div className="flex flex-col gap-[20px]">
@@ -119,9 +113,7 @@ const PersonaChooseModel = ({ control, setModel, model }: Props) => {
         render={({ field: { onChange, value } }) => {
           const changeFunction = (value: string) => {
             onChange(value);
-            setModel(value);
           };
-
           return (
             <Select onValueChange={changeFunction} value={value}>
               <SelectTrigger>

@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { Control, Controller } from "react-hook-form";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
@@ -17,10 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Controller, useFormContext } from "react-hook-form";
 import useDefault from "../hooks/useDefault";
 import { languages } from "../i18n/autistic-languages";
-import { PersonaInput } from "../hooks/usePersonaForm";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const autismLevels = ["1", "2", "3"];
 
@@ -226,12 +225,9 @@ const SupportLevelDialog = () => {
   );
 };
 
-const PersonaGeneralCharacteristics = ({
-  control,
-}: {
-  control: Control<PersonaInput, any, PersonaInput>;
-}) => {
+const PersonaGeneralCharacteristics = () => {
   const { exibirTexto } = useDefault();
+  const { control } = useFormContext();
 
   return (
     <div className="flex flex-col gap-[10px]">
