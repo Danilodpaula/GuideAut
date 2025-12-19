@@ -13,6 +13,7 @@ import SubmitButton from "../components/SubmitButton";
 import useAuthGuard from "../hooks/useAuthGuard";
 import useDefault from "../hooks/useDefault";
 import useEmpathyForm from "../hooks/useEmpathyForm";
+import ImportPersona from "../components/ImportPersona";
 
 const EmpathyCreateForm = () => {
   useAuthGuard();
@@ -44,6 +45,7 @@ const EmpathyCreateForm = () => {
           <h2 className="font-bold text-[30px] text-[#20B4F8] pb-[25px]">
             {exibirTexto("Criar Mapa de Empatia", "Create Empathy Map")}
           </h2>
+          <ImportPersona />
           <div className="p-4 border rounded mb-4">{steps[step]}</div>
           <div className="flex flex-row gap-[20px]">
             {step !== 0 && (
