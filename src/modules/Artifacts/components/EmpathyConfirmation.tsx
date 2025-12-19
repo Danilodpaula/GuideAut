@@ -29,7 +29,7 @@ const EmpathyConfirmation = ({ watch }: { watch: EmpathyWatch }) => {
       <Card className="flex flex-col" ref={contentRef}>
         <CardHeader>
           <div className="flex items-baseline">
-            <h2 className="font-bold text-[40px]">
+            <h2 className="font-bold text-[40px] break-all">
               {exibirTexto("Mapa de Empatia: ", "Empathy Map: ") +
                 watch("name")}
             </h2>
@@ -44,20 +44,20 @@ const EmpathyConfirmation = ({ watch }: { watch: EmpathyWatch }) => {
             {exibirTexto("E qual é o gênero?", "And what is their gender?")}
           </h2>
           <p className="mb-[20px]">{exibirTexto(gender.pt, gender.en)}</p>
-          <h2 className="font-bold print:hidden">
+          <h2 className="font-bold">
             {exibirTexto(
               "Por quais motivos esta aplicação se torna necessária?",
               "For what reasons does this application become necessary?",
             )}
           </h2>
-          <p className="mb-[20px]">{watch("reasons")}</p>
+          <p className="mb-[20px] break-all">{watch("reasons")}</p>
           <h2 className="font-bold">
             {exibirTexto(
               "O que o usuário espera obter a partir desta aplicação?",
               "What does the user expect to obtain from this application?",
             )}
           </h2>
-          <p className="mb-[20px]">{watch("expectations")}</p>
+          <p className="mb-[20px] break-all">{watch("expectations")}</p>
           <h2 className="font-bold">
             {exibirTexto("Interação Social", "Social Interaction")}
           </h2>

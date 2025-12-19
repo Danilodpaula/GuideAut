@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
+import { FormProvider } from "react-hook-form";
 import BackToArtifactsPageButton from "../components/BackToArtifactsPageButton";
 import Behavior from "../components/Behavior";
 import Cognition from "../components/Cognition";
@@ -9,7 +10,6 @@ import PersonaAbout from "../components/PersonaAbout";
 import PersonaCalmingActivities from "../components/PersonaCalmingActivities";
 import PersonaChooseModel from "../components/PersonaChooseModel";
 import PersonaConfirmation from "../components/PersonaConfirmation";
-import PersonaCreateWelcome from "../components/PersonaCreateWelcome";
 import PersonaGeneralCharacteristics from "../components/PersonaGeneralCharacteristics";
 import PersonalData from "../components/PersonalData";
 import PersonaSocialAspects from "../components/PersonaSocialAspects";
@@ -28,40 +28,40 @@ const PersonaEditForm = () => {
   const { findOnePersona } = usePersonaApi({ id: id });
   const { isFetching, data, isError, refetch } = findOnePersona;
   const [step, setStep] = useState(0);
-  const { control, watch, update, reset, errors } = usePersonaForm({ id: id });
+  const { onUpdateSubmit, formMethods, errors } = usePersonaForm({ id: id });
 
   const baseSteps = useMemo(
     () => [
-      <PersonalData<PersonaInput> control={control} />,
-      <PersonaGeneralCharacteristics control={control} />,
-      <Behavior<PersonaInput> control={control} />,
-      <Cognition<PersonaInput> control={control} />,
-      <Communication<PersonaInput> control={control} />,
-      <Interaction<PersonaInput> control={control} />,
-      <PersonaChooseModel control={control} />,
+      <PersonalData<PersonaInput> control={formMethods.control} />,
+      <PersonaGeneralCharacteristics control={formMethods.control} />,
+      <Behavior<PersonaInput> control={formMethods.control} />,
+      <Cognition<PersonaInput> control={formMethods.control} />,
+      <Communication<PersonaInput> control={formMethods.control} />,
+      <Interaction<PersonaInput> control={formMethods.control} />,
+      <PersonaChooseModel control={formMethods.control} />,
     ],
-    [control],
+    [formMethods.control],
   );
 
   const model1Steps = useMemo(
     () => [
-      <PersonaStressfulActivities control={control} />,
-      <PersonaCalmingActivities control={control} />,
-      <PersonaStereotypesHabits control={control} />,
-      <PersonaSocialAspects control={control} />,
-      <PersonaSoftwareAspects control={control} />,
+      <PersonaStressfulActivities control={formMethods.control} />,
+      <PersonaCalmingActivities control={formMethods.control} />,
+      <PersonaStereotypesHabits control={formMethods.control} />,
+      <PersonaSocialAspects control={formMethods.control} />,
+      <PersonaSoftwareAspects control={formMethods.control} />,
     ],
-    [control],
+    [formMethods.control],
   );
 
   const model2Steps = useMemo(
-    () => [<PersonaAbout control={control} />],
-    [control],
+    () => [<PersonaAbout control={formMethods.control} />],
+    [formMethods.control],
   );
 
   const confirmationSteps = useMemo(
-    () => [<PersonaConfirmation watch={watch} />],
-    [watch],
+    () => [<PersonaConfirmation watch={formMethods.watch} />],
+    [formMethods.watch],
   );
 
   const [steps, setSteps] = useState([...baseSteps, ...confirmationSteps]);
@@ -72,19 +72,25 @@ const PersonaEditForm = () => {
 
   useEffect(() => {
     if (data) {
-      reset(data);
+      formMethods.reset(data);
     }
   }, [data]);
 
   useEffect(() => {
-    if (watch("model") === "1") {
+    if (formMethods.watch("model") === "1") {
       setSteps([...baseSteps, ...model1Steps, ...confirmationSteps]);
-    } else if (watch("model") === "2") {
+    } else if (formMethods.watch("model") === "2") {
       setSteps([...baseSteps, ...model2Steps, ...confirmationSteps]);
     } else {
       setSteps([...baseSteps, ...confirmationSteps]);
     }
-  }, [watch("model"), baseSteps, confirmationSteps, model1Steps, model2Steps]);
+  }, [
+    formMethods.watch("model"),
+    baseSteps,
+    confirmationSteps,
+    model1Steps,
+    model2Steps,
+  ]);
 
   if (isFetching) {
     return <p>{exibirTexto("Carregando...", "Loading...")}</p>;
@@ -107,25 +113,30 @@ const PersonaEditForm = () => {
     return (
       <div className="mx-auto p-4 max-w-[1000px]">
         <BackToArtifactsPageButton value="1" />
-        <form onSubmit={update} className="mx-auto p-4">
-          <h2 className="font-bold text-[30px] text-[#20B4F8] pb-[25px]">
-            {exibirTexto("Editar Persona", "Edit Persona")}
-          </h2>
-          <div className="p-4 border rounded mb-4">{steps[step]}</div>
-          <div className="flex flex-row gap-[20px]">
-            {step !== 0 && (
-              <Button onClick={back} type="button">
-                {exibirTexto("Voltar", "Back")}
-              </Button>
-            )}
-            {step !== steps.length - 1 && (
-              <Button onClick={next} type="button">
-                {exibirTexto("Próximo", "Next")}
-              </Button>
-            )}
-            {step === steps.length - 1 && <SubmitButton />}
-          </div>
-        </form>
+        <FormProvider {...formMethods}>
+          <form
+            onSubmit={formMethods.handleSubmit(onUpdateSubmit)}
+            className="mx-auto p-4"
+          >
+            <h2 className="font-bold text-[30px] text-[#20B4F8] pb-[25px]">
+              {exibirTexto("Editar Persona", "Edit Persona")}
+            </h2>
+            <div className="p-4 border rounded mb-4">{steps[step]}</div>
+            <div className="flex flex-row gap-[20px]">
+              {step !== 0 && (
+                <Button onClick={back} type="button">
+                  {exibirTexto("Voltar", "Back")}
+                </Button>
+              )}
+              {step !== steps.length - 1 && (
+                <Button onClick={next} type="button">
+                  {exibirTexto("Próximo", "Next")}
+                </Button>
+              )}
+              {step === steps.length - 1 && <SubmitButton />}
+            </div>
+          </form>
+        </FormProvider>
         {errors.length > 0 && (
           <p className="font-bold text-red-600">{errors[0]}</p>
         )}

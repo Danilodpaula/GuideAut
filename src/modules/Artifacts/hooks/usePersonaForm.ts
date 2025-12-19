@@ -28,7 +28,7 @@ const usePersonaForm = ({ id }: Props) => {
   const { exibirTexto } = useDefault();
   const { createPersona, updatePersona } = usePersonaApi({ id: id });
 
-  const { handleSubmit, watch, control, reset } = useForm<Inputs>({
+  const formMethods = useForm<Inputs>({
     defaultValues: {
       name: "",
       age: 0,
@@ -341,12 +341,10 @@ const usePersonaForm = ({ id }: Props) => {
   };
 
   return {
-    control,
-    watch,
-    reset,
-    create: handleSubmit(onCreateSubmit),
-    update: handleSubmit(onUpdateSubmit),
     errors,
+    onCreateSubmit,
+    onUpdateSubmit,
+    formMethods,
   };
 };
 

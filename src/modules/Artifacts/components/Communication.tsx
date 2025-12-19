@@ -14,7 +14,13 @@ const Communication = <T extends FormBase>({
   return (
     <div>
       <h2 className="flex-1 mb-[10px] font-bold">
-        {" " + exibirTexto("Comunicação", "Communication")}
+        {exibirTexto(" Comunicação", " Communication")}
+        <small className="text-red-600 ml-2">
+          {exibirTexto(
+            "Inclua ao menos 1 opção!",
+            "Include at least 1 option!",
+          )}
+        </small>
       </h2>
       <Controller
         name={"communication" as FieldPath<T>}
