@@ -1,22 +1,17 @@
 import { Textarea } from "@/components/ui/textarea";
-import { Control, Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import useDefault from "../hooks/useDefault";
-import { PersonaInput } from "../hooks/usePersonaForm";
 
-const PersonaAbout = ({
-  control,
-}: {
-  control: Control<PersonaInput, any, PersonaInput>;
-}) => {
+const PersonaAbout = () => {
   const { exibirTexto } = useDefault();
+  const { control } = useFormContext();
   return (
     <div className="flex flex-col gap-[20px]">
       <h2 className="flex-1 ml-[20px] font-bold">
-        {" " +
-          exibirTexto(
-            "Descreva a persona com mais detalhes.",
-            "Describe the persona in more detail.",
-          )}
+        {exibirTexto(
+          " Esta persona representa uma pessoa autista. Descreva suas características, particularidades, pontos fortes e desafios, considerando que cada pessoa autista é única.",
+          " This persona represents an autistic person. Describe their traits, strengths, and challenges in a way that reflects the diversity and uniqueness of autistic individuals.",
+        )}
       </h2>
       <Controller
         name="about"

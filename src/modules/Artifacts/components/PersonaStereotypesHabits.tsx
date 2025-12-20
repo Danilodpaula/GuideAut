@@ -1,29 +1,22 @@
-import { Control, Controller } from "react-hook-form";
-import AddOptionAlertDialog from "./AddOptionAlertDialog";
-import RemoveOptionAlertDialog from "./RemoveOptionAlertDialog";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { defaultStereotypes } from "../i18n/persona";
+import { Controller, useFormContext } from "react-hook-form";
 import useDefault from "../hooks/useDefault";
-import { PersonaInput } from "../hooks/usePersonaForm";
-import { Language } from "../i18n/language";
-import { useI18n } from "@/core/i18n/I18nContext";
-import { toast } from "sonner";
+import { defaultStereotypes } from "../i18n/persona";
+import PersonaAddOption from "./PersonaAddOption";
 
-const PersonaStereotypesHabits = ({
-  control,
-}: {
-  control: Control<PersonaInput, any, PersonaInput>;
-}) => {
+const PersonaStereotypesHabits = () => {
   const { exibirTexto } = useDefault();
-  const { language } = useI18n();
-  const [newStereotype, setNewStereotype] = useState("");
+  const { control } = useFormContext();
 
   return (
     <div className="flex flex-col gap-[10px]">
       <h2 className="flex-1 font-bold">
-        {" " + exibirTexto("Estereótipos ou Manias", "Stereotypes or Quirks")}
+        {exibirTexto(" Estereótipos ou Manias", " Stereotypes or Quirks")}
+        <small className="text-red-600 ml-2">
+          {exibirTexto(
+            "Inclua ao menos 1 opção! Ou apenas escreva: Nada",
+            "Include at least 1 option! Or just write: Nothing",
+          )}
+        </small>
       </h2>
       <h2 className="flex-1">
         {" " +
@@ -37,106 +30,24 @@ const PersonaStereotypesHabits = ({
         control={control}
         render={({ field: { value: values, onChange } }) => {
           return (
-            <div>
-              <div className="flex flex-row gap-[15px]">
-                <Input
-                  value={newStereotype}
-                  onChange={(e) => setNewStereotype(e.target.value)}
-                  placeholder={exibirTexto(
-                    "Escreva um estereótipo ou mania",
-                    "Write a stereotype or quirk",
-                  )}
-                />
-                <Button
-                  onClick={() => {
-                    const valid =
-                      !values.includes(newStereotype.trim()) &&
-                      newStereotype.trim() !== "" &&
-                      newStereotype.trim().length >= 3 &&
-                      newStereotype.trim().length <= 200;
-                    if (valid) {
-                      onChange([...values, newStereotype]);
-                      setNewStereotype("");
-                    } else {
-                      toast.error(
-                        "Mínimo: 3 caracteres / Máximo: 200 caracteres",
-                      );
-                    }
-                  }}
-                  type="button"
-                >
-                  {exibirTexto("Adicione", "Add")}
-                </Button>
-              </div>
-              <div className="flex flex-row justify-evenly mt-[20px]">
-                <div>
-                  <h2 className="flex-1 font-bold mb-[15px] ml-[15px]">
-                    {" " +
-                      exibirTexto(
-                        "Estereótipos/Manias do GuideAut",
-                        "Stereotypes/Quirks from GuideAut",
-                      )}
-                  </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
-                    {defaultStereotypes.map((stereotype) => {
-                      return (
-                        <div
-                          key={stereotype.en}
-                          className="flex justify-between"
-                        >
-                          <button className="text-left">
-                            {exibirTexto(stereotype.pt, stereotype.en)}
-                          </button>
-                          <AddOptionAlertDialog
-                            onClick={() => {
-                              if (
-                                language === Language.Portuguese &&
-                                !values.includes(stereotype.pt) &&
-                                !values.includes(stereotype.en)
-                              ) {
-                                onChange([...values, stereotype.pt]);
-                              } else if (
-                                language === Language.English &&
-                                !values.includes(stereotype.pt) &&
-                                !values.includes(stereotype.en)
-                              ) {
-                                onChange([...values, stereotype.en]);
-                              }
-                            }}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div>
-                  <h2 className="flex-1 font-bold mb-[15px] ml-[15px]">
-                    {" " +
-                      exibirTexto(
-                        "Estereótipos/Manias Selecionados",
-                        "Selected Stereotypes/Quirks",
-                      )}
-                  </h2>
-                  <div className="flex flex-col p-4 border rounded mb-4 gap-[20px] w-[300px]">
-                    {values.map((value) => {
-                      return (
-                        <div key={value} className="flex justify-between">
-                          <button className="text-left">{value}</button>
-                          <RemoveOptionAlertDialog
-                            onClick={() => {
-                              const filtered = values.filter(
-                                (val) => val !== value,
-                              );
-                              onChange(filtered);
-                            }}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <PersonaAddOption
+              fieldName="stereotypes"
+              fieldOptions={defaultStereotypes}
+              fixedValuesText={exibirTexto(
+                "Estereótipos/Manias do GuideAut",
+                "Stereotypes/Quirks from GuideAut",
+              )}
+              inputPlaceholder={exibirTexto(
+                "Escreva um estereótipo ou mania",
+                "Write a stereotype or quirk",
+              )}
+              includedValues={values}
+              setIncludedValues={onChange}
+              includedValuesText={exibirTexto(
+                "Estereótipos/Manias Selecionados",
+                "Selected Stereotypes/Quirks",
+              )}
+            />
           );
         }}
       />
