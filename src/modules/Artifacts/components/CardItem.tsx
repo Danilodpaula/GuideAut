@@ -30,7 +30,7 @@ const CardItem = ({
               <User className="w-5 h-5 text-blue-600" />
             </div>
             <div className="flex flex-col items-start gap-2 mb-2">
-              <h3>{name}</h3>
+              <h3 className="max-w-80 truncate">{name}</h3>
               <p>
                 {exibirTexto(genderName.pt, genderName.en)}, {age}{" "}
                 {exibirTexto("anos", "years")}

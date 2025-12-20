@@ -38,6 +38,10 @@ const Persona = () => {
   const lang = languages.find((l) => l.id === data.language);
 
   const FirstModel = () => {
+    const { exibirTexto } = useDefault();
+    const gender = genders.find((gender) => gender.id === data.gender);
+    const lang = languages.find((l) => l.id === data.language);
+
     return (
       <div className="grid grid-rows-6 grid-cols-6 gap-5">
         <div className="col-start-1 col-end-3 row-start-1 row-end-4 border-2 border-primary p-5 rounded">
@@ -45,7 +49,11 @@ const Persona = () => {
             {exibirTexto("Atividades que Acalmam", "Calming Activities")}:
           </h2>
           {data.calmingActivities.map((activity) => {
-            return <p key={activity}>- {activity}</p>;
+            return (
+              <p key={activity} className="break-all">
+                - {activity}
+              </p>
+            );
           })}
         </div>
         <div className="col-start-3 col-end-5 row-start-1 row-end-3 border-2 border-primary p-5 rounded">
@@ -53,7 +61,11 @@ const Persona = () => {
             {exibirTexto("Aspectos Sociais", "Social Aspects")}:
           </h2>
           {data.socialAspects.map((aspect) => {
-            return <p key={aspect}>- {aspect}</p>;
+            return (
+              <p key={aspect} className="break-all">
+                - {aspect}
+              </p>
+            );
           })}
         </div>
         <div className="col-start-5 col-end-7 row-start-1 row-end-4 border-2 border-primary p-5 rounded">
@@ -63,11 +75,11 @@ const Persona = () => {
           <h2 className="font-bold">
             {exibirTexto("Linguagem: ", "Language: ")}
           </h2>
-          <p>{exibirTexto(lang.pt, lang.en)}</p>
+          <p className="break-all">{exibirTexto(lang.pt, lang.en)}</p>
           <h2 className="font-bold">
             {exibirTexto("Nível de Suporte: ", "Support Level: ")}
           </h2>
-          <p>{data.supportLevel}</p>
+          <p className="break-all">{data.supportLevel}</p>
           <div className="h-3" />
           <VGA
             interactionList={data.interaction}
@@ -81,13 +93,13 @@ const Persona = () => {
             <CircleUserRound className="w-52 h-52" />
             <div className="flex flex-col items-center justify-center">
               <h2 className="font-bold">{exibirTexto("Nome: ", "Name: ")}</h2>
-              <p>{data.name}</p>
+              <p className="break-all">{data.name}</p>
               <h2 className="font-bold">{exibirTexto("Idade: ", "Age: ")}</h2>
-              <p>{data.age}</p>
+              <p className="break-all">{data.age}</p>
               <h2 className="font-bold">
                 {exibirTexto("Gênero: ", "Gender: ")}
               </h2>
-              <p>{exibirTexto(gender.pt, gender.en)}</p>
+              <p className="break-all">{exibirTexto(gender.pt, gender.en)}</p>
             </div>
           </div>
         </div>
@@ -96,7 +108,11 @@ const Persona = () => {
             {exibirTexto("Atividades que Estressam", "Stressful Activities")}:
           </h2>
           {data.stressfulActivities.map((activity) => {
-            return <p key={activity}>- {activity}</p>;
+            return (
+              <p key={activity} className="break-all">
+                - {activity}
+              </p>
+            );
           })}
         </div>
         <div className="col-start-3 col-end-5 row-start-5 row-end-7 border-2 border-primary p-5 rounded">
@@ -104,7 +120,11 @@ const Persona = () => {
             {exibirTexto("Estereótipos ou Manias", "Stereotypes or Quirks")}:
           </h2>
           {data.stereotypes.map((stereotype) => {
-            return <p key={stereotype}>- {stereotype}</p>;
+            return (
+              <p key={stereotype} className="break-all">
+                - {stereotype}
+              </p>
+            );
           })}
         </div>
         <div className="col-start-5 col-end-7 row-start-4 row-end-7 border-2 border-primary p-5 rounded">
@@ -112,7 +132,11 @@ const Persona = () => {
             {exibirTexto("Aspectos de Software", "Software Aspects")}:
           </h2>
           {data.softwareAspects.map((aspect) => {
-            return <p key={aspect}>- {aspect}</p>;
+            return (
+              <p key={aspect} className="break-all">
+                - {aspect}
+              </p>
+            );
           })}
         </div>
       </div>
@@ -120,6 +144,10 @@ const Persona = () => {
   };
 
   const SecondModel = () => {
+    const { exibirTexto } = useDefault();
+    const gender = genders.find((gender) => gender.id === data.gender);
+    const lang = languages.find((l) => l.id === data.language);
+
     return (
       <div className="grid grid-rows-1 grid-cols-3 gap-5">
         <div className="border-2 border-primary p-5 rounded">
@@ -129,11 +157,11 @@ const Persona = () => {
           <h2 className="font-bold">
             {exibirTexto("Linguagem: ", "Language: ")}
           </h2>
-          <p>{exibirTexto(lang.pt, lang.en)}</p>
+          <p className="break-all">{exibirTexto(lang.pt, lang.en)}</p>
           <h2 className="font-bold">
             {exibirTexto("Nível de Suporte: ", "Support Level: ")}
           </h2>
-          <p>{data.supportLevel}</p>
+          <p className="break-all">{data.supportLevel}</p>
           <div className="h-3" />
           <VGA
             interactionList={data.interaction}
@@ -147,19 +175,19 @@ const Persona = () => {
             <CircleUserRound className="w-52 h-52" />
             <div className="flex flex-col items-center justify-center">
               <h2 className="font-bold">{exibirTexto("Nome: ", "Name: ")}</h2>
-              <p>{data.name}</p>
+              <p className="break-all">{data.name}</p>
               <h2 className="font-bold">{exibirTexto("Idade: ", "Age: ")}</h2>
-              <p>{data.age}</p>
+              <p className="break-all">{data.age}</p>
               <h2 className="font-bold">
                 {exibirTexto("Gênero: ", "Gender: ")}
               </h2>
-              <p>{exibirTexto(gender.pt, gender.en)}</p>
+              <p className="break-all">{exibirTexto(gender.pt, gender.en)}</p>
             </div>
           </div>
         </div>
         <div className="border-2 border-primary p-5 rounded">
           <h2 className="font-bold">{exibirTexto("Sobre", "About")}:</h2>
-          <p>{data.about}</p>
+          <p className="break-all">{data.about}</p>
         </div>
       </div>
     );

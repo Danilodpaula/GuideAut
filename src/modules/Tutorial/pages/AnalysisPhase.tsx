@@ -490,6 +490,17 @@ export default function AnalysisPhase() {
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
                       {language === "pt-BR"
+                        ? "Atividades da Fase:"
+                        : "Phase Activities:"}
+                    </strong>{" "}
+                    {language === "pt-BR"
+                      ? "Triangular dos Dados, Gerar Mapa de Empatia e Gerar de Personas."
+                      : "Triangulate Data, Generate Empathy Map, and Generate Personas."}
+                  </li>
+
+                  <li>
+                    <strong className="text-blue-700 dark:text-blue-300">
+                      {language === "pt-BR"
                         ? "Entradas da fase:"
                         : "Phase Inputs:"}
                     </strong>{" "}
@@ -514,16 +525,6 @@ export default function AnalysisPhase() {
                     {language === "pt-BR"
                       ? "Time de desenvolvimento, cuidador(es) e/ou terapeuta(s)."
                       : "Development team, caregiver(s) and/or therapist(s)."}
-                  </li>
-                  <li>
-                    <strong className="text-blue-700 dark:text-blue-300">
-                      {language === "pt-BR"
-                        ? "Atividades da Fase:"
-                        : "Phase Activities:"}
-                    </strong>{" "}
-                    {language === "pt-BR"
-                      ? "Triangular dos Dados, Gerar Mapa de Empatia e Gerar de Personas."
-                      : "Triangulate Data, Generate Empathy Map, and Generate Personas."}
                   </li>
                 </ul>
               </CardContent>
@@ -1279,7 +1280,7 @@ export default function AnalysisPhase() {
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:z-0 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">

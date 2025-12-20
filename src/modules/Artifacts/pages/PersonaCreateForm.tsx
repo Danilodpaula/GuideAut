@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
+import { FormProvider } from "react-hook-form";
 import BackToArtifactsPageButton from "../components/BackToArtifactsPageButton";
 import Behavior from "../components/Behavior";
 import Cognition from "../components/Cognition";
@@ -19,55 +20,46 @@ import PersonaStressfulActivities from "../components/PersonaStressfulActivities
 import SubmitButton from "../components/SubmitButton";
 import useAuthGuard from "../hooks/useAuthGuard";
 import useDefault from "../hooks/useDefault";
-import { PersonaInput, usePersonaForm } from "../hooks/usePersonaForm";
+import usePersonaForm from "../hooks/usePersonaForm";
 
 const PersonaCreateForm = () => {
   useAuthGuard();
   const [step, setStep] = useState(0);
-  const [model, setModel] = useState("");
   const { exibirTexto } = useDefault();
-  const { control, watch, create, errors } = usePersonaForm({});
+  const { errors, onCreateSubmit, formMethods } = usePersonaForm({});
 
   const baseSteps = useMemo(
     () => [
       <PersonaCreateWelcome />,
-      <PersonalData<PersonaInput> control={control} />,
-      <PersonaGeneralCharacteristics control={control} />,
-      <Behavior<PersonaInput> control={control} />,
-      <Cognition<PersonaInput> control={control} />,
-      <Communication<PersonaInput> control={control} />,
-      <Interaction<PersonaInput> control={control} />,
-      <PersonaChooseModel
-        model={model}
-        control={control}
-        setModel={setModel}
-      />,
+      <PersonalData />,
+      <PersonaGeneralCharacteristics />,
+      <Behavior />,
+      <Cognition />,
+      <Communication />,
+      <Interaction />,
+      <PersonaChooseModel />,
     ],
-    [model, control],
+    [],
   );
 
   const model1Steps = useMemo(
     () => [
-      <PersonaStressfulActivities control={control} />,
-      <PersonaCalmingActivities control={control} />,
-      <PersonaStereotypesHabits control={control} />,
-      <PersonaSocialAspects control={control} />,
-      <PersonaSoftwareAspects control={control} />,
+      <PersonaStressfulActivities />,
+      <PersonaCalmingActivities />,
+      <PersonaStereotypesHabits />,
+      <PersonaSocialAspects />,
+      <PersonaSoftwareAspects />,
     ],
-    [control],
+    [],
   );
 
-  const model2Steps = useMemo(
-    () => [<PersonaAbout control={control} />],
-    [control],
-  );
+  const model2Steps = useMemo(() => [<PersonaAbout />], []);
 
-  const confirmationSteps = useMemo(
-    () => [<PersonaConfirmation watch={watch} />],
-    [watch],
-  );
+  const confirmationSteps = useMemo(() => [<PersonaConfirmation />], []);
 
   const [steps, setSteps] = useState([...baseSteps, ...confirmationSteps]);
+
+  const model = formMethods.watch("model");
 
   useEffect(() => {
     if (model === "1") {
@@ -85,29 +77,34 @@ const PersonaCreateForm = () => {
   return (
     <div className="mx-auto p-4 max-w-6xl max-h-6xl">
       <BackToArtifactsPageButton value="1" />
-      <form onSubmit={create} className="mx-auto p-4">
-        <h2 className="font-bold text-[30px] text-[#20B4F8] pb-[25px]">
-          {exibirTexto("Criar Persona", "Create Persona")}
-        </h2>
-        <div className="p-4 border rounded mb-4">{steps[step]}</div>
-        <div className="flex flex-row gap-[20px]">
-          {step !== 0 && (
-            <Button onClick={back} type="button">
-              {exibirTexto("Voltar", "Back")}
-            </Button>
-          )}
-          {step !== steps.length - 1 && (
-            <Button
-              onClick={next}
-              disabled={step === 7 && model === ""}
-              type="button"
-            >
-              {exibirTexto("Próximo", "Next")}
-            </Button>
-          )}
-          {step === steps.length - 1 && <SubmitButton />}
-        </div>
-      </form>
+      <FormProvider {...formMethods}>
+        <form
+          onSubmit={formMethods.handleSubmit(onCreateSubmit)}
+          className="mx-auto p-4"
+        >
+          <h2 className="font-bold text-[30px] text-[#20B4F8] pb-[25px]">
+            {exibirTexto("Criar Persona", "Create Persona")}
+          </h2>
+          <div className="p-4 border rounded mb-4">{steps[step]}</div>
+          <div className="flex flex-row gap-[20px]">
+            {step !== 0 && (
+              <Button onClick={back} type="button">
+                {exibirTexto("Voltar", "Back")}
+              </Button>
+            )}
+            {step !== steps.length - 1 && (
+              <Button
+                onClick={next}
+                disabled={step === 7 && model === ""}
+                type="button"
+              >
+                {exibirTexto("Próximo", "Next")}
+              </Button>
+            )}
+            {step === steps.length - 1 && <SubmitButton />}
+          </div>
+        </form>
+      </FormProvider>
       {errors.length > 0 && (
         <p className="font-bold text-red-600">{errors[0]}</p>
       )}
