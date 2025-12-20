@@ -7,6 +7,7 @@ import { useI18n } from "@/core/i18n/I18nContext";
 import {
   ArrowLeft,
   ArrowRight,
+  CheckCircle,
   ChevronRight,
   Edit3,
   FileText,
@@ -111,6 +112,11 @@ export default function IdeationPhase() {
           language === "pt-BR"
             ? "Gerar/Refinar Ideias de Interface"
             : "Generate/Refine Interface Ideas",
+        type: "scroll",
+      },
+      {
+        id: "conclusao-fase",
+        title: language === "pt-BR" ? "Encerramento da Fase" : "Phase Closing",
         type: "scroll",
       },
       {
@@ -453,6 +459,16 @@ export default function IdeationPhase() {
                   <li>
                     <strong className="text-blue-700 dark:text-blue-300">
                       {language === "pt-BR"
+                        ? "Atividades da Fase:"
+                        : "Phase Activities:"}
+                    </strong>{" "}
+                    {language === "pt-BR"
+                      ? "Definir Itens de Requisitos/Restrições, Especificar Itens Requisitos e Gerar/Refinar Ideias de Interface."
+                      : "Define Requirements/Constraints Items, Specify Requirements Items, and Generate/Refine Interface Ideas."}
+                  </li>
+                  <li>
+                    <strong className="text-blue-700 dark:text-blue-300">
+                      {language === "pt-BR"
                         ? "Entrada da fase:"
                         : "Phase input:"}
                     </strong>{" "}
@@ -477,16 +493,6 @@ export default function IdeationPhase() {
                     {language === "pt-BR"
                       ? "Pais, especialistas, solicitantes de software, designers/desenvolvedores."
                       : "Parents, specialists, software requesters, designers/developers."}
-                  </li>
-                  <li>
-                    <strong className="text-blue-700 dark:text-blue-300">
-                      {language === "pt-BR"
-                        ? "Atividades da Fase:"
-                        : "Phase Activities:"}
-                    </strong>{" "}
-                    {language === "pt-BR"
-                      ? "Definir Itens de Requisitos/Restrições, Especificar Itens Requisitos e Gerar/Refinar Ideias de Interface."
-                      : "Define Requirements/Constraints Items, Specify Requirements Items, and Generate/Refine Interface Ideas."}
                   </li>
                 </ul>
               </CardContent>
@@ -923,6 +929,56 @@ export default function IdeationPhase() {
           </div>
         </section>
 
+        <section
+          id="conclusao-fase"
+          className="scroll-m-20 space-y-6 mt-12 pt-8 border-t"
+        >
+          <div className="flex items-center gap-3">
+            <div className="bg-green-100 p-2 rounded-full">
+              <CheckCircle className="h-6 w-6 text-green-600" />
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              {language === "pt-BR"
+                ? "Encerramento da Fase"
+                : "Phase Conclusion"}
+            </h2>
+          </div>
+
+          <div className="space-y-4 text-lg leading-relaxed">
+            <Card className="border-l-4 border-l-blue-500">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-xl text-blue-700 dark:text-blue-300 font-bold flex items-center gap-2">
+                  <CheckCircle className="text-blue-600 dark:text-blue-400 h-5 w-5" />
+                  {language === "pt-BR" ? "Conclusão" : "Conclusion"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                  <p className="text-justify text-blue-700 dark:text-blue-300 mb-4">
+                    {language === "pt-BR"
+                      ? "Ao concluir a atividade de Especificar Requisitos/Restrições a equipe pode desenvolver soluções iniciais que estejam de acordo com o contexto do assunto trabalhado. Com o material pronto, encerra-se a fase com:"
+                      : "Upon completing the Specify Requirements/Constraints activity, the team can develop initial solutions that align with the context of the subject matter. With the material ready, the phase concludes with:"}
+                  </p>
+                  <ul className="text-justify text-blue-700 dark:text-blue-300 list-disc list-inside ml-4 space-y-1 mb-4">
+                    <li>
+                      {language === "pt-BR"
+                        ? "Tabela de Requisitos/Restrições (TRR) Completa"
+                        : "Complete Requisitions/Constrains Table (RST)"}
+                    </li>
+                  </ul>
+                  <div className="mt-4 pt-4 border-t border-blue-200">
+                    <p className="font-bold text-blue-700 dark:text-blue-300 text-center">
+                      {language === "pt-BR"
+                        ? "Esse artefato orientam diretamente a Fase de Prototipação e garantem as funcionalidades necessárias para desenvolver a versão inicial do protótipo."
+                        : "This artifact directly guide the Prototyping Phase and ensure the necessary functionalities to develop the initial version of the prototype."}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
         {/* Artefatos da Fase */}
         <div className="mt-8 p-6 rounded-lg border">
           <h3 className="text-xl font-semibold mb-4">
@@ -1004,7 +1060,7 @@ export default function IdeationPhase() {
 
       {/* Tabela de Conteúdos */}
       <div
-        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
+        className={`${tocOpen ? "fixed" : "hidden"} w-[100vw] max-h-[80vh] z-[1000] lg:z-0 lg:relative lg:w-80 lg:block lg:order-2 lg:sticky lg:top-40 lg:self-start lg:max-h-[calc(100vh-5rem)] overflow-y-auto flex-shrink-0 p-6`}
       >
         <Card className="border-l-4 border-l-blue-500">
           <CardHeader className="pb-3">
